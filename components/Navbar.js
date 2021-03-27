@@ -14,7 +14,7 @@ import {
 
 function Navbar() {
   return (
-    <nav className="flex justify-center gap-12 p-2 text-red-700">
+    <nav className="flex justify-center gap-12 p-2 text-red-700 my-2">
       <h1 className="text-4xl font-semibold my-auto mr-12">
         Quora
       </h1>
