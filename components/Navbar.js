@@ -21,22 +21,22 @@ function Navbar() {
 
       <FontAwesomeIcon
         icon={faHome}
-        size="2x "
+        size="2x"
         className="my-auto"
       />
       <FontAwesomeIcon
         icon={faEdit}
-        size="2x "
+        size="2x"
         className="my-auto"
       />
       <FontAwesomeIcon
         icon={faBell}
-        size="2x "
+        size="2x"
         className="my-auto"
       />
       <FontAwesomeIcon
         icon={faUsers}
-        size="2x "
+        size="2x"
         className="my-auto"
       />
 
