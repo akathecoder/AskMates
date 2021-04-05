@@ -1,7 +1,10 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState, useEffect } from "react";
 import { string, mixed, number, object } from "yup";
-import { validateUsername } from "../utils/validateUsername";
+import {
+  validateEmail,
+  validateUsername,
+} from "../utils/validateUsername";
 
 const Registration = () => {
   return (
@@ -36,8 +39,11 @@ const Registration = () => {
                     label="Login Information"
                     validationSchema={object({
                       username: string()
-                        .required()
-                        .matches(/^[aA-zZ0-9.]+$/)
+                        .required("Username is required!")
+                        .matches(
+                          /^[aA-zZ0-9.]+$/,
+                          "Username cannot contains spaces or any symbols"
+                        )
                         .test(
                           "isAlreadyExists",
                           "Username already exists",
@@ -45,9 +51,20 @@ const Registration = () => {
                             validateUsername(value)
                         ),
                       email: string()
-                        .required()
-                        .matches(/^[aA-zZ0-9.]+$/),
-                      password: string().required(),
+                        .required("Email is required")
+                        .matches(
+                          /^[aA-zZ0-9.]+$/,
+                          "Email cannot contains spaces or any symbols except a period"
+                        )
+                        .test(
+                          "isEmailValid",
+                          "Email Address already exists",
+                          (value, context) =>
+                            validateEmail(value)
+                        ),
+                      password: string().required(
+                        "Password is required"
+                      ),
                     })}
                   >
                     <InputField
@@ -233,6 +250,10 @@ function InputField({
           ""
         )}
       </div>
+      <ErrorMessage
+        name={name}
+        component={CustomErrorMessage}
+      />
     </div>
   );
 }
@@ -270,5 +291,11 @@ function TextLink({ children, href }) {
         <small>{children}</small>
       </a>
     </div>
+  );
+}
+
+function CustomErrorMessage({ children }) {
+  return (
+    <span className="text-sm text-red-500">{children}</span>
   );
 }
