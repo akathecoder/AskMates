@@ -1,6 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import React, { useState, useEffect } from "react";
 import { string, mixed, number, object } from "yup";
+import { validateUsername } from "../utils/validateUsername";
 
 const Registration = () => {
   return (
@@ -36,7 +37,13 @@ const Registration = () => {
                     validationSchema={object({
                       username: string()
                         .required()
-                        .matches(/^[aA-zZ0-9.]+$/),
+                        .matches(/^[aA-zZ0-9.]+$/)
+                        .test(
+                          "isAlreadyExists",
+                          "Username already exists",
+                          (value, context) =>
+                            validateUsername(value)
+                        ),
                       email: string()
                         .required()
                         .matches(/^[aA-zZ0-9.]+$/),
