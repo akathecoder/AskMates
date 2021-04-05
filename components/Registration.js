@@ -1,5 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import React, { useState, useEffect } from "react";
+import { string, mixed, number, object } from "yup";
 
 const Registration = () => {
   return (
@@ -30,7 +31,18 @@ const Registration = () => {
                     console.log("values", values);
                   }}
                 >
-                  <FormikStep label="Login Information">
+                  <FormikStep
+                    label="Login Information"
+                    validationSchema={object({
+                      username: string()
+                        .required()
+                        .matches(/^[aA-zZ0-9.]+$/),
+                      email: string()
+                        .required()
+                        .matches(/^[aA-zZ0-9.]+$/),
+                      password: string().required(),
+                    })}
+                  >
                     <InputField
                       label="Username"
                       name="username"
@@ -52,7 +64,18 @@ const Registration = () => {
                     />
                   </FormikStep>
 
-                  <FormikStep label="Personal Information">
+                  <FormikStep
+                    label="Personal Information"
+                    validationSchema={object({
+                      fname: string()
+                        .required()
+                        .matches(/^[aA-zZ]+$/),
+                      mname: string().matches(/^[aA-zZ]+$/),
+                      lname: string()
+                        .required()
+                        .matches(/^[aA-zZ]+$/),
+                    })}
+                  >
                     <InputField
                       label="First Name"
                       name="fname"
@@ -128,6 +151,7 @@ function FormikStepper({ children, ...props }) {
   return (
     <Formik
       {...props}
+      validationSchema={currentChild.props.validationSchema}
       onSubmit={async (values, helpers) => {
         if (isLastStep()) {
           await props.onSubmit(values, helpers);
