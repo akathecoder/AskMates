@@ -142,22 +142,32 @@ function FormikStepper({ children, ...props }) {
         <Form autoComplete="off">
           {currentChild}
 
-          {step > 0 ? (
-            <Button
-              disabled={isSubmitting}
-              onClick={() => setStep((s) => s - 1)}
-            >
-              Back
-            </Button>
-          ) : null}
+          <div className="grid grid-cols-2 gap-4">
+            {step > 0 ? (
+              <Button
+                type="button"
+                disabled={isSubmitting}
+                halfWidth={true}
+                onClick={() => setStep((s) => s - 1)}
+              >
+                Back
+              </Button>
+            ) : null}
 
-          <Button disabled={isSubmitting} type="submit">
-            {isSubmitting
-              ? "Submitting"
-              : isLastStep()
-              ? "Submit"
-              : "Next"}
-          </Button>
+            <div className={step > 0 ? null : `col-span-2`}>
+              <Button
+                disabled={isSubmitting}
+                type="submit"
+                halfWidth={step > 0 ? true : false}
+              >
+                {isSubmitting
+                  ? "Submitting"
+                  : isLastStep()
+                  ? "Submit"
+                  : "Next"}
+              </Button>
+            </div>
+          </div>
         </Form>
       )}
     </Formik>
@@ -201,11 +211,17 @@ function InputField({
   );
 }
 
-function Button({ children, type, disabled, onClick }) {
+function Button({
+  children,
+  type,
+  disabled,
+  onClick,
+  halfWidth,
+}) {
   return (
     <div className="text-center mt-8">
       <button
-        className="bg-gray-900 active:bg-gray-700 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+        className={`bg-gray-900 active:bg-gray-700 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mx-1 mb-1 w-full`}
         type={type}
         disabled={disabled}
         onClick={onClick}
