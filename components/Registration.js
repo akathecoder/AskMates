@@ -147,7 +147,6 @@ function FormikStepper({ children, ...props }) {
               <Button
                 type="button"
                 disabled={isSubmitting}
-                halfWidth={true}
                 onClick={() => setStep((s) => s - 1)}
               >
                 Back
@@ -155,11 +154,7 @@ function FormikStepper({ children, ...props }) {
             ) : null}
 
             <div className={step > 0 ? null : `col-span-2`}>
-              <Button
-                disabled={isSubmitting}
-                type="submit"
-                halfWidth={step > 0 ? true : false}
-              >
+              <Button disabled={isSubmitting} type="submit">
                 {isSubmitting
                   ? "Submitting"
                   : isLastStep()
@@ -189,7 +184,7 @@ function InputField({
       >
         {label}
       </label>
-      <div className="flex rounded text-sm shadow bg-white">
+      <div className="flex rounded overflow-hidden text-sm shadow bg-white">
         <Field
           type={type}
           name={name}
@@ -200,7 +195,7 @@ function InputField({
           }}
         />
         {isEmail ? (
-          <div className="text-center px-5 py-3 font-semibold text-gray-600">
+          <div className="text-center bg-gray-100 px-5 py-3 font-semibold border-l-2 border-gray-300 text-gray-600">
             @jklu.edu.in
           </div>
         ) : (
@@ -211,17 +206,15 @@ function InputField({
   );
 }
 
-function Button({
-  children,
-  type,
-  disabled,
-  onClick,
-  halfWidth,
-}) {
+function Button({ children, type, disabled, onClick }) {
   return (
     <div className="text-center mt-8">
       <button
-        className={`bg-gray-900 active:bg-gray-700 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mx-1 mb-1 w-full`}
+        className={`${
+          type == "submit" && children == "Submit"
+            ? "bg-green-500"
+            : "bg-gray-900"
+        } active:bg-gray-700 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mx-1 mb-1 w-full`}
         type={type}
         disabled={disabled}
         onClick={onClick}
