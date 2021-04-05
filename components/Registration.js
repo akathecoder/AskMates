@@ -92,12 +92,21 @@ const Registration = () => {
                     label="Personal Information"
                     validationSchema={object({
                       fname: string()
+                        .required("First Name is Required")
+                        .matches(
+                          /^[aA-zZ]+$/,
+                          "First Name Cannot contain numeric, symbols, spaces"
+                        ),
+                      mname: string().matches(
+                        /^[aA-zZ]+$/,
+                        "Middle Name Cannot contain numeric, symbols, spaces"
+                      ),
+                      lname: string("Last Name is Required")
                         .required()
-                        .matches(/^[aA-zZ]+$/),
-                      mname: string().matches(/^[aA-zZ]+$/),
-                      lname: string()
-                        .required()
-                        .matches(/^[aA-zZ]+$/),
+                        .matches(
+                          /^[aA-zZ]+$/,
+                          "Last Name Cannot contain numeric, symbols, spaces"
+                        ),
                     })}
                   >
                     <InputField
