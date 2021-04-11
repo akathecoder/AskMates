@@ -15,20 +15,10 @@ export default (req, res) => {
 
     answers: [
       {
-        answerId: 1,
-        answerBody: "When describing your ",
-        correct: "C",
-        upVotes: 2,
-        downVotes: 1,
-        questionId: 2,
-        doc: "2021-04-12T18:30:00.000Z",
-        username: "raghav",
-      },
-      {
         answerId: 2,
         answerBody:
-          "When describing your strengths, always be accurate. Share your real strengths, not those you think the interviewer wants to hear. Be specific and choose strengths which are relevant and based on the job role requirements. Avoid choosing vague words such as “people skills,” instead say “persuasive communication” or “relationship building.”",
-        correct: "I",
+          "When describing your strengths, always be accurate. Share your real strengths, not those you think the interviewer wants to hear. Be specific and choose strengths which are relevant and based on the job role requirements. Avoid choosing vague words such as “people skills,” instead say “persuasive communication” or “relationship building.”When describing your strengths, always be accurate. Share your real strengths, not those you think the interviewer wants to hear. Be specific and choose strengths which are relevant and based on the job role requirements. Avoid choosing vague words such as “people skills,” instead say “persuasive communication” or “relationship building.”When describing your strengths, always be accurate. Share your real strengths, not those you think the interviewer wants to hear. Be specific and choose strengths which are relevant and based on the job role requirements. Avoid choosing vague words such as “people skills,” instead say “persuasive communication” or “relationship building.”When describing your strengths, always be accurate. Share your real strengths, not those you think the interviewer wants to hear. Be specific and choose strengths which are relevant and based on the job role requirements. Avoid choosing vague words such as “people skills,” instead say “persuasive communication” or “relationship building.”",
+        correct: "c",
         upVotes: 2,
         downVotes: 1,
         questionId: 2,
@@ -40,6 +30,16 @@ export default (req, res) => {
         answerBody:
           "When describing your strengths, always be accurate. Share your real strengths, not those you think the interviewer wants to hear. Be specific and choose strengths which are relevant and based on the job role requirements. Avoid choosing vague words such as “people skills,” instead say “persuasive communication” or “relationship building.”",
         correct: "I",
+        upVotes: 2,
+        downVotes: 1,
+        questionId: 2,
+        doc: "2021-04-12T18:30:00.000Z",
+        username: "raghav",
+      },
+      {
+        answerId: 1,
+        answerBody: "When describing your ",
+        correct: "w",
         upVotes: 2,
         downVotes: 1,
         questionId: 2,

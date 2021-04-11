@@ -10,22 +10,9 @@ const Question = ({ data }) => {
 
   return (
     <>
-      <div className="px-6 py-10 bg-gray-50 shadow-md">
-        {/* Question title */}
-        <h1 className="text-2xl font-bold text-black  mb-2 mx-2 text-justify">
-          {data.title}
-        </h1>
-
-        {/* Question body */}
-        <h1 className="text-xl font-normal text-black mt-2 mb-6 mx-2 text-justify">
-          {data.content}
-        </h1>
-
-        {/* line above user details */}
-        {/* <hr className="mt-8 mb-1 border " /> */}
-
+      <div className="px-6 py-6 bg-gray-50 shadow-md">
         {/* user details */}
-        <div className="">
+        <div className="mb-4">
           <Link href={"/u/" + data.username}>
             <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75">
               {imageLink ? (
@@ -56,6 +43,19 @@ const Question = ({ data }) => {
             </a>
           </Link>
         </div>
+
+        {/* Question title */}
+        <h1 className="text-2xl font-bold text-black  mb-2 mx-2 text-justify">
+          {data.title}
+        </h1>
+
+        {/* Question body */}
+        <h1 className="text-xl font-normal text-black mt-2 mb-2 mx-2 text-justify">
+          {data.content}
+        </h1>
+
+        {/* line above user details */}
+        {/* <hr className="mt-8 mb-1 border " /> */}
 
         {/* line below user details */}
         {/* <hr className="mb-8 mt-1 border " /> */}
