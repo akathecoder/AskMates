@@ -4,7 +4,7 @@ import { string, mixed, number, object } from "yup";
 import {
   validateEmail,
   validateUsername,
-} from "../utils/validateUsername";
+} from "../utils/validate";
 
 const Registration = () => {
   return (
@@ -26,9 +26,9 @@ const Registration = () => {
                     fname: "",
                     mname: "",
                     lname: "",
-                    batch: "",
-                    degree: "",
-                    field: "",
+                    batch: "2021",
+                    degree: "btech",
+                    field: "cse",
                     rollno: "",
                   }}
                   onSubmit={async (values) => {
@@ -60,11 +60,20 @@ const Registration = () => {
                           "isEmailValid",
                           "Email Address already exists",
                           (value, context) =>
-                            validateEmail(value)
+                            validateEmail(
+                              value + "@jklu.edu.in"
+                            )
                         ),
-                      password: string().required(
-                        "Password is required"
-                      ),
+                      password: string()
+                        .required("Password is required")
+                        .min(
+                          8,
+                          "Password must be at-least 8 characters long"
+                        )
+                        .matches(
+                          /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/,
+                          "Password must contain at-least one uppercase, lowercase, number and symbol"
+                        ),
                     })}
                   >
                     <InputField
@@ -129,30 +138,68 @@ const Registration = () => {
                     />
                   </FormikStep>
 
-                  <FormikStep label="Student Information">
+                  <FormikStep
+                    label="Student Information"
+                    validationSchema={object({
+                      rollno: number()
+                        .required("Roll No. is required")
+                        .positive(
+                          "Roll no. must be a positive number"
+                        ),
+                    })}
+                  >
                     <InputField
+                      as="select"
                       label="Batch"
                       name="batch"
-                      type="text"
                       placeholder="Year of Graduation"
-                    />
+                    >
+                      <option value="2021">2021</option>
+                      <option value="2022">2022</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                    </InputField>
+
                     <InputField
+                      as="select"
                       label="Degree"
                       name="degree"
-                      type="text"
                       placeholder="Select your Degree"
-                    />
+                    >
+                      <option value="btech">B Tech</option>
+                      <option value="bba">BBA</option>
+                      <option value="bdes">B Des</option>
+                      <option value="bca">BCA</option>
+                      <option value="mtech">M Tech</option>
+                      <option value="mba">MBA</option>
+                      <option value="mdes">M Des</option>
+                      <option value="mca">MCA</option>
+                    </InputField>
+
                     <InputField
+                      as="select"
                       label="Field"
                       name="field"
-                      type="text"
                       placeholder="Enter your Major"
-                    />
+                    >
+                      <option value="cse">
+                        Computer Science
+                      </option>
+                      <option value="mechanical">
+                        Mechanical
+                      </option>
+                      <option value="civil">Civil</option>
+                      <option value="electrical">
+                        Electrical
+                      </option>
+                    </InputField>
+
                     <InputField
                       label="Roll No."
                       name="rollno"
-                      type="text"
+                      type="number"
                       placeholder="Enter your Roll No."
+                      min="1"
                     />
                   </FormikStep>
                 </FormikStepper>
@@ -232,6 +279,9 @@ function InputField({
   placeholder,
   name,
   isEmail,
+  children,
+  as,
+  ...props
 }) {
   return (
     <div className="relative w-full mb-5">
@@ -243,6 +293,7 @@ function InputField({
       </label>
       <div className="flex rounded overflow-hidden text-sm shadow bg-white">
         <Field
+          as={as}
           type={type}
           name={name}
           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-0 w-full"
@@ -250,7 +301,10 @@ function InputField({
           style={{
             transition: "all .15s ease",
           }}
-        />
+          {...props}
+        >
+          {children}
+        </Field>
         {isEmail ? (
           <div className="text-center bg-gray-100 px-5 py-3 font-semibold border-l-2 border-gray-300 text-gray-600">
             @jklu.edu.in
