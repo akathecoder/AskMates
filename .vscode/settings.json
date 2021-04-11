@@ -1,0 +1,30 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "CS1106",
+            "database": "cs1106",
+            "username": "root",
+            "password": "5X*Eq4gSw4macD5N!$"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "DBMS Project",
+            "database": "dbms_project",
+            "username": "dbms-project-user",
+            "password": "Duxq4p4js9HhkhRDx@z"
+        }
+    ]
+}

@@ -4,7 +4,7 @@ import { string, mixed, number, object } from "yup";
 import {
   validateEmail,
   validateUsername,
-} from "../utils/validateUsername";
+} from "../utils/validate";
 
 const Registration = () => {
   return (
@@ -60,7 +60,9 @@ const Registration = () => {
                           "isEmailValid",
                           "Email Address already exists",
                           (value, context) =>
-                            validateEmail(value)
+                            validateEmail(
+                              value + "@jklu.edu.in"
+                            )
                         ),
                       password: string()
                         .required("Password is required")
