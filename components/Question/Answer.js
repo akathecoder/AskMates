@@ -13,9 +13,6 @@ const Answer = ({ data }) => {
 
   return (
     <>
-      {/* <pre className="whitespace-pre-wrap">
-        {JSON.stringify(data, null, 2)}
-      </pre> */}
       <div className="px-4 flex ">
         <div className="mr-6">
           {data.correct.toLowerCase() == "c" && (
