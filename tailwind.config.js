@@ -10,6 +10,14 @@ module.exports = {
         login: "url('/login1.svg')",
       }),
     },
+    fontFamily: {
+      display: [
+        "Roboto",
+        "Ubuntu",
+        "Cantarell",
+        "sans-serif",
+      ],
+    },
   },
   variants: {
     extend: {},
