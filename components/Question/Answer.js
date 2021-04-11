@@ -16,7 +16,7 @@ const Answer = ({ data }) => {
       {/* <pre className="whitespace-pre-wrap">
         {JSON.stringify(data, null, 2)}
       </pre> */}
-      <div className="mr-96 px-4 grid grid-cols-9 ">
+      <div className="px-4 grid grid-cols-9 ">
         <div className="mr-6 mt-2">
           <FontAwesomeIcon
             icon={faCaretUp}

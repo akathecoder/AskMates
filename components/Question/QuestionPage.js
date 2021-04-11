@@ -6,14 +6,18 @@ function QuestionPage({ slug, data }) {
   data = JSON.parse(data);
 
   return (
-    <div className="mx-96 font-display">
-      <Question data={JSON.stringify(data.question)} />
-      {data.answers.map((answer) => (
-        <Answer
-          data={JSON.stringify(answer)}
-          key={answer.answerId}
-        />
-      ))}
+    <div className="mx-96 pr-64 font-display">
+      <div className="mt-10">
+        <Question data={JSON.stringify(data.question)} />
+      </div>
+      <div className="my-12">
+        {data.answers.map((answer) => (
+          <Answer
+            data={JSON.stringify(answer)}
+            key={answer.answerId}
+          />
+        ))}
+      </div>
     </div>
   );
 }
