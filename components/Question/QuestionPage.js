@@ -1,22 +1,30 @@
 import Question from "./Question";
 import Answer from "./Answer";
+import NoAnswer from "./NoAnswer";
 
-function QuestionPage({ slug, data }) {
-  // console.log(data);
-  data = JSON.parse(data);
+function QuestionPage({ slug, questionData, answersData }) {
+  // console.log(answersData);
+  questionData = JSON.parse(questionData);
+  answersData = JSON.parse(answersData);
+
+  // console.log(answersData.length);
 
   return (
     <div className="mx-96 pr-64 font-display">
       <div className="mt-10">
-        <Question data={JSON.stringify(data.question)} />
+        <Question data={JSON.stringify(questionData)} />
       </div>
       <div className="my-12">
-        {data.answers.map((answer) => (
-          <Answer
-            data={JSON.stringify(answer)}
-            key={answer.answerId}
-          />
-        ))}
+        {answersData.length ? (
+          answersData.map((answer) => (
+            <Answer
+              data={JSON.stringify(answer)}
+              key={answer.answerId}
+            />
+          ))
+        ) : (
+          <NoAnswer />
+        )}
       </div>
     </div>
   );
