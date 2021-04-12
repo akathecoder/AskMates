@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       backgroundImage: (theme) => ({
         login: "url('/login1.svg')",
+        question404: "url('/assets/caveMan.gif')",
       }),
     },
     fontFamily: {
