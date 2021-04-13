@@ -55,7 +55,7 @@ export async function getServerSideProps(context) {
 	}
 
 	const answerData = await axios
-		.get("http://localhost:4001/answers", {
+		.get("http://localhost:4001/answers/byquestionid/", {
 			params: {
 				questionId: questionData.data.questionId,
 			},
