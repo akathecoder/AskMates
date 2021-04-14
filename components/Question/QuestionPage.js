@@ -1,6 +1,7 @@
 import Question from "./Question";
 import Answer from "./Answer";
 import NoAnswer from "./NoAnswer";
+import MyEditor from "../InputBox/MyEditor";
 
 function QuestionPage({ slug, questionData, answersData }) {
   // console.log(answersData);
@@ -13,6 +14,9 @@ function QuestionPage({ slug, questionData, answersData }) {
     <div className="mx-96 pr-64 font-display">
       <div className="mt-10">
         <Question data={JSON.stringify(questionData)} />
+      </div>
+      <div className="my-12 border-black border-2">
+        <MyEditor />
       </div>
       <div className="my-12">
         {answersData.length ? (
