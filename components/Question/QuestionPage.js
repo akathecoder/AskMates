@@ -15,10 +15,7 @@ function QuestionPage({ slug, questionData, answersData }) {
       <div className="mt-10">
         <Question data={JSON.stringify(questionData)} />
       </div>
-      <div className="my-12 border-black border-2">
-        <MyEditor />
-      </div>
-      <div className="my-12">
+      <div className="mb-6 mt-12">
         {answersData.length ? (
           answersData.map((answer) => (
             <Answer
@@ -29,6 +26,14 @@ function QuestionPage({ slug, questionData, answersData }) {
         ) : (
           <NoAnswer />
         )}
+      </div>
+      <div className="mt-6 mb-12 px-2">
+        <MyEditor />
+        <div className="flex justify-end">
+          <button className="border hover:bg-blue-400 font-medium text-gray-600 hover:text-white hover:shadow-lg py-2 px-4 rounded-sm my-4">
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );
