@@ -9,7 +9,13 @@ const Login = () => {
                 <div className="text-center mb-3 font-bold text-xl">
                   <h3>Sign in with credentials</h3>
                 </div>
-                <form className="mt-8">
+                <form
+                  className="mt-8"
+                  method="post"
+                  action={
+                    process.env.serverUrl + "authenticate"
+                  }
+                >
                   <div className="relative w-full mb-5">
                     <label
                       className="block text-xs font-bold mb-2"
@@ -19,7 +25,8 @@ const Login = () => {
                     </label>
                     <div className="flex rounded text-sm shadow bg-white">
                       <input
-                        type="email"
+                        type="text"
+                        name="username"
                         placeholder="Email"
                         className="flex-grow rounded focus:outline-none focus:ring-0 px-3 py-3 placeholder-gray-400 text-gray-600"
                         style={{
@@ -41,6 +48,7 @@ const Login = () => {
                     </label>
                     <input
                       type="password"
+                      name="password"
                       className="border-0 px-3 py-3 placeholder-gray-400 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-0 w-full"
                       placeholder="Password"
                       style={{
@@ -51,7 +59,7 @@ const Login = () => {
                   <div className="text-center mt-8">
                     <button
                       className="bg-gray-900 active:bg-gray-700 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                      type="button"
+                      type="submit"
                       style={{
                         transition: "all .15s ease",
                       }}
