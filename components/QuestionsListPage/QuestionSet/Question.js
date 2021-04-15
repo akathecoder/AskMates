@@ -4,13 +4,17 @@ import {
 	faEye,
 	faEdit,
 	faShare,
+	faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import Link from "next/link";
 import date from "date-and-time";
+import { useState } from "react";
+import { showPopup } from "../../Notification";
 
 const Question = ({ question }) => {
 	const imageLink = "/assets/profilePic.jpeg";
+	const [share, setShare] = useState(true);
 	return (
 		// Question Card
 		<div className="my-6 px-10 py-6 bg-gray-50 shadow-lg">
@@ -76,45 +80,77 @@ const Question = ({ question }) => {
 					</div>
 
 					{/* Question */}
-					<div className="">
-						{/* Question title */}
-						<Link href="/">
-							<h3 className="text-lg font-bold text-black mb-2 mx-2 text-justify cursor-pointer">
-								{question.title}
-							</h3>
-						</Link>
+					<div>
+						<Link href={`/q/${question.slug}`}>
+							<div className="cursor-pointer">
+								{/* Question title */}
+								<h3 className="text-lg font-bold text-black mb-2 mx-2 text-justify">
+									{question.title}
+								</h3>
 
-						{/* Question body */}
-						<p className="font-normal text-gray-700 mt-2 mb-2 mx-2 text-justify">
-							{question.content.length > 300
-								? question.content.substring(0, 300) + "..."
-								: question.content}
-						</p>
+								{/* Question body */}
+								<p className="font-normal text-gray-700 mt-2 mb-2 mx-2 text-justify">
+									{question.content.length > 300
+										? question.content.substring(0, 300) +
+										  "..."
+										: question.content}
+								</p>
+							</div>
+						</Link>
 
 						{/* Action Buttons and User Details */}
 						<div className="mx-2 mt-5 flex flex-row justify-between items-center">
 							{/* Answer and Share Buttons */}
 							<div className="flex flex-row justify-evenly space-x-7">
-								<div className="cursor-pointer group">
-									<FontAwesomeIcon
-										icon={faEdit}
-										size="x"
-										className="text-gray-400 group-hover:text-gray-800"
-									/>
-									<span className="text-gray-400 group-hover:text-gray-800 font-bold">
-										&nbsp;Answer
-									</span>
-								</div>
-								<div className="cursor-pointer group">
-									<FontAwesomeIcon
-										icon={faShare}
-										size="x"
-										className="text-gray-400 group-hover:text-gray-800"
-									/>
-									<span className="text-gray-400 group-hover:text-gray-800 font-bold">
-										&nbsp;Share
-									</span>
-								</div>
+								<Link href={`/q/${question.slug}`}>
+									<div className="cursor-pointer group">
+										<FontAwesomeIcon
+											icon={faEdit}
+											size="x"
+											className="text-gray-400 group-hover:text-gray-800"
+										/>
+										<span className="text-gray-400 group-hover:text-gray-800 font-bold">
+											&nbsp;Answer
+										</span>
+									</div>
+								</Link>
+								{share ? (
+									<div
+										className="cursor-pointer group"
+										onClick={() => {
+											setShare(!share);
+										}}
+									>
+										<FontAwesomeIcon
+											icon={faShare}
+											size="x"
+											className="text-gray-400 group-hover:text-gray-800"
+										/>
+										<span className="text-gray-400 group-hover:text-gray-800 font-bold">
+											&nbsp;Share
+										</span>
+									</div>
+								) : (
+									<div
+										className="cursor-pointer group"
+										onClick={() => {
+											setShare(!share);
+											navigator.clipboard.writeText(
+												question.slug
+											);
+											showPopup("URL Copied!", "green");
+										}}
+									>
+										<FontAwesomeIcon
+											icon={faCopy}
+											size="x"
+											className="text-gray-400 group-hover:text-gray-800"
+										/>
+										<span className="text-gray-400 group-hover:text-gray-800 font-bold">
+											&nbsp;Copy URL
+										</span>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
