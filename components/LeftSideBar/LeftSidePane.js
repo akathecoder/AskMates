@@ -8,7 +8,7 @@ import taglist from "../../data/tags.json";
 const LeftSidePane = (className) => {
   const maptaglist = taglist.map((name, index) => {
     return (
-      <Link href="">
+      <Link href="" key={index}>
         <TagList tagname={name} />
       </Link>
     );
