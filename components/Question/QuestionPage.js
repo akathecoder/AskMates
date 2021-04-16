@@ -28,7 +28,10 @@ function QuestionPage({ slug, questionData, answersData }) {
         )}
       </div>
       <div className="mt-6 mb-12 px-2">
-        <MyEditor />
+        <h1 className="text-xl mb-4 px-1 font-medium ">
+          Your Answer
+        </h1>
+        <MyEditor minHeight="12rem" />
         <div className="flex justify-end">
           <button className="border hover:bg-blue-400 font-medium text-gray-600 hover:text-white hover:shadow-lg py-2 px-4 rounded-sm my-4">
             Submit
