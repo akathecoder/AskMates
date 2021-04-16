@@ -3,7 +3,7 @@ import QuestionSet from "./QuestionSet/QuestionSet";
 
 const QuestionsListPage = ({ questionData }) => {
 	return (
-		<section className="md:mx-32 lg:mx-48">
+		<section className="md:mx-32 lg:mx-48 pb-20">
 			<div className="fixed top-0 w-full h-40 bg-white z-10"></div>
 			<div className="flex flex-row">
 				<LeftSidePane />
