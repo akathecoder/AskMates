@@ -7,7 +7,9 @@ const QuestionsListPage = ({ questionData }) => {
 			<div className="fixed top-0 w-full h-40 bg-white z-10"></div>
 			<div className="flex flex-row">
 				<LeftSidePane />
-				<QuestionSet questionData={questionData} />
+				<div className="ml-96">
+					<QuestionSet questionData={questionData} />
+				</div>
 			</div>
 		</section>
 	);

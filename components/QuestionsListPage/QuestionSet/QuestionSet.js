@@ -16,7 +16,7 @@ const QuestionSet = ({ questionData }) => {
 		);
 	});
 	return (
-		<section className="z-0 ml-96">
+		<section className="z-0">
 			<h2 className="text-3xl font-bold block">
 				Questions
 			</h2>
