@@ -67,17 +67,17 @@ const Question = ({ question }) => {
 							</span>
 						</div>
 
-            {/* Date */}
-            <p className="text-sm text-gray-500 font-semibold">
-              {date.format(
-                date.parse(
-                  new String(question.doc).substring(0, 10),
-                  "YYYY-MM-DD"
-                ),
-                "ddd, MMM DD YYYY"
-              )}
-            </p>
-          </div>
+						{/* Date */}
+						<p className="text-sm text-gray-500 font-semibold">
+							{date.format(
+								date.parse(
+									new String(question.doc).substring(0, 10),
+									"YYYY-MM-DD"
+								),
+								"ddd, MMM DD YYYY"
+							)}
+						</p>
+					</div>
 
 					{/* Question */}
 					<div>
@@ -90,9 +90,10 @@ const Question = ({ question }) => {
 
 								{/* Question body */}
 								<p className="font-normal text-gray-700 mt-2 mb-2 mx-2 text-justify">
-									{question.content.length > 300
-										? question.content.substring(0, 300) +
-										  "..."
+									{new String(question.content).length > 300
+										? new String(
+												question.content
+										  ).substring(0, 300) + "..."
 										: question.content}
 								</p>
 							</div>

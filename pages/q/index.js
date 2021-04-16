@@ -1,12 +1,12 @@
 import Navbar from "../../components/Nav";
-import HomePage from "../../components/QuestionsListPage/QuestionsListPage";
+import QuestionsListPage from "../../components/QuestionsListPage/QuestionsListPage";
 import axios from "axios";
 
 export default function Home({ questionData }) {
 	return (
 		<div className="">
 			<Navbar />
-			<HomePage questionData={questionData} />
+			<QuestionsListPage questionData={questionData} />
 		</div>
 	);
 }

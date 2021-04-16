@@ -12,16 +12,16 @@ const Footer = () => {
 					<div>
 						<h3 className="font-medium block">Company</h3>
 						<div className="flex flex-col mt-1">
-							<Link href="">Login</Link>
-							<Link href="">Questions</Link>
-							<Link href="">Help</Link>
+							<Link href="/q">Login</Link>
+							<Link href="/q">Questions</Link>
+							<Link href="/q">Help</Link>
 						</div>
 					</div>
 					<div>
 						<h3 className="font-medium block">Product</h3>
 						<div className="flex flex-col mt-1">
-							<Link href="">About</Link>
-							<Link href="">Developers</Link>
+							<Link href="/q">About</Link>
+							<Link href="/q">Developers</Link>
 						</div>
 					</div>
 				</section>
