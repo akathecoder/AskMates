@@ -13,6 +13,10 @@ import {
   faHome,
   faUsers,
   faSearch,
+  faSignOutAlt,
+  faUser,
+  faQuestion,
+  faPencilAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faEdit,
@@ -23,6 +27,7 @@ import {
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const imageLink = "/assets/profilePic.jpeg";
+  const [dropDownOpen, setdropDownOpen] = useState(false);
 
   return (
     <>
@@ -72,9 +77,7 @@ export default function Navbar() {
                       size="2x"
                       className="leading-lg text-white opacity-75"
                     />
-                    <span className="ml-2">
-                      Notifications
-                    </span>
+                    <span className="ml-2">Notifications</span>
                   </a>
                 </Link>
               </li>
@@ -87,9 +90,7 @@ export default function Navbar() {
                       size="2x"
                       className="leading-lg text-white opacity-75"
                     />
-                    <span className="ml-2">
-                      Ask Question
-                    </span>
+                    <span className="ml-2">Ask Question</span>
                   </a>
                 </Link>
               </li>
@@ -110,7 +111,7 @@ export default function Navbar() {
           </div>
           <div>
             <div className="nav-item my-auto hidden lg:flex">
-              <Link href="/me">
+              <Link href="#">
                 <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
                   {imageLink ? (
                     <Image
@@ -120,22 +121,81 @@ export default function Navbar() {
                       width={40}
                       height={40}
                       objectFit="cover"
+                      onClick={() => setdropDownOpen(!dropDownOpen)}
                     />
                   ) : (
                     <FontAwesomeIcon
                       icon={faUserCircle}
                       size="3x"
                       className="leading-lg text-white opacity-75"
+                      onClick={() => setdropDownOpen(!dropDownOpen)}
                     />
                   )}
 
                   {/* <span className="ml-2"></span> */}
                 </a>
               </Link>
+              <div
+                onClick={() => setdropDownOpen(false)}
+                className={
+                  dropDownOpen
+                    ? "fixed inset-0 h-full w-full bg-black opacity-30 cursor-default"
+                    : "hidden"
+                }
+              ></div>
             </div>
           </div>
         </div>
       </nav>
+
+      <div className={dropDownOpen ? "inline" : "hidden"}>
+        <div className="fixed z-50 -right-0 top-16 text-sm py-2 w-40 mt-2 bg-white rounded-lg shadow-md mr-9">
+          <a
+            href="#"
+            className="block pl-6 py-2 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+          >
+            <FontAwesomeIcon
+              icon={faUser}
+              size="1x"
+              className="text-gray-600 group-hover:text-gray-50"
+            />
+            &nbsp; My Profile
+          </a>
+          <a
+            href="#"
+            className="block pl-6 py-2 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+          >
+            <FontAwesomeIcon
+              icon={faQuestion}
+              size="1x"
+              className="text-gray-600 group-hover:text-gray-50"
+            />
+            &nbsp; My Question
+          </a>
+          <a
+            href="#"
+            className="block pl-6 py-2 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+          >
+            <FontAwesomeIcon
+              icon={faPencilAlt}
+              size="1x"
+              className="text-gray-600 group-hover:text-gray-50"
+            />
+            &nbsp; My Answers
+          </a>
+          <a
+            href="#"
+            className="block pl-6 py-2 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+          >
+            <FontAwesomeIcon
+              icon={faSignOutAlt}
+              size="1x"
+              className="text-gray-600 group-hover:text-gray-50"
+            />
+            &nbsp; Sign Out
+          </a>
+        </div>
+      </div>
     </>
   );
 }
