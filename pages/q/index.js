@@ -11,7 +11,7 @@ export default function Home({ questionData }) {
 	);
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	const questionData = await axios
 		.get("http://localhost:4001/questions")
 		.catch(error => {
@@ -40,5 +40,6 @@ export async function getServerSideProps() {
 		props: {
 			questionData: JSON.stringify(questionData.data),
 		},
+		revalidate: 1,
 	};
 }
