@@ -1,3 +1,4 @@
+import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState, useEffect } from "react";
 import { string, mixed, number, object } from "yup";
@@ -5,8 +6,11 @@ import {
   validateEmail,
   validateUsername,
 } from "../utils/validate";
+import { useRouter } from "next/router";
 
 const Registration = () => {
+  const router = useRouter();
+
   return (
     <div className="absolute bg-login h-full w-full bg-cover">
       <div className="container mx-auto px-4 h-full">
@@ -23,16 +27,31 @@ const Registration = () => {
                     username: "",
                     email: "",
                     password: "",
-                    fname: "",
-                    mname: "",
-                    lname: "",
+                    firstName: "",
+                    middleName: "",
+                    lastName: "",
                     batch: "2021",
                     degree: "btech",
                     field: "cse",
-                    rollno: "",
+                    rollNo: "",
                   }}
                   onSubmit={async (values) => {
                     console.log("values", values);
+                    await axios
+                      .post(
+                        process.env.serverUrl + "users",
+                        {
+                          ...values,
+                        }
+                      )
+                      .then((res) => {
+                        router.push("/login");
+                        console.log("User Created");
+                      })
+                      .catch((err) => {
+                        router.reload();
+                        console.log(err);
+                      });
                   }}
                 >
                   <FormikStep
@@ -100,17 +119,19 @@ const Registration = () => {
                   <FormikStep
                     label="Personal Information"
                     validationSchema={object({
-                      fname: string()
+                      firstName: string()
                         .required("First Name is Required")
                         .matches(
                           /^[aA-zZ]+$/,
                           "First Name Cannot contain numeric, symbols, spaces"
                         ),
-                      mname: string().matches(
+                      middleName: string().matches(
                         /^[aA-zZ]+$/,
                         "Middle Name Cannot contain numeric, symbols, spaces"
                       ),
-                      lname: string("Last Name is Required")
+                      lastName: string(
+                        "Last Name is Required"
+                      )
                         .required()
                         .matches(
                           /^[aA-zZ]+$/,
@@ -120,19 +141,19 @@ const Registration = () => {
                   >
                     <InputField
                       label="First Name"
-                      name="fname"
+                      name="firstName"
                       type="text"
                       placeholder="Enter your First name"
                     />
                     <InputField
                       label="Middle Name"
-                      name="mname"
+                      name="middleName"
                       type="text"
                       placeholder="Enter your Middle name"
                     />
                     <InputField
                       label="Last Name"
-                      name="lname"
+                      name="lastName"
                       type="text"
                       placeholder="Enter your Last name"
                     />
@@ -141,7 +162,7 @@ const Registration = () => {
                   <FormikStep
                     label="Student Information"
                     validationSchema={object({
-                      rollno: number()
+                      rollNo: number()
                         .required("Roll No. is required")
                         .positive(
                           "Roll no. must be a positive number"
@@ -196,7 +217,7 @@ const Registration = () => {
 
                     <InputField
                       label="Roll No."
-                      name="rollno"
+                      name="rollNo"
                       type="number"
                       placeholder="Enter your Roll No."
                       min="1"
@@ -243,7 +264,7 @@ function FormikStepper({ children, ...props }) {
       }}
     >
       {({ isSubmitting }) => (
-        <Form autoComplete="off">
+        <Form autoComplete="off" target="/login">
           {currentChild}
 
           <div className="grid grid-cols-2 gap-4">
