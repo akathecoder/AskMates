@@ -8,7 +8,7 @@ const TagList = ({ tagname }) => {
       {/* <span className="text-sm font-normal"># </span> */}
       <FontAwesomeIcon
         icon={faHashtag}
-        size="x"
+        size="1x"
         className="text-blue-500 group-hover:text-gray-50 text-base pt-1"
       />
       <p>{tagname}</p>
