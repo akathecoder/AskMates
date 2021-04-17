@@ -6,10 +6,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import Link from "next/link";
+import { voteUp, voteDown } from "../../utils/voteAnswers";
+import { useState } from "react";
 
 const Answer = ({ data }) => {
   data = JSON.parse(data);
   const imageLink = "/assets/profilePic.jpeg";
+
+  const [votes, setVotes] = useState([
+    data.upVotes,
+    data.downVotes,
+  ]);
+
+  console.log(data);
 
   return (
     <>
@@ -24,7 +33,12 @@ const Answer = ({ data }) => {
             />
           )}
 
-          <div className="text-center">
+          <div
+            className="text-center cursor-pointer"
+            onClick={() =>
+              voteUp(data.answerId, votes, setVotes)
+            }
+          >
             <FontAwesomeIcon
               icon={faCaretUp}
               size="2x"
@@ -32,10 +46,15 @@ const Answer = ({ data }) => {
             />
           </div>
           <p className="text-center">
-            {data.upVotes - data.downVotes}
+            {votes[0] - votes[1]}
           </p>
 
-          <div className="text-center">
+          <div
+            className="text-center cursor-pointer"
+            onClick={() =>
+              voteDown(data.answerId, votes, setVotes)
+            }
+          >
             <FontAwesomeIcon
               icon={faCaretDown}
               size="2x"

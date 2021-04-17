@@ -44,7 +44,7 @@ export default function MyEditor({
         editorState={editorState}
         toolbarClassName="toolbarClassName"
         wrapperClassName="wrapperClassName"
-        editorClassName="editorClassName border border-gray-300 leading-snug text-lg px-4"
+        editorClassName="editorClassName bg-white border border-gray-300 leading-snug text-lg px-4"
         editorStyle={{
           minHeight: minHeight,
         }}
