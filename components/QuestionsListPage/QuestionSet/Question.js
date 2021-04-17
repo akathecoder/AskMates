@@ -67,17 +67,17 @@ const Question = ({ question }) => {
 							</span>
 						</div>
 
-						{/* Date */}
-						<p className="text-sm text-gray-500 font-semibold">
-							{date.format(
-								date.parse(
-									new String(question.doc).substring(0, 10),
-									"YYYY-MM-DD"
-								),
-								"ddd, MMM DD YYYY"
-							)}
-						</p>
-					</div>
+            {/* Date */}
+            <p className="text-sm text-gray-500 font-semibold">
+              {date.format(
+                date.parse(
+                  new String(question.doc).substring(0, 10),
+                  "YYYY-MM-DD"
+                ),
+                "ddd, MMM DD YYYY"
+              )}
+            </p>
+          </div>
 
 					{/* Question */}
 					<div>
