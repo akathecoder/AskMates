@@ -18,7 +18,11 @@ import { stateToHTML } from "draft-js-export-html";
 
 import parse from "html-react-parser";
 
-export default function MyEditor() {
+export default function MyEditor({
+  minHeight,
+  className,
+  setData,
+}) {
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
@@ -29,15 +33,21 @@ export default function MyEditor() {
 
   // console.log(typeof html);
 
+  if (setData) {
+    setData(html);
+  }
+
   return (
-    <>
+    <div className={className}>
       {/* {parse(html)} */}
-      <h1 className="text-xl mb-4 px-1">Your Answer</h1>
       <Editor
         editorState={editorState}
         toolbarClassName="toolbarClassName"
         wrapperClassName="wrapperClassName"
-        editorClassName="editorClassName border border-gray-300 leading-snug text-lg px-4"
+        editorClassName="editorClassName bg-white border border-gray-300 leading-snug text-lg px-4"
+        editorStyle={{
+          minHeight: minHeight,
+        }}
         className=""
         onEditorStateChange={setEditorState}
         toolbar={{
@@ -65,6 +75,6 @@ export default function MyEditor() {
           },
         }}
       />
-    </>
+    </div>
   );
 }
