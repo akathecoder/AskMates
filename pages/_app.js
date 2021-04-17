@@ -5,7 +5,7 @@ function MyApp({ Component, pageProps }) {
   EE();
 
   return (
-    <div className="bg-gray-200  min-h-screen w-full bg-cover">
+    <div className="bg-gray-200 min-h-screen w-full bg-cover font-display">
       <Head>
         <meta charSet="utf-8" />
       </Head>

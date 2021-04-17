@@ -1,7 +1,12 @@
 import Navbar from "../components/Nav";
 import MyEditor from "../components/InputBox/MyEditor";
+import { useState } from "react";
 
 function ask() {
+  const [bodyData, setBodyData] = useState("");
+
+  // console.log(bodyData);
+
   return (
     <>
       <Navbar />
@@ -29,7 +34,11 @@ function ask() {
               Include all the information someone would need
               to answer your question
             </p>
-            <MyEditor minHeight="20rem" className="my-2" />
+            <MyEditor
+              minHeight="20rem"
+              className="my-2"
+              setData={setBodyData}
+            />
           </div>
           <div className="my-4">
             <h1 className="text-xl font-medium">Tags</h1>

@@ -18,7 +18,11 @@ import { stateToHTML } from "draft-js-export-html";
 
 import parse from "html-react-parser";
 
-export default function MyEditor({ minHeight, className }) {
+export default function MyEditor({
+  minHeight,
+  className,
+  setData,
+}) {
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
@@ -28,6 +32,10 @@ export default function MyEditor({ minHeight, className }) {
   let html = stateToHTML(contentState);
 
   // console.log(typeof html);
+
+  if (setData) {
+    setData(html);
+  }
 
   return (
     <div className={className}>
