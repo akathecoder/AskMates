@@ -1,65 +1,161 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
-import SearchBar from "./SearchBar";
-import QuestionSet from "../../QuestionsListPage/QuestionSet/QuestionSet";
 import _ from "lodash";
+import { useState, useEffect, useReducer } from "react";
+import SearchBar from "./SearchBar";
+import SearchResults from "./SearchResults/SearchResults";
+
+const storiesReducer = (state, action) => {
+	switch (action.type) {
+		case "DATA_FETCH_INIT":
+			return {
+				...state,
+				questionData: false,
+				answerData: false,
+				questionsFound: false,
+				answersFound: false,
+				isLoading: true,
+				isError: false,
+			};
+		case "QUESTIONS_FETCH_SUCESS":
+			return {
+				...state,
+				questionData: action.payload,
+				questionsFound: true,
+				isLoading: false,
+				isError: false,
+			};
+		case "ANSWERS_FETCH_SUCESS":
+			return {
+				...state,
+				answerData: action.payload,
+				answersFound: true,
+				isLoading: false,
+				isError: false,
+			};
+		case "QUESTIONS_NOT_FOUND":
+			return {
+				...state,
+				questionData: {},
+				questionsFound: false,
+				isLoading: false,
+				isError: false,
+			};
+		case "ANSWERS_NOT_FOUND":
+			return {
+				...state,
+				answerData: {},
+				answersFound: false,
+				isLoading: false,
+				isError: false,
+			};
+		case "FETCH_FALIURE":
+			return {
+				...state,
+				questionData: false,
+				answerData: false,
+				questionsFound: false,
+				answersFound: false,
+				isLoading: false,
+				isError: true,
+			};
+		default:
+			break;
+	}
+};
 
 const SearchSection = () => {
 	const [searchTerm, setSearchTerm] = useState("");
-	const [searchResult, setSearchResult] = useState();
+	const [searchResult, dispatchSearchResult] = useReducer(
+		storiesReducer,
+		{
+			questionData: false,
+			answerData: false,
+			questionsFound: false,
+			answersFound: false,
+			isLoading: false,
+			isError: false,
+		}
+	);
+
 	const handleOnChange = newTerm => {
 		setSearchTerm(newTerm);
 	};
-	const [notFound, setNotFound] = useState(false);
+
+	// Fetch data every time searchTerm changes
 	useEffect(() => {
-		searchData(searchTerm)
-			.then(searchedData => {
-				if (_.isEmpty(searchedData)) {
-					setSearchResult(false);
+		if (searchTerm === "") {
+			dispatchSearchResult({ type: "DATA_FETCH_INIT" });
+		} else {
+			searchData(
+				`http://localhost:4001/questions/question/${searchTerm}`
+			).then(searchedQuestionData => {
+				if (_.isEmpty(searchedQuestionData)) {
+					dispatchSearchResult({
+						type: "QUESTIONS_NOT_FOUND",
+					});
 				} else {
-					setSearchResult(searchedData);
+					dispatchSearchResult({
+						type: "QUESTIONS_FETCH_SUCESS",
+						payload: searchedQuestionData,
+					});
 				}
-			})
-			.catch(error => {
-				console.log(error);
 			});
+			searchData(
+				`http://localhost:4001/answers/search/${searchTerm}`
+			).then(searchedAnswerData => {
+				if (_.isEmpty(searchedAnswerData)) {
+					dispatchSearchResult({
+						type: "ANSWERS_NOT_FOUND",
+					});
+				} else {
+					dispatchSearchResult({
+						type: "ANSWERS_FETCH_SUCESS",
+						payload: searchedAnswerData,
+					});
+				}
+			});
+		}
 	}, [searchTerm]);
 
-	const searchData = async searchTerm => {
-		if (searchTerm) {
-			const searchedData = await axios
-				.get(
-					`http://localhost:4001/questions/question/${searchTerm}`
-				)
-				.catch(error => {
-					if (error.response) {
-						/*
-						 * The request was made and the server responded with a
-						 * status code that falls out of the range of 2xx
-						 */
-						if (error.response.status === 404) {
-							setNotFound(true);
-						}
-					} else if (error.request) {
-						/*
-						 * The request was made but no response was received, `error.request`
-						 * is an instance of XMLHttpRequest in the browser and an instance
-						 * of http.ClientRequest in Node.js
-						 */
-						console.log(error.request);
-					} else {
-						// Something happened in setting up the request and triggered an Error
-						console.log("Error", error.message);
-					}
-					console.log(error);
-				});
-			if (searchedData) {
-				setNotFound(false);
+	const searchData = async searchPoint => {
+		return await axios
+			.get(searchPoint)
+			.then(searchedData => {
 				return searchedData.data;
-			}
-		} else {
-			setNotFound(false);
-		}
+			})
+			.catch(error => {
+				if (error.response) {
+					/*
+					 * The request was made and the server responded with a
+					 * status code that falls out of the range of 2xx
+					 */
+					if (error.response.status !== 404) {
+						dispatchSearchResult({
+							type: "FETCH_FALIURE",
+						});
+						console.log(error.response);
+					}
+				} else if (error.request) {
+					/*
+					 * The request was made but no response was received, `error.request`
+					 * is an instance of XMLHttpRequest in the browser and an instance
+					 * of http.ClientRequest in Node.js
+					 */
+					dispatchSearchResult({
+						type: "FETCH_FALIURE",
+					});
+					console.log(error.request);
+				} else {
+					// Something happened in setting up the request and triggered an Error
+					console.log("Error", error.message);
+					dispatchSearchResult({
+						type: "FETCH_FALIURE",
+					});
+				}
+				dispatchSearchResult({
+					type: "FETCH_FALIURE",
+				});
+			});
 	};
 
 	return (
@@ -69,37 +165,10 @@ const SearchSection = () => {
 				searchTerm={searchTerm}
 				onChange={handleOnChange}
 			/>
-			<div className="flex flex-col justify-center items-center pr-16 text-lg font-bold">
-				{notFound ? (
-					<p className="text-red-500">No Match Found</p>
-				) : null}
-				{searchResult ? (
-					<>
-						<p className="text-gray-600">
-							Showing search results for&nbsp;
-							<span className="text-white bg-blue-500 text-xl">
-								&nbsp;
-								{searchTerm}
-								&nbsp;
-							</span>
-						</p>
-						<p className="text-gray-600">
-							Found &nbsp;
-							<span className="text-white bg-blue-500 text-xl">
-								&nbsp;
-								{Object.keys(searchResult).length}
-								&nbsp;
-							</span>
-							&nbsp;results
-						</p>
-						<QuestionSet
-							questionData={JSON.stringify(searchResult)}
-						/>
-					</>
-				) : notFound ? null : (
-					<p>Start searching...</p>
-				)}
-			</div>
+			<SearchResults
+				searchResult={searchResult}
+				searchTerm={searchTerm}
+			/>
 		</section>
 	);
 };
