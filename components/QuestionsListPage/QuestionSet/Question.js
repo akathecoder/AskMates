@@ -17,12 +17,12 @@ const Question = ({ question }) => {
 	const [share, setShare] = useState(true);
 	return (
 		// Question Card
-		<div className="my-6 px-10 py-6 bg-gray-50 shadow-lg">
+		<div className="my-6 px-10 py-6 bg-white shadow-lg rounded-lg">
 			<div className="grid grid-cols-10 gap-x-5 items-center">
 				{/* user details */}
 				<div className="col-span-1">
 					<Link href={"/u/" + question.username}>
-						<a className="mt-1 flex flex-col items-center space-y-3 font-medium group opacity-75 hover:opacity-100">
+						<a className="mt-1 flex flex-col items-center space-y-3 font-medium group opacity-100 hover:opacity-75">
 							{imageLink ? (
 								<Image
 									src="/assets/profilePic.jpeg"
@@ -36,7 +36,7 @@ const Question = ({ question }) => {
 								<FontAwesomeIcon
 									icon={faUserCircle}
 									size="4x"
-									className="leading-lg opacity-75"
+									className="leading-lg opacity-100"
 								/>
 							)}
 							<div className="my-auto text-center">
@@ -59,7 +59,7 @@ const Question = ({ question }) => {
 						<div>
 							<FontAwesomeIcon
 								icon={faEye}
-								size="x"
+								size="1x"
 								className="text-gray-500"
 							/>
 							<span className="text-gray-500 text-sm">
@@ -67,17 +67,17 @@ const Question = ({ question }) => {
 							</span>
 						</div>
 
-            {/* Date */}
-            <p className="text-sm text-gray-500 font-semibold">
-              {date.format(
-                date.parse(
-                  new String(question.doc).substring(0, 10),
-                  "YYYY-MM-DD"
-                ),
-                "ddd, MMM DD YYYY"
-              )}
-            </p>
-          </div>
+						{/* Date */}
+						<p className="text-sm text-gray-500 font-semibold">
+							{date.format(
+								date.parse(
+									new String(question.doc).substring(0, 10),
+									"YYYY-MM-DD"
+								),
+								"ddd, MMM DD YYYY"
+							)}
+						</p>
+					</div>
 
 					{/* Question */}
 					<div>
@@ -107,10 +107,10 @@ const Question = ({ question }) => {
 									<div className="cursor-pointer group">
 										<FontAwesomeIcon
 											icon={faEdit}
-											size="x"
-											className="text-gray-400 group-hover:text-gray-800"
+											size="1x"
+											className="text-blue-500 group-hover:text-gray-600"
 										/>
-										<span className="text-gray-400 group-hover:text-gray-800 font-bold">
+										<span className="text-blue-500 group-hover:text-gray-600 font-bold">
 											&nbsp;Answer
 										</span>
 									</div>
@@ -124,10 +124,10 @@ const Question = ({ question }) => {
 									>
 										<FontAwesomeIcon
 											icon={faShare}
-											size="x"
-											className="text-gray-400 group-hover:text-gray-800"
+											size="1x"
+											className="text-blue-500 group-hover:text-gray-600"
 										/>
-										<span className="text-gray-400 group-hover:text-gray-800 font-bold">
+										<span className="text-blue-500 group-hover:text-gray-600 font-bold">
 											&nbsp;Share
 										</span>
 									</div>
@@ -144,10 +144,10 @@ const Question = ({ question }) => {
 									>
 										<FontAwesomeIcon
 											icon={faCopy}
-											size="x"
-											className="text-gray-400 group-hover:text-gray-800"
+											size="1x"
+											className="text-green-500 group-hover:text-gray-600"
 										/>
-										<span className="text-gray-400 group-hover:text-gray-800 font-bold">
+										<span className="text-green-500 group-hover:text-gray-600 font-bold">
 											&nbsp;Copy URL
 										</span>
 									</div>

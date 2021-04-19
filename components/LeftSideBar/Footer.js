@@ -31,7 +31,7 @@ const Footer = () => {
 						{
 							<FontAwesomeIcon
 								icon={faHeart}
-								size="x"
+								size="1x"
 								className="leading-lg opacity-75"
 							/>
 						}{" "}
