@@ -1,11 +1,8 @@
+import _ from "lodash";
 import { useState } from "react";
 import AnswersTab from "./AnswersTab";
 import QuestionsTab from "./QuestionsTab";
 const SearchResults = ({ searchResult, searchTerm }) => {
-	const [tab, setTab] = useState(true);
-	const handleChangeTab = () => {
-		setTab(!tab);
-	};
 	const {
 		questionData,
 		answerData,
@@ -13,6 +10,10 @@ const SearchResults = ({ searchResult, searchTerm }) => {
 		answersFound,
 		isLoading,
 	} = searchResult;
+	const [tab, setTab] = useState(true);
+	const handleChangeTab = () => {
+		setTab(!tab);
+	};
 
 	return (
 		<>

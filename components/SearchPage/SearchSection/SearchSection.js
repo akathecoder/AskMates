@@ -63,8 +63,10 @@ const storiesReducer = (state, action) => {
 	}
 };
 
-const SearchSection = () => {
-	const [searchTerm, setSearchTerm] = useState("");
+const SearchSection = ({ defaultSearchTerm }) => {
+	const [searchTerm, setSearchTerm] = useState(
+		defaultSearchTerm === "" ? "" : defaultSearchTerm
+	);
 	const [searchResult, dispatchSearchResult] = useReducer(
 		storiesReducer,
 		{
@@ -80,6 +82,10 @@ const SearchSection = () => {
 	const handleOnChange = newTerm => {
 		setSearchTerm(newTerm);
 	};
+
+	useEffect(() => {
+		setSearchTerm(defaultSearchTerm);
+	}, [defaultSearchTerm]);
 
 	// Fetch data every time searchTerm changes
 	useEffect(() => {

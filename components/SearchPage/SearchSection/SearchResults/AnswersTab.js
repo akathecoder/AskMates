@@ -38,7 +38,15 @@ const AnswersTab = ({
 					/>
 				</>
 			) : answerData ? (
-				<p className="text-red-500">No Match Found</p>
+				<>
+					<p className="text-red-500">No Match Found</p>
+					<p
+						className="w-full text-right hover:underline text-base text-blue-500 cursor-pointer"
+						onClick={showQuestions}
+					>
+						Show Questions
+					</p>
+				</>
 			) : (
 				<p>Start searching...</p>
 			)}

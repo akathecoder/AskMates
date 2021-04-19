@@ -59,7 +59,7 @@ const Question = ({ question }) => {
 						<div>
 							<FontAwesomeIcon
 								icon={faEye}
-								size="x"
+								size="1x"
 								className="text-gray-500"
 							/>
 							<span className="text-gray-500 text-sm">
@@ -107,7 +107,7 @@ const Question = ({ question }) => {
 									<div className="cursor-pointer group">
 										<FontAwesomeIcon
 											icon={faEdit}
-											size="x"
+											size="1x"
 											className="text-blue-500 group-hover:text-gray-600"
 										/>
 										<span className="text-blue-500 group-hover:text-gray-600 font-bold">
@@ -124,7 +124,7 @@ const Question = ({ question }) => {
 									>
 										<FontAwesomeIcon
 											icon={faShare}
-											size="x"
+											size="1x"
 											className="text-blue-500 group-hover:text-gray-600"
 										/>
 										<span className="text-blue-500 group-hover:text-gray-600 font-bold">
@@ -144,7 +144,7 @@ const Question = ({ question }) => {
 									>
 										<FontAwesomeIcon
 											icon={faCopy}
-											size="x"
+											size="1x"
 											className="text-green-500 group-hover:text-gray-600"
 										/>
 										<span className="text-green-500 group-hover:text-gray-600 font-bold">

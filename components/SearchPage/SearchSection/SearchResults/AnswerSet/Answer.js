@@ -15,7 +15,6 @@ import { useState } from "react";
 
 const Answer = ({ data }) => {
 	data = JSON.parse(data);
-	console.log(data);
 	const imageLink = "/assets/profilePic.jpeg";
 
 	const [votes, setVotes] = useState([
