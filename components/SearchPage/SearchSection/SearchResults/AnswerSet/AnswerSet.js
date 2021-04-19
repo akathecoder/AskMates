@@ -15,7 +15,7 @@ const AnswerSet = ({ answerData }) => {
 		);
 	});
 	return (
-		<section>
+		<section className="w-full">
 			<h2 className="text-3xl font-bold block">Answers</h2>
 			{mapAnswers}
 		</section>

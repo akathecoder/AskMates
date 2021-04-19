@@ -159,7 +159,7 @@ const SearchSection = () => {
 	};
 
 	return (
-		<section className="z-0 mt-2 ml-96 w-full">
+		<section className="z-0 mt-2 ml-96 w-full mr-16">
 			<h2 className="text-3xl font-bold block">Search</h2>
 			<SearchBar
 				searchTerm={searchTerm}

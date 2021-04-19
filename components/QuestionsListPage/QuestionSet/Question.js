@@ -108,9 +108,9 @@ const Question = ({ question }) => {
 										<FontAwesomeIcon
 											icon={faEdit}
 											size="x"
-											className="text-gray-700 group-hover:text-blue-500"
+											className="text-blue-500 group-hover:text-gray-600"
 										/>
-										<span className="text-gray-700 group-hover:text-blue-500 font-bold">
+										<span className="text-blue-500 group-hover:text-gray-600 font-bold">
 											&nbsp;Answer
 										</span>
 									</div>
@@ -125,9 +125,9 @@ const Question = ({ question }) => {
 										<FontAwesomeIcon
 											icon={faShare}
 											size="x"
-											className="text-gray-400 group-hover:text-gray-800"
+											className="text-blue-500 group-hover:text-gray-600"
 										/>
-										<span className="text-gray-400 group-hover:text-gray-800 font-bold">
+										<span className="text-blue-500 group-hover:text-gray-600 font-bold">
 											&nbsp;Share
 										</span>
 									</div>
@@ -145,9 +145,9 @@ const Question = ({ question }) => {
 										<FontAwesomeIcon
 											icon={faCopy}
 											size="x"
-											className="text-gray-400 group-hover:text-gray-800"
+											className="text-green-500 group-hover:text-gray-600"
 										/>
-										<span className="text-gray-400 group-hover:text-gray-800 font-bold">
+										<span className="text-green-500 group-hover:text-gray-600 font-bold">
 											&nbsp;Copy URL
 										</span>
 									</div>

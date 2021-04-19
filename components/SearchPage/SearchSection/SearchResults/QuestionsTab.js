@@ -7,7 +7,7 @@ const QuestionsTab = ({
 	showAnswers,
 }) => {
 	return (
-		<div className="flex flex-col justify-center items-center pr-16 text-lg font-bold">
+		<div className="flex flex-col justify-center items-center text-lg font-bold">
 			{questionsFound ? (
 				<>
 					<p className="text-gray-600">
