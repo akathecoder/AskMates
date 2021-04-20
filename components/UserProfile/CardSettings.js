@@ -1,7 +1,36 @@
-export default function CardSettings({ enabled }) {
+import _ from "lodash";
+import { useState } from "react";
+import axios from "axios";
+
+export default function CardSettings({ enabled, setEnabled }) {
+  const [formData, updateFormData] = useState({});
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
+  const updateUser = async (updatedData) => {
+    await axios
+      .patch(`http://localhost:4001/users/data/nonit_m`, { ...updatedData })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEnabled(true);
+    console.log(formData);
+    // Sending Data to server.
+    updateUser(formData);
+  };
+
   return (
     <>
-      <form action="#" method="post">
+      <form action="#" method="post" onSubmit={handleSubmit}>
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100">
           <div className="flex-auto md:p-7 lg:px-10 lg:py-7 ">
             <h6 className="text-gray-500 text-base mt-2 mb-2 font-bold uppercase">
@@ -14,7 +43,10 @@ export default function CardSettings({ enabled }) {
                   <input
                     type="text"
                     name="firstName"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChange}
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-white"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="First Name"
                     required
                     pattern="^[aA-zZ]+$"
@@ -28,7 +60,10 @@ export default function CardSettings({ enabled }) {
                   <input
                     type="text"
                     name="middleName"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChange}
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-white"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="Middle Name"
                     pattern="^[aA-zZ]+$"
                     title="Cannot contain numeric, symbols, spaces"
@@ -41,7 +76,10 @@ export default function CardSettings({ enabled }) {
                   <input
                     type="text"
                     name="lastName"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChange}
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-white"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="Last Name"
                     required
                     pattern="^[aA-zZ]+$"
@@ -60,9 +98,11 @@ export default function CardSettings({ enabled }) {
                     type="text"
                     name="username"
                     disabled
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-gray-50"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="Username"
-                    defaultValue="akathecoder"
+                    defaultValue="nonit_m"
                   />
                 </div>
               </div>
@@ -72,9 +112,11 @@ export default function CardSettings({ enabled }) {
                     type="email"
                     name="email"
                     disabled
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-gray-50"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="E-Mail ID"
-                    defaultValue="sparshagarwal@gmail.com"
+                    defaultValue="nonit@email.com"
                   />
                 </div>
               </div>
@@ -87,7 +129,10 @@ export default function CardSettings({ enabled }) {
                   <input
                     type="date"
                     name="dob"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChange}
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-white"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="D.O.B."
                     required
                     disabled={enabled}
@@ -99,7 +144,10 @@ export default function CardSettings({ enabled }) {
                   <input
                     type="tel"
                     name="mobileNumber"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChange}
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-white"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="Mobile Number"
                     pattern="^[0-9]+$"
                     minLength="10"
@@ -124,7 +172,10 @@ export default function CardSettings({ enabled }) {
                   <input
                     type="number"
                     name="rollNo"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChange}
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-white"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="Roll No."
                     required
                     pattern="[0-9]"
@@ -144,27 +195,30 @@ export default function CardSettings({ enabled }) {
                   </label>
                   <select
                     name="degree"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChange}
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-white"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     disabled={enabled}
                   >
                     <option value="*" disabled>
                       Select Degree
                     </option>
                     <optgroup label="Institute of Engineernig and Technology">
-                      <option value="btech">B. Tech.</option>
-                      <option value="bca">BCA</option>
-                      <option value="mtech">M. Tech.</option>
-                      <option value="mca">MCA</option>
-                      <option value="phd">PhD</option>
+                      <option value="B. Tech.">B. Tech.</option>
+                      <option value="BCA">BCA</option>
+                      <option value="M. Tech.">M. Tech.</option>
+                      <option value="MCA">MCA</option>
+                      <option value="PhD">PhD</option>
                     </optgroup>
                     <optgroup label="Institute of Management">
-                      <option value="bba">BBA</option>
-                      <option value="mba">MBA</option>
-                      <option value="phd">PhD</option>
+                      <option value="BBA">BBA</option>
+                      <option value="MBA">MBA</option>
+                      <option value="PhD">PhD</option>
                     </optgroup>
                     <optgroup label="Institute of Design">
-                      <option value="bdes">B. Des.</option>
-                      <option value="mdes">M. Des.</option>
+                      <option value="B. Des.">B. Des.</option>
+                      <option value="M. Des.">M. Des.</option>
                     </optgroup>
                   </select>
                 </div>
@@ -179,34 +233,53 @@ export default function CardSettings({ enabled }) {
                   </label>
                   <select
                     name="field"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChange}
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-white"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     disabled={enabled}
                   >
                     <optgroup label="B. Tech.">
-                      <option value="bcse">Computer Science Engineernig</option>
-                      <option value="me">Mechanical Engineering</option>
-                      <option value="ce">Civil Engineering</option>
-                      <option value="ee">Electrical Engineering</option>
-                      <option value="ece">
+                      <option value="Computer Science Engineering">
+                        Computer Science Engineering
+                      </option>
+                      <option value="Mechanical Engineering">
+                        Mechanical Engineering
+                      </option>
+                      <option value="Civil Engineering">
+                        Civil Engineering
+                      </option>
+                      <option value="Electrical Engineering">
+                        Electrical Engineering
+                      </option>
+                      <option value="Electronics and Communication Engineeringe">
                         Electronics and Communication Engineering
                       </option>
-                      <option value="eee">
+                      <option value="Electrical and Electronics Engineering">
                         Electrical and Electronics Engineering
                       </option>
                     </optgroup>
                     <optgroup label="B. Des.">
-                      <option value="pd">Product Design</option>
-                      <option value="id">Interaction Design</option>
-                      <option value="idd">Interdisciplinary Design</option>
-                      <option value="icd">
+                      <option value="Product Design">Product Design</option>
+                      <option value="Interaction Design">
+                        Interaction Design
+                      </option>
+                      <option value="Interdisciplinary Design">
+                        Interdisciplinary Design
+                      </option>
+                      <option value="Integrated and Communication Design">
                         Integrated and Communication Design
                       </option>
                     </optgroup>
                     <optgroup label="M. Tech.">
-                      <option value="ds">Data Science</option>
-                      <option value="esiot">Embedded Systems and IoT</option>
-                      <option value="ar">Automation and Robotics</option>
-                      <option value="hsee">
+                      <option value="Data Science">Data Science</option>
+                      <option value="Embedded Systems and IoT">
+                        Embedded Systems and IoT
+                      </option>
+                      <option value="Automation and Robotics">
+                        Automation and Robotics
+                      </option>
+                      <option value="Health, Safety and Environment">
                         Health, Safety and Environment
                       </option>
                     </optgroup>
@@ -223,17 +296,24 @@ export default function CardSettings({ enabled }) {
                   </label>
                   <select
                     name="batch"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChange}
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-white"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     disabled={enabled}
                   >
                     <option value="*" disabled>
                       Year of Graduation
                     </option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
+                    {_.range(2017, new Date().getFullYear() + 3, 1).map(
+                      (option, index) => {
+                        return (
+                          <option value={option} key={index}>
+                            {option}
+                          </option>
+                        );
+                      }
+                    )}
                   </select>
                 </div>
               </div>
@@ -251,7 +331,10 @@ export default function CardSettings({ enabled }) {
                   <textarea
                     type="text"
                     name="bio"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChange}
+                    className={`${
+                      enabled ? "bg-gray-200" : "bg-white"
+                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     rows="5"
                     placeholder="Something about Me......."
                     disabled={enabled}
@@ -263,7 +346,7 @@ export default function CardSettings({ enabled }) {
             <button
               className={`${
                 enabled
-                  ? "bg-gray-200 text-gray-400 border-gray-500"
+                  ? "bg-gray-200 text-gray-400 border-gray-500 cursor-default"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-50 hover:font-bold transititon duration-200 ease-in-out transform hover:scale-105 border-gray-700"
               } relative flex w-2/5 flex-col mt-5 mb-3  rounded-lg items-center m-auto focus:outline-none border-2 font-semibold  tracking-wider`}
               type="submit"

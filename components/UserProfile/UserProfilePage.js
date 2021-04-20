@@ -23,7 +23,7 @@ const UserProfilePage = () => {
             <CardProfile />
           </div>
           <div className="w-full lg:w-8/12 px-6 pb-10">
-            <CardSettings enabled={enabled} />
+            <CardSettings enabled={enabled} setEnabled={setEnabled} />
           </div>
         </div>
       </div>
