@@ -1,4 +1,4 @@
-export default function CardSettings() {
+export default function CardSettings({ enabled }) {
   return (
     <>
       <form action="#" method="post">
@@ -14,11 +14,12 @@ export default function CardSettings() {
                   <input
                     type="text"
                     name="firstName"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="First Name"
                     required
                     pattern="^[aA-zZ]+$"
                     title="Cannot contain numeric, symbols, spaces"
+                    disabled={enabled}
                   />
                 </div>
               </div>
@@ -27,11 +28,11 @@ export default function CardSettings() {
                   <input
                     type="text"
                     name="middleName"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Middle Name"
                     pattern="^[aA-zZ]+$"
                     title="Cannot contain numeric, symbols, spaces"
-                    disabled={false}
+                    disabled={enabled}
                   />
                 </div>
               </div>
@@ -40,11 +41,12 @@ export default function CardSettings() {
                   <input
                     type="text"
                     name="lastName"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Last Name"
                     required
                     pattern="^[aA-zZ]+$"
                     title="Cannot contain numeric, symbols, spaces"
+                    disabled={enabled}
                   />
                 </div>
               </div>
@@ -58,8 +60,9 @@ export default function CardSettings() {
                     type="text"
                     name="username"
                     disabled
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Username"
+                    defaultValue="akathecoder"
                   />
                 </div>
               </div>
@@ -69,8 +72,9 @@ export default function CardSettings() {
                     type="email"
                     name="email"
                     disabled
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="E-Mail ID"
+                    defaultValue="sparshagarwal@gmail.com"
                   />
                 </div>
               </div>
@@ -83,9 +87,10 @@ export default function CardSettings() {
                   <input
                     type="date"
                     name="dob"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="D.O.B."
                     required
+                    disabled={enabled}
                   />
                 </div>
               </div>
@@ -94,12 +99,13 @@ export default function CardSettings() {
                   <input
                     type="tel"
                     name="mobileNumber"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Mobile Number"
                     pattern="^[0-9]+$"
                     minLength="10"
                     maxLength="11"
                     title="Must Contain only Numbers (xxxxxxxxxx)"
+                    disabled={enabled}
                   />
                 </div>
               </div>
@@ -118,12 +124,13 @@ export default function CardSettings() {
                   <input
                     type="number"
                     name="rollNo"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Roll No."
                     required
                     pattern="[0-9]"
                     title="Cannot contain alphabets, symbols, spaces"
                     min="1"
+                    disabled={enabled}
                   />
                 </div>
               </div>
@@ -131,13 +138,14 @@ export default function CardSettings() {
                 <div className="relative flex flex-row w-full mb-3 items-center space-x-3">
                   <label
                     className="uppercase text-gray-500 text-xs font-bold mb-2"
-                    for="degree"
+                    htmlFor="degree"
                   >
                     Degree
                   </label>
                   <select
                     name="degree"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    disabled={enabled}
                   >
                     <option value="*" disabled>
                       Select Degree
@@ -165,13 +173,14 @@ export default function CardSettings() {
                 <div className="relative flex flex-row w-full mb-3 items-center space-x-3">
                   <label
                     className="uppercase text-gray-500 text-xs font-bold mb-2"
-                    for="field"
+                    htmlFor="field"
                   >
                     Field
                   </label>
                   <select
                     name="field"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    disabled={enabled}
                   >
                     <optgroup label="B. Tech.">
                       <option value="bcse">Computer Science Engineernig</option>
@@ -208,13 +217,14 @@ export default function CardSettings() {
                 <div className="relative flex flex-row w-full mb-3 items-center space-x-4">
                   <label
                     className="uppercase text-gray-500 text-xs font-bold mb-2"
-                    for="batch"
+                    htmlFor="batch"
                   >
                     Batch
                   </label>
                   <select
                     name="batch"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    disabled={enabled}
                   >
                     <option value="*" disabled>
                       Year of Graduation
@@ -241,17 +251,23 @@ export default function CardSettings() {
                   <textarea
                     type="text"
                     name="bio"
-                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     rows="5"
                     placeholder="Something about Me......."
+                    disabled={enabled}
                   ></textarea>
                 </div>
               </div>
             </div>
             {/* Edit / Update Profile */}
             <button
-              className="relative flex w-2/5 flex-col mt-5 mb-3  rounded-lg items-center m-auto focus:outline-none bg-gray-200 text-gray-700 border-gray-700 border-2 hover:bg-gray-700 hover:text-gray-50 hover:font-bold transititon duration-200 ease-in-out transform hover:scale-105"
+              className={`${
+                enabled
+                  ? "bg-gray-200 text-gray-400 border-gray-500"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-50 hover:font-bold transititon duration-200 ease-in-out transform hover:scale-105 border-gray-700"
+              } relative flex w-2/5 flex-col mt-5 mb-3  rounded-lg items-center m-auto focus:outline-none border-2 font-semibold  tracking-wider`}
               type="submit"
+              disabled={enabled}
             >
               <div className="p-4 font-semibold uppercase text-lg break-words">
                 Update Profile
