@@ -10,25 +10,23 @@ export default function CardProfile() {
     <>
       <form action="#" method="post">
         {/* Profile Picture */}
-        <div className="w-full p-4 flex justify-center my-8">
-          <div className="relative text-2xl">
-            {imageLink1 ? (
-              <Image
-                src="/assets/profilePic.jpeg"
-                alt="Picture of the author"
-                className="rounded-full overflow-hidden shadow-xl"
-                width={250}
-                height={250}
-                objectFit="cover"
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faUserCircle}
-                size="10x"
-                className="text-blue-900 opacity-75"
-              />
-            )}
-          </div>
+        <div className="w-full flex p-4 justify-center my-8">
+          {imageLink1 ? (
+            <Image
+              src="/assets/profilePic.jpeg"
+              alt="Picture of the author"
+              className="rounded-full shadow-xl mb-5"
+              width={250}
+              height={250}
+              objectFit="cover"
+            />
+          ) : (
+            <FontAwesomeIcon
+              icon={faUserCircle}
+              size="10x"
+              className="text-blue-900 opacity-75 text-2xl rounded-full shadow-xl"
+            />
+          )}
         </div>
         {/* Update Password */}
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 mt-4 shadow-lg rounded-lg bg-gray-100 md:p-7">
