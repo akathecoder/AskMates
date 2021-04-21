@@ -2,13 +2,23 @@ import Question from "./Question";
 import Answer from "./Answer";
 import NoAnswer from "./NoAnswer";
 import MyEditor from "../InputBox/MyEditor";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
+import Router from "next/router";
+import Link from "next/link";
 
 function QuestionPage({ slug, questionData, answersData }) {
   // console.log(answersData);
   questionData = JSON.parse(questionData);
   answersData = JSON.parse(answersData);
 
-  // console.log(answersData);
+  const [answer, setAnswer] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    setIsLogin(Cookies.get("username"));
+  }, []);
 
   return (
     <div className="mx-96 pr-64 font-display">
@@ -27,19 +37,69 @@ function QuestionPage({ slug, questionData, answersData }) {
           <NoAnswer />
         )}
       </div>
-      <div className="mt-6 px-2">
-        <h1 className="text-xl mb-4 px-1 font-medium ">
-          Your Answer
-        </h1>
-        <MyEditor minHeight="12rem" />
-        <div className="flex justify-end">
-          <button className="border hover:bg-blue-500 bg-blue-600 font-medium text-white hover:shadow-lg py-2 px-4 rounded-sm my-4">
-            Submit
-          </button>
+      <section id="answer-section" className="relative">
+        <div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 z-10"
+          hidden={isLogin ? true : false}
+        >
+          <h1 className="text-2xl font-semibold">
+            You need to login in order to Answer
+          </h1>
+          <div className="flex justify-center">
+            <Link href="/login">
+              <button className="text-2xl bg-blue-400 text-white px-8 py-2 my-4">
+                Login
+              </button>
+            </Link>
+          </div>
         </div>
-      </div>
+        <div
+          className={
+            "mt-6 px-2 pointer-events-none" +
+            (isLogin ? "" : " filter blur-md ")
+          }
+        >
+          <h1 className="text-xl mb-4 px-1 font-medium ">
+            Your Answer
+          </h1>
+          <MyEditor minHeight="12rem" setData={setAnswer} />
+          <div className="flex justify-end">
+            <button
+              onClick={(e) =>
+                submitAnswer(
+                  questionData.questionId,
+                  answer
+                )
+              }
+              className="border hover:bg-blue-500 bg-blue-600 font-medium text-white hover:shadow-lg py-2 px-4 rounded-sm my-4"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   );
+}
+
+async function submitAnswer(questionId, answerBody) {
+  // const username = Cookies.get("username");
+
+  await axios
+    .post(
+      process.env.serverUrl + "answers",
+      {
+        answerBody: answerBody,
+        questionId: questionId,
+      },
+      { withCredentials: true }
+    )
+    .then((res) => {
+      Router.reload();
+    })
+    .catch((err) => {
+      alert("Error Occurred");
+    });
 }
 
 export default QuestionPage;

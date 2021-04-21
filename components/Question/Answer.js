@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { voteUp, voteDown } from "../../utils/voteAnswers";
 import { useState } from "react";
+import { default as parse } from "html-react-parser";
 
 const Answer = ({ data }) => {
   data = JSON.parse(data);
@@ -18,7 +19,7 @@ const Answer = ({ data }) => {
     data.downVotes,
   ]);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
@@ -65,7 +66,7 @@ const Answer = ({ data }) => {
 
         {/* Answer Body */}
         <div className="text-justify mt-1 mb-auto">
-          <p>{data.answerBody}</p>
+          {parse(data.answerBody)}
         </div>
       </div>
 
@@ -91,11 +92,16 @@ const Answer = ({ data }) => {
             )}
             <div className="mx-4 my-auto">
               <p className="text-sm text-gray-900">
-                John Doe
+                {data.firstName +
+                  " " +
+                  (data.middleName
+                    ? data.middleName + " "
+                    : "") +
+                  data.lastName}
               </p>
               {/* <p>&nbsp;&nbsp;&nbsp;&nbsp;</p> */}
               <p className="text-xs text-gray-600">
-                Computer Science & Engineering
+                {data.field}
               </p>
             </div>
           </a>

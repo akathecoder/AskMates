@@ -1,7 +1,12 @@
-import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
+import {
+  faEye,
+  faUserCircle,
+} from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
+import parse from "html-react-parser";
+import date from "date-and-time";
 
 const Question = ({ data }) => {
   data = JSON.parse(data);
@@ -11,37 +16,72 @@ const Question = ({ data }) => {
   return (
     <>
       <div className="px-6 py-6 bg-gray-50 shadow-md">
-        {/* user details */}
-        <div className="mb-4">
-          <Link href={"/u/" + data.username}>
-            <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75">
-              {imageLink ? (
-                <Image
-                  src="/assets/profilePic.jpeg"
-                  alt="Picture of the author"
-                  className="rounded-full overflow-hidden"
-                  width={50}
-                  height={50}
-                  objectFit="cover"
-                />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faUserCircle}
-                  size="4x"
-                  className="leading-lg opacity-75"
-                />
-              )}
+        <div className="flex justify-between ">
+          {/* user details */}
+          <div className="mb-4">
+            <Link href={"/u/" + data.username}>
+              <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75">
+                {imageLink ? (
+                  <Image
+                    src="/assets/profilePic.jpeg"
+                    alt="Picture of the author"
+                    className="rounded-full overflow-hidden"
+                    width={50}
+                    height={50}
+                    objectFit="cover"
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faUserCircle}
+                    size="4x"
+                    className="leading-lg opacity-75"
+                  />
+                )}
 
-              <div className="mx-4 my-auto">
-                <p className="text-lg text-gray-900">
-                  John Doe
-                </p>
-                <p className="text-xs text-gray-600">
-                  Computer Science & Engineering
-                </p>
+                <div className="mx-4 my-auto">
+                  <p className="text-lg text-gray-900">
+                    {data.firstName +
+                      " " +
+                      (data.middleName
+                        ? data.middleName + " "
+                        : "") +
+                      data.lastName}
+                  </p>
+                  <p className="text-xs text-gray-600">
+                    {data.field}
+                  </p>
+                </div>
+              </a>
+            </Link>
+          </div>
+
+          <div className="inline-block my-2">
+            {/* Date and Views */}
+            <div className="flex flex-row items-center space-x-10 mx-6 px-2 ">
+              {/* Views */}
+              <div>
+                <FontAwesomeIcon
+                  icon={faEye}
+                  size="1x"
+                  className="text-gray-500"
+                />
+                <span className="text-gray-500 text-sm">
+                  &nbsp;{data.views}
+                </span>
               </div>
-            </a>
-          </Link>
+
+              {/* Date */}
+              <p className="text-sm text-gray-500 font-semibold">
+                {date.format(
+                  date.parse(
+                    new String(data.doc).substring(0, 10),
+                    "YYYY-MM-DD"
+                  ),
+                  "ddd, MMM DD YYYY"
+                )}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Question title */}
@@ -51,7 +91,7 @@ const Question = ({ data }) => {
 
         {/* Question body */}
         <h1 className="text-xl font-normal text-black mt-2 mb-2 mx-2 text-justify">
-          {data.content}
+          {parse(data.content)}
         </h1>
 
         {/* line above user details */}
