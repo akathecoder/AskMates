@@ -137,7 +137,7 @@ const Question = ({ question }) => {
 										onClick={() => {
 											setShare(!share);
 											navigator.clipboard.writeText(
-												question.slug
+												`${window.location.href}/${question.slug}`
 											);
 											showPopup("URL Copied!", "green");
 										}}
