@@ -2,6 +2,7 @@ import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
+import parse from "html-react-parser";
 
 const Question = ({ data }) => {
   data = JSON.parse(data);
@@ -51,7 +52,7 @@ const Question = ({ data }) => {
 
         {/* Question body */}
         <h1 className="text-xl font-normal text-black mt-2 mb-2 mx-2 text-justify">
-          {data.content}
+          {parse(data.content)}
         </h1>
 
         {/* line above user details */}

@@ -18,7 +18,7 @@ const Answer = ({ data }) => {
     data.downVotes,
   ]);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
