@@ -1,6 +1,6 @@
 import Navbar from "../components/Nav";
 import QuestionsListPage from "../components/QuestionsListPage/QuestionsListPage";
-import LoginPage from "../pages/login";
+import LeftSidePane from "../components/LeftSideBar/LeftSidePane";
 import axios from "axios";
 
 export default function Home({ questionData }) {
@@ -10,7 +10,20 @@ export default function Home({ questionData }) {
       {questionData ? (
         <QuestionsListPage questionData={questionData} />
       ) : (
-        <LoginPage />
+        <>
+          <section className="md:mx-32 lg:mx-48 pb-20 mt-16">
+            <div className="flex flex-row">
+              <LeftSidePane />
+              <div className="ml-96">
+                <section className="w-full items-center">
+                  <h2 className="text-3xl font-bold block text-red-500">
+                    You haven't asked any questions yet !.
+                  </h2>
+                </section>
+              </div>
+            </div>
+          </section>
+        </>
       )}
     </div>
   );
@@ -18,12 +31,13 @@ export default function Home({ questionData }) {
 
 export async function getStaticProps() {
   const questionData = await axios
-    .get("http://localhost:4001/questions/username/nonit_m")
+    .get("http://localhost:4001/questions/username/nonit_mittal")
     .catch((error) => {
       console.log(error);
       return;
     });
-  if (questionData === null) {
+  console.log(questionData);
+  if (questionData === undefined) {
     return {
       props: {
         questionData: null,
