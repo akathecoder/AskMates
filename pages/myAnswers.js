@@ -7,18 +7,22 @@ export default function Home({ answerData }) {
   return (
     <div>
       <Navbar />
-      {answerData ? (
-        <section className="md:mx-32 lg:mx-48 pb-20 mt-16">
-          <div className="flex flex-row">
-            <LeftSidePane />
-            <div className="ml-96">
+      <section className="md:mx-32 lg:mx-48 pb-20 mt-16">
+        <div className="flex flex-row">
+          <LeftSidePane />
+          <div className="ml-96">
+            {answerData ? (
               <AnswerSet answerData={answerData} />
-            </div>
+            ) : (
+              <section className="w-full">
+                <h2 className="text-3xl font-bold block text-red-500">
+                  You haven't answered any questions yet !.
+                </h2>
+              </section>
+            )}
           </div>
-        </section>
-      ) : (
-        <LoginPage />
-      )}
+        </div>
+      </section>
     </div>
   );
 }
@@ -27,7 +31,7 @@ export async function getStaticProps() {
   const answerData = await axios
     .get("http://localhost:4001/answers/byusername", {
       params: {
-        username: "rg12301",
+        username: "nonit_m",
       },
     })
     .catch((error) => {
@@ -35,8 +39,7 @@ export async function getStaticProps() {
       return;
     });
 
-  console.log(answerData);
-  if (answerData === null) {
+  if (answerData.data.length === 0) {
     return {
       props: {
         answerData: null,

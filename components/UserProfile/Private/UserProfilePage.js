@@ -2,8 +2,10 @@ import CardSettings from "./CardSettings";
 import CardProfile from "./CardProfile";
 import { useState } from "react";
 
-const UserProfilePage = () => {
+const UserProfilePage = ({ userData }) => {
+  userData = JSON.parse(userData);
   const [enabled, setEnabled] = useState(true);
+
   return (
     <>
       <div className="flex flex-col lg:px-48 lg:py-12 md:px-20 md:py-10">
@@ -23,7 +25,11 @@ const UserProfilePage = () => {
             <CardProfile />
           </div>
           <div className="w-full lg:w-8/12 px-6 pb-10">
-            <CardSettings enabled={enabled} setEnabled={setEnabled} />
+            <CardSettings
+              enabled={enabled}
+              setEnabled={setEnabled}
+              userData={userData}
+            />
           </div>
         </div>
       </div>

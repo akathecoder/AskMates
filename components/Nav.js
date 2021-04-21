@@ -138,7 +138,7 @@ export default function Navbar() {
               >
                 <div className="text-sm py-2.5 w-48 mt-1.5 bg-white rounded-lg shadow-md mr-9">
                   <a
-                    href="/userProfile"
+                    href="/me"
                     className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
                   >
                     <FontAwesomeIcon
@@ -160,7 +160,7 @@ export default function Navbar() {
                     &nbsp; My Question
                   </a>
                   <a
-                    href="myAnswers"
+                    href="/myAnswers"
                     className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
                   >
                     <FontAwesomeIcon
