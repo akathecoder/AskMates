@@ -2,6 +2,7 @@ import axios from "axios";
 import Navbar from "../../components/Nav";
 import QuestionPage from "../../components/Question/QuestionPage";
 import QuestionFourZeroFour from "../../components/Question/404";
+import increaseViews from "../../utils/increaseViews";
 
 export default function Home({
   slug,
@@ -53,6 +54,10 @@ export async function getServerSideProps(context) {
       }, // will be passed to the page component as props
     };
   }
+
+  // console.log("sss = ");
+  // console.log(questionData.data.slug);
+  increaseViews(questionData.data.slug);
 
   const answerData = await axios
     .get("http://localhost:4001/answers/byquestionid/", {
