@@ -14,7 +14,7 @@ function QuestionPage({ slug, questionData, answersData }) {
 
   const [answer, setAnswer] = useState("");
 
-  // console.log(questionData);
+  console.log(questionData);
 
   return (
     <div className="mx-96 pr-64 font-display">
