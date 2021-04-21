@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { voteUp, voteDown } from "../../utils/voteAnswers";
 import { useState } from "react";
+import { default as parse } from "html-react-parser";
 
 const Answer = ({ data }) => {
   data = JSON.parse(data);
@@ -65,7 +66,7 @@ const Answer = ({ data }) => {
 
         {/* Answer Body */}
         <div className="text-justify mt-1 mb-auto">
-          <p>{data.answerBody}</p>
+          {parse(data.answerBody)}
         </div>
       </div>
 
