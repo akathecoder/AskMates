@@ -2,10 +2,11 @@ import Question from "./Question";
 import Answer from "./Answer";
 import NoAnswer from "./NoAnswer";
 import MyEditor from "../InputBox/MyEditor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import Router from "next/router";
+import Link from "next/link";
 
 function QuestionPage({ slug, questionData, answersData }) {
   // console.log(answersData);
@@ -13,8 +14,11 @@ function QuestionPage({ slug, questionData, answersData }) {
   answersData = JSON.parse(answersData);
 
   const [answer, setAnswer] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
 
-  console.log(questionData);
+  useEffect(() => {
+    setIsLogin(Cookies.get("username"));
+  }, []);
 
   return (
     <div className="mx-96 pr-64 font-display">
@@ -33,8 +37,28 @@ function QuestionPage({ slug, questionData, answersData }) {
           <NoAnswer />
         )}
       </div>
-      <section id="answer-section">
-        <div className="mt-6 px-2">
+      <section id="answer-section" className="relative">
+        <div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 z-10"
+          hidden={isLogin ? true : false}
+        >
+          <h1 className="text-2xl font-semibold">
+            You need to login in order to Answer
+          </h1>
+          <div className="flex justify-center">
+            <Link href="/login">
+              <button className="text-2xl bg-blue-400 text-white px-8 py-2 my-4">
+                Login
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div
+          className={
+            "mt-6 px-2 pointer-events-none" +
+            (isLogin ? "" : " filter blur-md ")
+          }
+        >
           <h1 className="text-xl mb-4 px-1 font-medium ">
             Your Answer
           </h1>
