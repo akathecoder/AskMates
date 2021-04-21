@@ -92,11 +92,16 @@ const Answer = ({ data }) => {
             )}
             <div className="mx-4 my-auto">
               <p className="text-sm text-gray-900">
-                John Doe
+                {data.firstName +
+                  " " +
+                  (data.middleName
+                    ? data.middleName + " "
+                    : "") +
+                  data.lastName}
               </p>
               {/* <p>&nbsp;&nbsp;&nbsp;&nbsp;</p> */}
               <p className="text-xs text-gray-600">
-                Computer Science & Engineering
+                {data.field}
               </p>
             </div>
           </a>

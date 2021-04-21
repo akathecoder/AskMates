@@ -33,22 +33,27 @@ function QuestionPage({ slug, questionData, answersData }) {
           <NoAnswer />
         )}
       </div>
-      <div className="mt-6 px-2">
-        <h1 className="text-xl mb-4 px-1 font-medium ">
-          Your Answer
-        </h1>
-        <MyEditor minHeight="12rem" setData={setAnswer} />
-        <div className="flex justify-end">
-          <button
-            onClick={(e) =>
-              submitAnswer(questionData.questionId, answer)
-            }
-            className="border hover:bg-blue-500 bg-blue-600 font-medium text-white hover:shadow-lg py-2 px-4 rounded-sm my-4"
-          >
-            Submit
-          </button>
+      <section id="answer-section">
+        <div className="mt-6 px-2">
+          <h1 className="text-xl mb-4 px-1 font-medium ">
+            Your Answer
+          </h1>
+          <MyEditor minHeight="12rem" setData={setAnswer} />
+          <div className="flex justify-end">
+            <button
+              onClick={(e) =>
+                submitAnswer(
+                  questionData.questionId,
+                  answer
+                )
+              }
+              className="border hover:bg-blue-500 bg-blue-600 font-medium text-white hover:shadow-lg py-2 px-4 rounded-sm my-4"
+            >
+              Submit
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
