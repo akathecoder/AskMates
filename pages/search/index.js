@@ -1,5 +1,5 @@
-import Navbar from "../components/Nav";
-import SearchPage from "../components/SearchPage/SearchPage";
+import Navbar from "../../components/Nav";
+import SearchPage from "../../components/SearchPage/SearchPage";
 
 const search = () => {
 	return (

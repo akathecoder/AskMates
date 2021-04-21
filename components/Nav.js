@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookSquare,
@@ -111,31 +110,79 @@ export default function Navbar() {
             </ul>
           </div>
           <div>
-            <div className="nav-item my-auto hidden lg:flex">
-              <Link href="#">
-                <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-                  {imageLink ? (
-                    <Image
-                      src="/assets/profilePic.jpeg"
-                      alt="Picture of the author"
-                      className="rounded-full overflow-hidden"
-                      width={40}
-                      height={40}
-                      objectFit="cover"
-                      onClick={() => setdropDownOpen(!dropDownOpen)}
-                    />
-                  ) : (
+            <div className="nav-item my-auto hidden lg:flex relative">
+              <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                {imageLink ? (
+                  <Image
+                    src="/assets/profilePic.jpeg"
+                    alt="Picture of the author"
+                    className="rounded-full overflow-hidden"
+                    width={40}
+                    height={40}
+                    objectFit="cover"
+                    onClick={() => setdropDownOpen(!dropDownOpen)}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faUserCircle}
+                    size="3x"
+                    className="leading-lg text-white opacity-75"
+                    onClick={() => setdropDownOpen(!dropDownOpen)}
+                  />
+                )}
+              </a>
+              <div
+                className={`${
+                  dropDownOpen ? "inline" : "hidden"
+                } absolute top-12 -right-6 z-50`}
+              >
+                <div className="text-sm py-2.5 w-48 mt-1.5 bg-white rounded-lg shadow-md mr-9">
+                  <a
+                    href="/userProfile"
+                    className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+                  >
                     <FontAwesomeIcon
-                      icon={faUserCircle}
-                      size="3x"
-                      className="leading-lg text-white opacity-75"
-                      onClick={() => setdropDownOpen(!dropDownOpen)}
+                      icon={faUser}
+                      size="1x"
+                      className="text-gray-600 group-hover:text-gray-50"
                     />
-                  )}
-
-                  {/* <span className="ml-2"></span> */}
-                </a>
-              </Link>
+                    &nbsp; My Profile
+                  </a>
+                  <a
+                    href="/myQuestions"
+                    className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+                  >
+                    <FontAwesomeIcon
+                      icon={faQuestion}
+                      size="1x"
+                      className="text-gray-600 group-hover:text-gray-50"
+                    />
+                    &nbsp; My Question
+                  </a>
+                  <a
+                    href="myAnswers"
+                    className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+                  >
+                    <FontAwesomeIcon
+                      icon={faPencilAlt}
+                      size="1x"
+                      className="text-gray-600 group-hover:text-gray-50"
+                    />
+                    &nbsp; My Answers
+                  </a>
+                  <a
+                    href="#"
+                    className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+                  >
+                    <FontAwesomeIcon
+                      icon={faSignOutAlt}
+                      size="1x"
+                      className="text-gray-600 group-hover:text-gray-50"
+                    />
+                    &nbsp; Sign Out
+                  </a>
+                </div>
+              </div>
               <div
                 onClick={() => setdropDownOpen(false)}
                 className={
@@ -148,55 +195,6 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-
-      <div className={dropDownOpen ? "inline" : "hidden"}>
-        <div className="fixed z-50 -right-0 top-16 text-sm py-2 w-40 mt-2 bg-white rounded-lg shadow-md mr-9">
-          <a
-            href="#"
-            className="block pl-6 py-2 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
-          >
-            <FontAwesomeIcon
-              icon={faUser}
-              size="1x"
-              className="text-gray-600 group-hover:text-gray-50"
-            />
-            &nbsp; My Profile
-          </a>
-          <a
-            href="#"
-            className="block pl-6 py-2 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
-          >
-            <FontAwesomeIcon
-              icon={faQuestion}
-              size="1x"
-              className="text-gray-600 group-hover:text-gray-50"
-            />
-            &nbsp; My Question
-          </a>
-          <a
-            href="#"
-            className="block pl-6 py-2 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
-          >
-            <FontAwesomeIcon
-              icon={faPencilAlt}
-              size="1x"
-              className="text-gray-600 group-hover:text-gray-50"
-            />
-            &nbsp; My Answers
-          </a>
-          <a
-            href="#"
-            className="block pl-6 py-2 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
-          >
-            <FontAwesomeIcon
-              icon={faSignOutAlt}
-              size="1x"
-              className="text-gray-600 group-hover:text-gray-50"
-            />
-            &nbsp; Sign Out
-          </a>
-        </div>
-      </div>
     </>
   );
 }
