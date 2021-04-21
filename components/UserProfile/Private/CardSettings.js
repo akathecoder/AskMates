@@ -2,9 +2,14 @@ import _ from "lodash";
 import { useState } from "react";
 import axios from "axios";
 
-export default function CardSettings({ enabled, setEnabled }) {
+export default function CardSettings({ enabled, setEnabled, userData }) {
   const [formData, updateFormData] = useState({});
+  // TO set the max DOB option to 18 years before from now.
+  let maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() - 18);
+  maxDate = maxDate.toISOString().substring(0, 10);
 
+  // Whenever there is any change in any input, it gets added to formdata.
   const handleChange = (e) => {
     updateFormData({
       ...formData,
@@ -12,20 +17,24 @@ export default function CardSettings({ enabled, setEnabled }) {
     });
   };
 
-  const updateUser = async (updatedData) => {
-    await axios
-      .patch(`http://localhost:4001/users/data/nonit_m`, { ...updatedData })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
+  // what happens when from is Submitted.
   const handleSubmit = (e) => {
     e.preventDefault();
     setEnabled(true);
     console.log(formData);
     // Sending Data to server.
     updateUser(formData);
+  };
+
+  // Call the Update User API
+  const updateUser = async (updatedData) => {
+    await axios
+      .patch(`http://localhost:4001/users/data/${userData.username}`, {
+        ...updatedData,
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -52,6 +61,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                     pattern="^[aA-zZ]+$"
                     title="Cannot contain numeric, symbols, spaces"
                     disabled={enabled}
+                    defaultValue={userData.firstName}
                   />
                 </div>
               </div>
@@ -68,6 +78,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                     pattern="^[aA-zZ]+$"
                     title="Cannot contain numeric, symbols, spaces"
                     disabled={enabled}
+                    defaultValue={userData.middleName}
                   />
                 </div>
               </div>
@@ -85,6 +96,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                     pattern="^[aA-zZ]+$"
                     title="Cannot contain numeric, symbols, spaces"
                     disabled={enabled}
+                    defaultValue={userData.lastName}
                   />
                 </div>
               </div>
@@ -102,7 +114,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                       enabled ? "bg-gray-200" : "bg-gray-50"
                     } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="Username"
-                    defaultValue="nonit_m"
+                    defaultValue={userData.username}
                   />
                 </div>
               </div>
@@ -116,7 +128,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                       enabled ? "bg-gray-200" : "bg-gray-50"
                     } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="E-Mail ID"
-                    defaultValue="nonit@email.com"
+                    defaultValue={userData.email}
                   />
                 </div>
               </div>
@@ -129,6 +141,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                   <input
                     type="date"
                     name="dob"
+                    max={maxDate.toString()}
                     onChange={handleChange}
                     className={`${
                       enabled ? "bg-gray-200" : "bg-white"
@@ -136,6 +149,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                     placeholder="D.O.B."
                     required
                     disabled={enabled}
+                    defaultValue={userData.dob.slice(0, 10)}
                   />
                 </div>
               </div>
@@ -154,6 +168,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                     maxLength="11"
                     title="Must Contain only Numbers (xxxxxxxxxx)"
                     disabled={enabled}
+                    defaultValue={userData.mobileNumber}
                   />
                 </div>
               </div>
@@ -182,6 +197,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                     title="Cannot contain alphabets, symbols, spaces"
                     min="1"
                     disabled={enabled}
+                    defaultValue={userData.rollNo}
                   />
                 </div>
               </div>
@@ -200,6 +216,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                       enabled ? "bg-gray-200" : "bg-white"
                     } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     disabled={enabled}
+                    defaultValue={userData.degree}
                   >
                     <option value="*" disabled>
                       Select Degree
@@ -238,6 +255,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                       enabled ? "bg-gray-200" : "bg-white"
                     } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     disabled={enabled}
+                    defaultValue={userData.field}
                   >
                     <optgroup label="B. Tech.">
                       <option value="Computer Science Engineering">
@@ -301,6 +319,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                       enabled ? "bg-gray-200" : "bg-white"
                     } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     disabled={enabled}
+                    defaultValue={userData.batch}
                   >
                     <option value="*" disabled>
                       Year of Graduation
@@ -338,6 +357,7 @@ export default function CardSettings({ enabled, setEnabled }) {
                     rows="5"
                     placeholder="Something about Me......."
                     disabled={enabled}
+                    defaultValue={userData.bio}
                   ></textarea>
                 </div>
               </div>
