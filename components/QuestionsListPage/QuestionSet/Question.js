@@ -41,7 +41,9 @@ const Question = ({ question }) => {
               )}
               <div className="my-auto text-center">
                 <p className="text-sm text-gray-700">
-                  {question.firstName + " " + question.lastName}
+                  {question.firstName +
+                    " " +
+                    question.lastName}
                 </p>
                 <p className="text-xs text-gray-500">
                   {question.field + " " + question.batch}
@@ -89,7 +91,9 @@ const Question = ({ question }) => {
                 {/* Question body */}
                 <p className="font-normal text-gray-700 mt-2 mb-2 mx-2 text-justify">
                   {new String(question.content).length > 300
-                    ? new String(question.content).substring(0, 300) + "..."
+                    ? new String(
+                        question.content
+                      ).substring(0, 300) + "..."
                     : question.content}
                 </p>
               </div>
@@ -132,7 +136,9 @@ const Question = ({ question }) => {
                     className="cursor-pointer group"
                     onClick={() => {
                       setShare(!share);
-                      navigator.clipboard.writeText(question.slug);
+                      navigator.clipboard.writeText(
+                        `${window.location.href}/${question.slug}`
+                      );
                       showPopup("URL Copied!", "green");
                     }}
                   >
