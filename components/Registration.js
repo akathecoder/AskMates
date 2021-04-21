@@ -41,7 +41,17 @@ const Registration = () => {
                       .post(
                         process.env.serverUrl + "users",
                         {
-                          ...values,
+                          username: values.username,
+                          email:
+                            values.email + "@jklu.edu.in",
+                          password: values.password,
+                          firstName: values.firstName,
+                          middleName: values.middleName,
+                          lastName: values.lastName,
+                          batch: values.batch,
+                          degree: values.degree,
+                          field: values.field,
+                          rollNo: values.rollNo,
                         }
                       )
                       .then((res) => {
