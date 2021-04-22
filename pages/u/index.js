@@ -5,7 +5,11 @@ export default function () {
   return (
     <div>
       <Navbar />
-      <UserFourZeroFour />
+      <UserFourZeroFour
+        message="the USER you are looking for not found !.."
+        path={`/`}
+        buttonName="HOME"
+      />
     </div>
   );
 }
