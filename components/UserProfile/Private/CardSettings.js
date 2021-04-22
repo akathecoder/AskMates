@@ -1,8 +1,13 @@
 import _ from "lodash";
 import { useState } from "react";
+import { showPopup } from "../../Notification";
 import axios from "axios";
 
-export default function CardSettings({ enabled, setEnabled, userData }) {
+export default function CardSettings({
+  enabled,
+  setEnabled,
+  userData,
+}) {
   const [formData, updateFormData] = useState({});
   // TO set the max DOB option to 18 years before from now.
   let maxDate = new Date();
@@ -24,14 +29,21 @@ export default function CardSettings({ enabled, setEnabled, userData }) {
     console.log(formData);
     // Sending Data to server.
     updateUser(formData);
+    showPopup(
+      "User Profile Successfully Updated..",
+      "green"
+    );
   };
 
   // Call the Update User API
   const updateUser = async (updatedData) => {
     await axios
-      .patch(`http://localhost:4001/users/data/${userData.username}`, {
-        ...updatedData,
-      })
+      .patch(
+        `http://localhost:4001/users/data/${userData.username}`,
+        {
+          ...updatedData,
+        }
+      )
       .catch((error) => {
         console.log(error);
       });
@@ -39,7 +51,11 @@ export default function CardSettings({ enabled, setEnabled, userData }) {
 
   return (
     <>
-      <form action="#" method="post" onSubmit={handleSubmit}>
+      <form
+        action="#"
+        method="post"
+        onSubmit={handleSubmit}
+      >
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100">
           <div className="flex-auto md:p-7 lg:px-10 lg:py-7 ">
             <h6 className="text-gray-500 text-base mt-2 mb-2 font-bold uppercase">
@@ -222,9 +238,13 @@ export default function CardSettings({ enabled, setEnabled, userData }) {
                       Select Degree
                     </option>
                     <optgroup label="Institute of Engineernig and Technology">
-                      <option value="B. Tech.">B. Tech.</option>
+                      <option value="B. Tech.">
+                        B. Tech.
+                      </option>
                       <option value="BCA">BCA</option>
-                      <option value="M. Tech.">M. Tech.</option>
+                      <option value="M. Tech.">
+                        M. Tech.
+                      </option>
                       <option value="MCA">MCA</option>
                       <option value="PhD">PhD</option>
                     </optgroup>
@@ -234,8 +254,12 @@ export default function CardSettings({ enabled, setEnabled, userData }) {
                       <option value="PhD">PhD</option>
                     </optgroup>
                     <optgroup label="Institute of Design">
-                      <option value="B. Des.">B. Des.</option>
-                      <option value="M. Des.">M. Des.</option>
+                      <option value="B. Des.">
+                        B. Des.
+                      </option>
+                      <option value="M. Des.">
+                        M. Des.
+                      </option>
                     </optgroup>
                   </select>
                 </div>
@@ -271,14 +295,18 @@ export default function CardSettings({ enabled, setEnabled, userData }) {
                         Electrical Engineering
                       </option>
                       <option value="Electronics and Communication Engineeringe">
-                        Electronics and Communication Engineering
+                        Electronics and Communication
+                        Engineering
                       </option>
                       <option value="Electrical and Electronics Engineering">
-                        Electrical and Electronics Engineering
+                        Electrical and Electronics
+                        Engineering
                       </option>
                     </optgroup>
                     <optgroup label="B. Des.">
-                      <option value="Product Design">Product Design</option>
+                      <option value="Product Design">
+                        Product Design
+                      </option>
                       <option value="Interaction Design">
                         Interaction Design
                       </option>
@@ -290,7 +318,9 @@ export default function CardSettings({ enabled, setEnabled, userData }) {
                       </option>
                     </optgroup>
                     <optgroup label="M. Tech.">
-                      <option value="Data Science">Data Science</option>
+                      <option value="Data Science">
+                        Data Science
+                      </option>
                       <option value="Embedded Systems and IoT">
                         Embedded Systems and IoT
                       </option>
@@ -324,15 +354,17 @@ export default function CardSettings({ enabled, setEnabled, userData }) {
                     <option value="*" disabled>
                       Year of Graduation
                     </option>
-                    {_.range(2017, new Date().getFullYear() + 3, 1).map(
-                      (option, index) => {
-                        return (
-                          <option value={option} key={index}>
-                            {option}
-                          </option>
-                        );
-                      }
-                    )}
+                    {_.range(
+                      2017,
+                      new Date().getFullYear() + 3,
+                      1
+                    ).map((option, index) => {
+                      return (
+                        <option value={option} key={index}>
+                          {option}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
               </div>
