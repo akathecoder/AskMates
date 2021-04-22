@@ -7,9 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 import parse from "html-react-parser";
 import date from "date-and-time";
+import Tags from "./Tags";
 
 const Question = ({ data }) => {
   data = JSON.parse(data);
+
+  const tags = data.tags.split(" ");
+  // console.log(tags);
 
   const imageLink = "/assets/profilePic.jpeg";
 
@@ -93,6 +97,13 @@ const Question = ({ data }) => {
         <h1 className="text-xl font-normal text-black mt-2 mb-2 mx-2 text-justify">
           {parse(data.content)}
         </h1>
+
+        {/* Tags */}
+        <div className="flex gap-4">
+          {tags.map((tag) => {
+            return <Tags tag={tag} />;
+          })}
+        </div>
 
         {/* line above user details */}
         {/* <hr className="mt-8 mb-1 border " /> */}
