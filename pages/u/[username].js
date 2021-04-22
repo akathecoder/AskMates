@@ -8,7 +8,17 @@ export default function Home({ userData }) {
     <>
       <Navbar />
       {userData === null ? (
-        <UserFourZeroFour />
+        <UserFourZeroFour
+          message="the USER you are looking for not found !.."
+          path={`/`}
+          buttonName="HOME"
+        />
+      ) : userData === "notLoggenIn" ? (
+        <UserFourZeroFour
+          message="You need to LogIn to see this profile !.."
+          path={`/login`}
+          buttonName="LOGIN"
+        />
       ) : (
         <PublicUserProfile userData={userData} />
       )}
@@ -20,12 +30,23 @@ export async function getServerSideProps({ params }) {
   const userData = await axios
     .get(`http://localhost:4001/users/${params.username}`)
     .catch((err) => {
-      return null;
+      if (err.response.status === 401) {
+        return "notLoggenIn";
+      } else {
+        return null;
+      }
     });
   if (userData === null) {
     return {
       props: {
         userData: null,
+      },
+    };
+  }
+  if (userData === "notLoggenIn") {
+    return {
+      props: {
+        userData: "notLoggenIn",
       },
     };
   }
