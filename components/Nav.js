@@ -171,6 +171,11 @@ export default function Navbar() {
                   <a
                     href="#"
                     className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+                    onClick={() => {
+                      Cookies.remove("username");
+                      Cookies.remove("auth");
+                      router.reload();
+                    }}
                   >
                     <FontAwesomeIcon
                       icon={faSignOutAlt}
