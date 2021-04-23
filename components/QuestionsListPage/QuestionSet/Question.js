@@ -11,6 +11,7 @@ import Link from "next/link";
 import date from "date-and-time";
 import { useState } from "react";
 import { showPopup } from "../../Notification";
+import parse from "html-react-parser";
 
 const Question = ({ question }) => {
   const imageLink = "/assets/profilePic.jpeg";
@@ -90,7 +91,8 @@ const Question = ({ question }) => {
 
                 {/* Question body */}
                 <p className="font-normal text-gray-700 mt-2 mb-2 mx-2 text-justify">
-                  {new String(question.content).length > 300
+                  {new String(parse(question.content))
+                    .length > 300
                     ? new String(
                         question.content
                       ).substring(0, 300) + "..."
