@@ -1,11 +1,19 @@
 import Navbar from "../components/Nav";
 import MyEditor from "../components/InputBox/MyEditor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import Router from "next/router";
 
 function ask() {
   const [bodyData, setBodyData] = useState("");
 
   // console.log(bodyData);
+
+  useEffect(() => {
+    if (!Cookies.get("username")) {
+      Router.push("/login");
+    }
+  });
 
   return (
     <>
