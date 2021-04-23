@@ -35,9 +35,15 @@ export default function CardProfile() {
   // Call the Update Password API
   const updatePassword = async (updatePassword) => {
     await axios
-      .patch(`http://localhost:4001/updatePassword`, {
-        ...updatePassword,
-      })
+      .patch(
+        `http://localhost:4001/updatePassword`,
+        {
+          ...updatePassword,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .catch((error) => {
         console.log(error);
       });
