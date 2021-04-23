@@ -1,4 +1,5 @@
 import _ from "lodash";
+import date from "date-and-time";
 import { useState } from "react";
 import { showPopup } from "../../Notification";
 import axios from "axios";
@@ -9,6 +10,13 @@ export default function CardSettings({
   userData,
 }) {
   const [formData, updateFormData] = useState({});
+  if (userData.dob != null) {
+    userData.dob = date.format(
+      new Date(userData.dob),
+      "YYYY-MM-DD"
+    );
+  }
+
   // TO set the max DOB option to 18 years before from now.
   let maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() - 18);
@@ -166,12 +174,9 @@ export default function CardSettings({
                       enabled ? "bg-gray-200" : "bg-white"
                     } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="D.O.B."
-                    required
                     disabled={enabled}
                     defaultValue={
-                      userData.dob
-                        ? userData.dob.slice(0, 10)
-                        : ""
+                      userData.dob ? userData.dob : ""
                     }
                   />
                 </div>
