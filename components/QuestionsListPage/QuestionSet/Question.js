@@ -53,7 +53,7 @@ const Question = ({ question }) => {
             </a>
           </Link>
         </div>
-        <div className="flex flex-col items-center justify-center col-start-2 col-end-11">
+        <div className="flex flex-col  justify-center col-start-2 col-end-11">
           {/* Date and Views */}
           <div className="flex flex-row justify-end items-center space-x-10 mx-6 px-2 w-full">
             {/* Views */}
@@ -91,12 +91,7 @@ const Question = ({ question }) => {
 
                 {/* Question body */}
                 <p className="font-normal text-gray-700 mt-2 mb-2 mx-2 text-justify">
-                  {new String(parse(question.content))
-                    .length > 300
-                    ? new String(
-                        question.content
-                      ).substring(0, 300) + "..."
-                    : question.content}
+                  {parse(question.content)}
                 </p>
               </div>
             </Link>

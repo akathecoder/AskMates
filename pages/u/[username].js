@@ -26,9 +26,19 @@ export default function Home({ userData }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps(ctx) {
+  // console.log(params);
+
   const userData = await axios
-    .get(`http://localhost:4001/users/${params.username}`)
+    .get(`http://localhost:4001/user`, {
+      withCredentials: true,
+      params: {
+        username: ctx.params.username,
+      },
+      headers: ctx.req.headers.cookie
+        ? { cookie: ctx.req.headers.cookie }
+        : undefined,
+    })
     .catch((err) => {
       if (err.response.status === 401) {
         return "notLoggenIn";

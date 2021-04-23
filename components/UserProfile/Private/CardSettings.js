@@ -42,6 +42,9 @@ export default function CardSettings({
         `http://localhost:4001/users/data/${userData.username}`,
         {
           ...updatedData,
+        },
+        {
+          withCredentials: true,
         }
       )
       .catch((error) => {
@@ -165,7 +168,11 @@ export default function CardSettings({
                     placeholder="D.O.B."
                     required
                     disabled={enabled}
-                    defaultValue={userData.dob.slice(0, 10)}
+                    defaultValue={
+                      userData.dob
+                        ? userData.dob.slice(0, 10)
+                        : ""
+                    }
                   />
                 </div>
               </div>
