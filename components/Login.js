@@ -21,21 +21,18 @@ const Login = () => {
                       className="block text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Email
+                      Username
                     </label>
                     <div className="flex rounded text-sm shadow bg-white">
                       <input
                         type="text"
                         name="username"
-                        placeholder="Email"
+                        placeholder="Username"
                         className="flex-grow rounded focus:outline-none focus:ring-0 px-3 py-3 placeholder-gray-400 text-gray-600"
                         style={{
                           transition: "all .15s ease",
                         }}
-                      ></input>
-                      <div className="text-center px-5 py-3 font-semibold text-gray-600">
-                        @jklu.edu.in
-                      </div>
+                      />
                     </div>
                   </div>
 
@@ -56,25 +53,45 @@ const Login = () => {
                       }}
                     />
                   </div>
-                  <div className="text-center mt-8">
-                    <button
-                      className="bg-gray-900 active:bg-gray-700 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                      type="submit"
-                      style={{
-                        transition: "all .15s ease",
-                      }}
-                    >
-                      Sign In
-                    </button>
-                  </div>
-                  <div className="flex justify-center mt-2">
-                    <a
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      className="text-gray-100"
-                    >
-                      <small>Forgot password?</small>
-                    </a>
+                  <div className="divide-y divide-gray-500 ">
+                    <div className="text-center mt-8 mb-10">
+                      <button
+                        className="bg-gray-900 active:bg-gray-700 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                        type="submit"
+                        style={{
+                          transition: "all .15s ease",
+                        }}
+                      >
+                        Sign In
+                      </button>
+                      <div className="flex flex-col justify-center items-center mt-1 w-full">
+                        <a
+                          href="#pablo"
+                          onClick={(e) =>
+                            e.preventDefault()
+                          }
+                          className="text-gray-100"
+                        >
+                          <small>Forgot password?</small>
+                        </a>
+                      </div>
+                    </div>
+                    <div className="text-center w-full">
+                      <div className="text-center mb-3 font-bold text-xl pt-10">
+                        <h3>Create a new acount</h3>
+                      </div>
+                      <a href="/registration">
+                        <p
+                          className="bg-gray-900 active:bg-gray-700 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full mt-2"
+                          type="submit"
+                          style={{
+                            transition: "all .15s ease",
+                          }}
+                        >
+                          Sign Up
+                        </p>
+                      </a>
+                    </div>
                   </div>
                 </form>
               </div>
