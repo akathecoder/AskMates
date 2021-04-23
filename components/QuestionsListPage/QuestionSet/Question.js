@@ -47,7 +47,7 @@ const Question = ({ question }) => {
                     question.lastName}
                 </p>
                 <p className="text-xs text-gray-500">
-                  {question.field + " " + question.batch}
+                  {question.field}
                 </p>
               </div>
             </a>
@@ -100,7 +100,9 @@ const Question = ({ question }) => {
             <div className="mx-2 mt-5 flex flex-row justify-between items-center">
               {/* Answer and Share Buttons */}
               <div className="flex flex-row justify-evenly space-x-7">
-                <Link href={`/q/${question.slug}`}>
+                <Link
+                  href={`/q/${question.slug}#answer-section`}
+                >
                   <div className="cursor-pointer group">
                     <FontAwesomeIcon
                       icon={faEdit}
