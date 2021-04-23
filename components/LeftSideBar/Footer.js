@@ -10,18 +10,19 @@ const Footer = () => {
 			<div className="flex flex-col">
 				<section className="flex flex-row space-x-8 justify-center items-start">
 					<div>
-						<h3 className="font-medium block">Company</h3>
+						<h3 className="font-medium block">AskMates</h3>
 						<div className="flex flex-col mt-1">
-							<Link href="/q">Login</Link>
-							<Link href="/q">Questions</Link>
-							<Link href="/q">Help</Link>
+							<Link href="/ask">Ask Question</Link>
+							<Link href="/search">Search</Link>
+							<Link href="/q">Archive</Link>
 						</div>
 					</div>
 					<div>
 						<h3 className="font-medium block">Product</h3>
 						<div className="flex flex-col mt-1">
-							<Link href="/q">About</Link>
-							<Link href="/q">Developers</Link>
+							<Link href="/">About</Link>
+							<Link href="/">Developers</Link>
+							<Link href="/">Help</Link>
 						</div>
 					</div>
 				</section>

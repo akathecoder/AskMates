@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function Home({ questionData }) {
   return (
-    <div className="">
+    <div>
       <Navbar />
       {questionData ? (
         <QuestionsListPage questionData={questionData} />
@@ -31,12 +31,11 @@ export default function Home({ questionData }) {
 
 export async function getStaticProps() {
   const questionData = await axios
-    .get("http://localhost:4001/questions/username/nonit_mittal")
+    .get("http://localhost:4001/questions/username/nonit_m")
     .catch((error) => {
       console.log(error);
       return;
     });
-  console.log(questionData);
   if (questionData === undefined) {
     return {
       props: {

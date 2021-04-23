@@ -8,7 +8,17 @@ export default function Home({ userData }) {
     <>
       <Navbar />
       {userData === null ? (
-        <UserFourZeroFour />
+        <UserFourZeroFour
+          message="the USER you are looking for not found !.."
+          path={`/`}
+          buttonName="HOME"
+        />
+      ) : userData === "notLoggenIn" ? (
+        <UserFourZeroFour
+          message="You need to LogIn to see this profile !.."
+          path={`/login`}
+          buttonName="LOGIN"
+        />
       ) : (
         <PublicUserProfile userData={userData} />
       )}
@@ -16,16 +26,37 @@ export default function Home({ userData }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps(ctx) {
+  // console.log(params);
+
   const userData = await axios
-    .get(`http://localhost:4001/users/${params.username}`)
+    .get(`http://localhost:4001/user`, {
+      withCredentials: true,
+      params: {
+        username: ctx.params.username,
+      },
+      headers: ctx.req.headers.cookie
+        ? { cookie: ctx.req.headers.cookie }
+        : undefined,
+    })
     .catch((err) => {
-      return null;
+      if (err.response.status === 401) {
+        return "notLoggenIn";
+      } else {
+        return null;
+      }
     });
   if (userData === null) {
     return {
       props: {
         userData: null,
+      },
+    };
+  }
+  if (userData === "notLoggenIn") {
+    return {
+      props: {
+        userData: "notLoggenIn",
       },
     };
   }

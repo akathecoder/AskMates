@@ -13,17 +13,25 @@ const userProfile = ({ userData }) => {
 
 export default userProfile;
 
-export async function getStaticProps() {
+export async function getServerSideProps(ctx) {
   const userData = await axios
-    .get("http://localhost:4001/users/nonit_mittal")
+    .get(
+      process.env.serverUrl + "user",
+      {
+        headers: ctx.req
+          ? { cookie: ctx.req.headers.cookie }
+          : undefined,
+      },
+      { withCredentials: true }
+    )
     .catch((error) => {
       console.log(error);
       return;
     });
+
   return {
     props: {
       userData: JSON.stringify(userData.data),
     },
-    revalidate: 1,
   };
 }

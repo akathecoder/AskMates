@@ -1,14 +1,54 @@
-import Image from "next/image";
+import { showPopup } from "../../Notification";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
+import { useState } from "react";
+import axios from "axios";
 
 const imageLink1 = "/assets/profilePic.jpeg";
 const imageLink = false;
 
 export default function CardProfile() {
+  const [formData, updateFormData] = useState({});
+  // To store confirmNewPassword to later check with newPassword.
+  const [confirmNewPass, setconfirmNewPass] = useState("");
+  // Whenever there is any change in any input, it gets added to formdata.
+  const handleChange = (e) => {
+    e.target.name === "confirmNewPassword"
+      ? setconfirmNewPass(e.target.value.trim())
+      : updateFormData({
+          ...formData,
+          [e.target.name]: e.target.value.trim(),
+        });
+  };
+
+  // what happens when from is Submitted.
+  const handleSubmit = (e) => {
+    console.log(formData);
+    // Sending Data to server.
+    //updatePassword(formData);
+    formData.newPassword === confirmNewPass
+      ? showPopup("Password Matches..", "green")
+      : showPopup("Confirm Password not Match !..", "red") &
+        e.preventDefault();
+  };
+
+  // Call the Update Password API
+  const updatePassword = async (updatePassword) => {
+    await axios
+      .patch(`http://localhost:4001/updatePassword`, {
+        ...updatePassword,
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <>
-      <form action="#" method="post">
+      <form
+        action="#"
+        method="post"
+        onSubmit={handleSubmit}
+      >
         {/* Profile Picture */}
         <div className="w-full flex p-4 justify-center my-8">
           <div className="text-2xl rounded-full shadow-2xl">
@@ -37,6 +77,7 @@ export default function CardProfile() {
               <input
                 type="password"
                 name="currentPassword"
+                onChange={handleChange}
                 className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Current Password"
                 required
@@ -51,12 +92,13 @@ export default function CardProfile() {
               <input
                 type="password"
                 name="newPassword"
+                onChange={handleChange}
                 className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="New Password"
                 required
-                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])"
-                title="Password must contain at-least one uppercase, lowercase, number and symbol and at-least 8 characters."
+                pattern="^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$"
                 minLength="8"
+                title="Password must contain at-least one uppercase, lowercase, number and symbol and at-least 8 characters."
               />
             </div>
           </div>
@@ -65,6 +107,7 @@ export default function CardProfile() {
               <input
                 type="password"
                 name="confirmNewPassword"
+                onChange={handleChange}
                 className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Confirm New Password"
                 required

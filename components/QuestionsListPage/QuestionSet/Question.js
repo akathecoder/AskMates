@@ -11,6 +11,7 @@ import Link from "next/link";
 import date from "date-and-time";
 import { useState } from "react";
 import { showPopup } from "../../Notification";
+import parse from "html-react-parser";
 
 const Question = ({ question }) => {
   const imageLink = "/assets/profilePic.jpeg";
@@ -46,13 +47,13 @@ const Question = ({ question }) => {
                     question.lastName}
                 </p>
                 <p className="text-xs text-gray-500">
-                  {question.field + " " + question.batch}
+                  {question.field}
                 </p>
               </div>
             </a>
           </Link>
         </div>
-        <div className="flex flex-col items-center justify-center col-start-2 col-end-11">
+        <div className="flex flex-col  justify-center col-start-2 col-end-11">
           {/* Date and Views */}
           <div className="flex flex-row justify-end items-center space-x-10 mx-6 px-2 w-full">
             {/* Views */}
@@ -90,11 +91,7 @@ const Question = ({ question }) => {
 
                 {/* Question body */}
                 <p className="font-normal text-gray-700 mt-2 mb-2 mx-2 text-justify">
-                  {new String(question.content).length > 300
-                    ? new String(
-                        question.content
-                      ).substring(0, 300) + "..."
-                    : question.content}
+                  {parse(question.content)}
                 </p>
               </div>
             </Link>
@@ -103,7 +100,9 @@ const Question = ({ question }) => {
             <div className="mx-2 mt-5 flex flex-row justify-between items-center">
               {/* Answer and Share Buttons */}
               <div className="flex flex-row justify-evenly space-x-7">
-                <Link href={`/q/${question.slug}`}>
+                <Link
+                  href={`/q/${question.slug}#answer-section`}
+                >
                   <div className="cursor-pointer group">
                     <FontAwesomeIcon
                       icon={faEdit}
