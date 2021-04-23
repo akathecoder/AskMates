@@ -67,7 +67,10 @@ function ask() {
               <p className="text-sm text-gray-600">
                 Add up to 5 tags to describe what your
                 question is about.
-                <b> Separate your tags with space</b>
+                <b> Separate your tags with space. </b>
+                <br />
+                Only Small characters, Numerals and hyphens
+                allowed.
               </p>
               <input
                 type="text"
