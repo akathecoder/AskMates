@@ -2,14 +2,14 @@ import Navbar from "../components/Nav";
 import QuestionsListPage from "../components/QuestionsListPage/QuestionsListPage";
 import LeftSidePane from "../components/LeftSideBar/LeftSidePane";
 import axios from "axios";
+import UserFourZeroFour from "../components/UserProfile/Public/404";
 
 export default function Home({ questionData }) {
   return (
     <div>
       <Navbar />
-      {questionData ? (
-        <QuestionsListPage questionData={questionData} />
-      ) : (
+      {questionData === "zeroAnswers" ||
+      questionData === null ? (
         <>
           <section className="md:mx-32 lg:mx-48 pb-20 mt-16">
             <div className="flex flex-row">
@@ -24,22 +24,53 @@ export default function Home({ questionData }) {
             </div>
           </section>
         </>
+      ) : questionData === "notLoggedIn" ? (
+        <UserFourZeroFour
+          message="You need to LogIn to see your Questions !.."
+          path={`/login`}
+          buttonName="LOGIN"
+        />
+      ) : (
+        <QuestionsListPage questionData={questionData} />
       )}
     </div>
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(ctx) {
   const questionData = await axios
-    .get("http://localhost:4001/questions/username/nonit_m")
+    .get("http://localhost:4001/questions/username", {
+      withCredentials: true,
+      headers: ctx.req.headers.cookie
+        ? { cookie: ctx.req.headers.cookie }
+        : undefined,
+    })
     .catch((error) => {
-      console.log(error);
-      return;
+      if (error.response.status === 401) {
+        return "notLoggedIn";
+      }
+      if (error.response.status === 404) {
+        return "zeroAnswers";
+      } else {
+        console.log(error.response);
+        return null;
+      }
     });
-  if (questionData === undefined) {
+  console.log(questionData);
+  if (questionData === "zeroAnswers") {
     return {
       props: {
-        questionData: null,
+        questionData: "zeroAnswers",
+      },
+    };
+  }
+  if (
+    questionData === "notLoggedIn" ||
+    questionData === null
+  ) {
+    return {
+      props: {
+        questionData: "notLoggedIn",
       },
     };
   }
@@ -47,6 +78,5 @@ export async function getStaticProps() {
     props: {
       questionData: JSON.stringify(questionData.data),
     },
-    revalidate: 1,
   };
 }
