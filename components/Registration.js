@@ -1,3 +1,4 @@
+import _ from "lodash";
 import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState, useEffect } from "react";
@@ -185,10 +186,23 @@ const Registration = () => {
                       name="batch"
                       placeholder="Year of Graduation"
                     >
-                      <option value="2021">2021</option>
-                      <option value="2022">2022</option>
-                      <option value="2023">2023</option>
-                      <option value="2024">2024</option>
+                      <option value="*" disabled>
+                        Year of Graduation
+                      </option>
+                      {_.range(
+                        2017,
+                        new Date().getFullYear() + 3,
+                        1
+                      ).map((option, index) => {
+                        return (
+                          <option
+                            value={option}
+                            key={index}
+                          >
+                            {option}
+                          </option>
+                        );
+                      })}
                     </InputField>
 
                     <InputField
@@ -197,14 +211,33 @@ const Registration = () => {
                       name="degree"
                       placeholder="Select your Degree"
                     >
-                      <option value="btech">B Tech</option>
-                      <option value="bba">BBA</option>
-                      <option value="bdes">B Des</option>
-                      <option value="bca">BCA</option>
-                      <option value="mtech">M Tech</option>
-                      <option value="mba">MBA</option>
-                      <option value="mdes">M Des</option>
-                      <option value="mca">MCA</option>
+                      <option value="*" disabled>
+                        Select Degree
+                      </option>
+                      <optgroup label="Institute of Engineernig and Technology">
+                        <option value="B. Tech.">
+                          B. Tech.
+                        </option>
+                        <option value="BCA">BCA</option>
+                        <option value="M. Tech.">
+                          M. Tech.
+                        </option>
+                        <option value="MCA">MCA</option>
+                        <option value="PhD">PhD</option>
+                      </optgroup>
+                      <optgroup label="Institute of Management">
+                        <option value="BBA">BBA</option>
+                        <option value="MBA">MBA</option>
+                        <option value="PhD">PhD</option>
+                      </optgroup>
+                      <optgroup label="Institute of Design">
+                        <option value="B. Des.">
+                          B. Des.
+                        </option>
+                        <option value="M. Des.">
+                          M. Des.
+                        </option>
+                      </optgroup>
                     </InputField>
 
                     <InputField
@@ -213,16 +246,57 @@ const Registration = () => {
                       name="field"
                       placeholder="Enter your Major"
                     >
-                      <option value="cse">
-                        Computer Science
-                      </option>
-                      <option value="mechanical">
-                        Mechanical
-                      </option>
-                      <option value="civil">Civil</option>
-                      <option value="electrical">
-                        Electrical
-                      </option>
+                      <optgroup label="B. Tech.">
+                        <option value="Computer Science Engineering">
+                          Computer Science Engineering
+                        </option>
+                        <option value="Mechanical Engineering">
+                          Mechanical Engineering
+                        </option>
+                        <option value="Civil Engineering">
+                          Civil Engineering
+                        </option>
+                        <option value="Electrical Engineering">
+                          Electrical Engineering
+                        </option>
+                        <option value="Electronics and Communication Engineeringe">
+                          Electronics and Communication
+                          Engineering
+                        </option>
+                        <option value="Electrical and Electronics Engineering">
+                          Electrical and Electronics
+                          Engineering
+                        </option>
+                      </optgroup>
+                      <optgroup label="B. Des.">
+                        <option value="Product Design">
+                          Product Design
+                        </option>
+                        <option value="Interaction Design">
+                          Interaction Design
+                        </option>
+                        <option value="Interdisciplinary Design">
+                          Interdisciplinary Design
+                        </option>
+                        <option value="Integrated and Communication Design">
+                          Integrated and Communication
+                          Design
+                        </option>
+                      </optgroup>
+                      <optgroup label="M. Tech.">
+                        <option value="Data Science">
+                          Data Science
+                        </option>
+                        <option value="Embedded Systems and IoT">
+                          Embedded Systems and IoT
+                        </option>
+                        <option value="Automation and Robotics">
+                          Automation and Robotics
+                        </option>
+                        <option value="Health, Safety and Environment">
+                          Health, Safety and Environment
+                        </option>
+                      </optgroup>
                     </InputField>
 
                     <InputField
