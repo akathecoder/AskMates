@@ -2,31 +2,31 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebookSquare,
-  faPinterest,
-  faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
+
 import {
   faBars,
-  faHome,
-  faUsers,
   faSearch,
   faSignOutAlt,
   faUser,
   faQuestion,
   faPencilAlt,
+  faStream,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faEdit,
-  faBell,
   faUserCircle,
 } from "@fortawesome/free-regular-svg-icons";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
+  const user = Cookies.get("username");
+  const router = useRouter();
+
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const imageLink = "/assets/profilePic.jpeg";
   const [dropDownOpen, setdropDownOpen] = useState(false);
+
+  const imageLink = user ? "/assets/profilePic.jpeg" : "";
 
   return (
     <>
@@ -59,25 +59,13 @@ export default function Navbar() {
                 <Link href="/q">
                   <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
                     <FontAwesomeIcon
-                      icon={faHome}
+                      icon={faStream}
                       size="2x"
                       className="leading-lg text-white opacity-75"
                     />
-                    <span className="ml-2">Home</span>
-                  </a>
-                </Link>
-              </li>
-
-              <li className="nav-item my-auto">
-                <Link href="/notifications">
-                  <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-                    <FontAwesomeIcon
-                      icon={faBell}
-                      size="2x"
-                      className="leading-lg text-white opacity-75"
-                    />
-
-                    <span className="ml-2">Notifications</span>
+                    <span className="ml-2">
+                      Question Feed
+                    </span>
                   </a>
                 </Link>
               </li>
@@ -90,7 +78,9 @@ export default function Navbar() {
                       size="2x"
                       className="leading-lg text-white opacity-75"
                     />
-                    <span className="ml-2">Ask Question</span>
+                    <span className="ml-2">
+                      Ask Question
+                    </span>
                   </a>
                 </Link>
               </li>
@@ -111,7 +101,7 @@ export default function Navbar() {
           </div>
           <div>
             <div className="nav-item my-auto hidden lg:flex relative">
-              <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+              <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75 cursor-pointer">
                 {imageLink ? (
                   <Image
                     src="/assets/profilePic.jpeg"
@@ -120,14 +110,22 @@ export default function Navbar() {
                     width={40}
                     height={40}
                     objectFit="cover"
-                    onClick={() => setdropDownOpen(!dropDownOpen)}
+                    onClick={() =>
+                      user
+                        ? setdropDownOpen(!dropDownOpen)
+                        : router.push("/login")
+                    }
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faUserCircle}
                     size="3x"
                     className="leading-lg text-white opacity-75"
-                    onClick={() => setdropDownOpen(!dropDownOpen)}
+                    onClick={() =>
+                      user
+                        ? setdropDownOpen(!dropDownOpen)
+                        : router.push("/login")
+                    }
                   />
                 )}
               </a>
@@ -173,6 +171,11 @@ export default function Navbar() {
                   <a
                     href="#"
                     className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+                    onClick={() => {
+                      Cookies.remove("username");
+                      Cookies.remove("auth");
+                      router.reload();
+                    }}
                   >
                     <FontAwesomeIcon
                       icon={faSignOutAlt}
