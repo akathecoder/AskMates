@@ -174,7 +174,7 @@ export default function Navbar() {
                     onClick={() => {
                       Cookies.remove("username");
                       Cookies.remove("auth");
-                      router.reload();
+                      router.push("/q/");
                     }}
                   >
                     <FontAwesomeIcon
