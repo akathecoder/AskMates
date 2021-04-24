@@ -14,8 +14,8 @@ const Registration = () => {
   const router = useRouter();
 
   return (
-    <div className="absolute bg-login h-full w-full bg-cover">
-      <div className="container mx-auto px-4 h-full">
+    <div className="relative top-48">
+      <div className="container mx-auto px-4">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full md:w-2/3 xl:w-1/3 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-2xl border-0 rounded-lg bg-gray-600">
