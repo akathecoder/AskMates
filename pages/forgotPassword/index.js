@@ -1,9 +1,9 @@
 import React from "react";
-import { useRouter } from "next/router";
+import Router from "next/router";
 import axios from "axios";
+import { showPopup } from "../../components/Notification";
 
 const email = () => {
-  const router = useRouter();
   return (
     <div className="absolute bg-login h-full w-full bg-cover">
       <div className="container mx-auto px-4 h-full">
@@ -19,29 +19,38 @@ const email = () => {
                   method="post"
                   onSubmit={(e) => {
                     e.preventDefault();
+                    if (
+                      e.target.newPassword.value !==
+                      e.target.confirmPassword.value
+                    ) {
+                      showPopup(
+                        "Password does not match",
+                        "red"
+                      );
+                      e.target.newPassword.value = "";
+                      e.target.confirmPassword.value = "";
+                    }
                     axios
                       .patch(
                         `${process.env.serverUrl}updateForgottenPassword`,
                         {
-                          email: router.query.email,
+                          email: Router.query.email,
                           newPassword:
                             e.target.newPassword.value,
                           authenticateForgotPassword:
-                            router.query
+                            Router.query
                               .authenticateForgotPassword,
                         }
                       )
-                      .then((res) => {
-                        showPopup(
-                          "Passwod updated sucessfully",
-                          "green"
-                        );
-                        setTimeout(() => {
-                          Router.push(`/login`);
-                        }, 2000);
-                      })
                       .catch((error) => {
                         if (error.response.status === 200) {
+                          showPopup(
+                            "Passwod updated sucessfully",
+                            "green"
+                          );
+                          setTimeout(() => {
+                            Router.push(`/login`);
+                          }, 2000);
                           console.log(
                             "Password updated sucessfully"
                           );
@@ -64,6 +73,10 @@ const email = () => {
                         name="newPassword"
                         placeholder="New Password"
                         className="flex-grow rounded focus:outline-none focus:ring-0 px-3 py-3 placeholder-gray-400 text-gray-600"
+                        required
+                        pattern="^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+                        minLength="8"
+                        title="Password must contain at-least one uppercase, lowercase, number and symbol and at-least 8 characters."
                         style={{
                           transition: "all .15s ease",
                         }}
@@ -83,6 +96,7 @@ const email = () => {
                         name="confirmPassword"
                         placeholder="Confirm Password"
                         className="flex-grow rounded focus:outline-none focus:ring-0 px-3 py-3 placeholder-gray-400 text-gray-600"
+                        required
                         style={{
                           transition: "all .15s ease",
                         }}
