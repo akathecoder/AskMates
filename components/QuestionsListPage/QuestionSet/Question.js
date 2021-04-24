@@ -19,9 +19,9 @@ const Question = ({ question }) => {
   return (
     // Question Card
     <div className="my-6 px-10 py-6 bg-white shadow-lg rounded-lg">
-      <div className="grid grid-cols-10 gap-x-5 items-center">
+      <div className="grid grid-cols-10 gap-x-5 items-start">
         {/* user details */}
-        <div className="col-span-1">
+        <div className="col-span-1 mt-7">
           <Link href={"/u/" + question.username}>
             <a className="mt-1 flex flex-col items-center space-y-3 font-medium group opacity-100 hover:opacity-75">
               {imageLink ? (
@@ -47,7 +47,7 @@ const Question = ({ question }) => {
                     question.lastName}
                 </p>
                 <p className="text-xs text-gray-500">
-                  {question.field + " " + question.batch}
+                  {question.field}
                 </p>
               </div>
             </a>
@@ -100,7 +100,9 @@ const Question = ({ question }) => {
             <div className="mx-2 mt-5 flex flex-row justify-between items-center">
               {/* Answer and Share Buttons */}
               <div className="flex flex-row justify-evenly space-x-7">
-                <Link href={`/q/${question.slug}`}>
+                <Link
+                  href={`/q/${question.slug}#answer-section`}
+                >
                   <div className="cursor-pointer group">
                     <FontAwesomeIcon
                       icon={faEdit}
