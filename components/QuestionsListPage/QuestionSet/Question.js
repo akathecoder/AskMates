@@ -21,7 +21,7 @@ const Question = ({ question }) => {
     <div className="my-6 px-10 py-6 bg-white shadow-2xl rounded-lg">
       <div className="grid grid-cols-10 gap-x-5 items-center">
         {/* user details */}
-        <div className="col-span-1">
+        <div className="col-span-1 mt-7">
           <Link href={"/u/" + question.username}>
             <a className="mt-1 flex flex-col items-center space-y-3 font-medium group opacity-100 hover:opacity-75">
               {imageLink ? (
