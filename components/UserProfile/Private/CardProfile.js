@@ -1,52 +1,77 @@
 import { showPopup } from "../../Notification";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
 import axios from "axios";
 
 const imageLink1 = "/assets/profilePic.jpeg";
 const imageLink = false;
 
 export default function CardProfile() {
-  const [formData, updateFormData] = useState({});
-  // To store confirmNewPassword to later check with newPassword.
-  const [confirmNewPass, setconfirmNewPass] = useState("");
-  // Whenever there is any change in any input, it gets added to formdata.
-  const handleChange = (e) => {
-    e.target.name === "confirmNewPassword"
-      ? setconfirmNewPass(e.target.value.trim())
-      : updateFormData({
-          ...formData,
-          [e.target.name]: e.target.value.trim(),
-        });
-  };
-
   // what happens when from is Submitted.
   const handleSubmit = (e) => {
-    console.log(formData);
-    // Sending Data to server.
-    //updatePassword(formData);
-    formData.newPassword === confirmNewPass
-      ? showPopup("Password Matches..", "green")
-      : showPopup("Confirm Password not Match !..", "red") &
-        e.preventDefault();
+    e.preventDefault();
+
+    // if confirm new password not matches
+    if (
+      e.target.newPassword.value !==
+      e.target.confirmNewPassword.value
+    ) {
+      showPopup("Confirm Password not Match !..", "red");
+    }
+    // if the current password entered is not correct and confirm password matches..
+    else {
+      const message = updatePassword(
+        e.target.currentPassword.value,
+        e.target.newPassword.value
+      ).then((val) => {
+        return val;
+      });
+      message.then((val) => {
+        if (val === "CurrentPasswordNotMatch") {
+          showPopup("Current Password not Match", "red");
+        }
+        if (val === "PasswordChanged") {
+          showPopup(
+            "Password Successfully Updated !..",
+            "green"
+          );
+        }
+      });
+    }
+    e.target.currentPassword.value = "";
+    e.target.newPassword.value = "";
+    e.target.confirmNewPassword.value = "";
   };
 
   // Call the Update Password API
-  const updatePassword = async (updatePassword) => {
-    await axios
+  const updatePassword = async (
+    currentPassword,
+    newPassword
+  ) => {
+    const result = await axios
       .patch(
         `http://localhost:4001/updatePassword`,
         {
-          ...updatePassword,
+          password: currentPassword,
+          newPassword: newPassword,
         },
         {
           withCredentials: true,
         }
       )
+      .then((res) => {
+        if (res.status === 200) {
+          return "PasswordChanged";
+        }
+      })
       .catch((error) => {
-        console.log(error);
+        if (error.response.status === 404) {
+          return "CurrentPasswordNotMatch";
+        } else {
+          console.log(error);
+        }
       });
+    return result;
   };
   return (
     <>
@@ -83,7 +108,7 @@ export default function CardProfile() {
               <input
                 type="password"
                 name="currentPassword"
-                onChange={handleChange}
+                autoComplete="new-password"
                 className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Current Password"
                 required
@@ -98,7 +123,7 @@ export default function CardProfile() {
               <input
                 type="password"
                 name="newPassword"
-                onChange={handleChange}
+                autoComplete="new-password"
                 className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="New Password"
                 required
@@ -113,7 +138,7 @@ export default function CardProfile() {
               <input
                 type="password"
                 name="confirmNewPassword"
-                onChange={handleChange}
+                autoComplete="new-password"
                 className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Confirm New Password"
                 required
