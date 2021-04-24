@@ -184,14 +184,6 @@ export default function PublicUserProfile({ userData }) {
         <hr className="my-3 lg:mx-32 md:mx-12 border-b-1 border-gray-200" />
         <div className="flex justify-center py-5 md:px-20 lg:px-40 text-center text-gray-600 tracking-wider">
           <p>{userData.bio}</p>
-          {/* <p>
-            Lorem Ipsum is simply dummy text of the printing
-            and typesetting industry. Lorem Ipsum has been
-            the industry's standard dummy text ever since
-            the 1500s, when an unknown printer took a galley
-            of type and scrambled it to make a type specimen
-            book.
-          </p> */}
         </div>
       </div>
     </section>

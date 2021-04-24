@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: (theme) => ({
-        login: "url('/login1.svg')",
+        login: "url('/formbg.png')",
         question404: "url('/assets/caveMan.gif')",
         homeHero: "url('/assets/undraw_Questions.svg')",
         homeSubHero: "url('/assets/undraw_my_answer.svg')",
