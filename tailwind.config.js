@@ -24,6 +24,7 @@ module.exports = {
         displayGradientPrimary: "rgba(155,12,161,1)",
         displayGradientSecondary: "rgba(96,72,184,1)",
         displayGradientDanger: "rgba(96,72,184,1)",
+        displayGradientPrimaryLight: "rgba(155,12,161,0.3)",
       },
     },
     fontFamily: {

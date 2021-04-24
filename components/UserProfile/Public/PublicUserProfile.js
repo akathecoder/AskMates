@@ -103,7 +103,7 @@ export default function PublicUserProfile({ userData }) {
             <FontAwesomeIcon
               icon={faUserCircle}
               size="10x"
-              className="text-blue-900 opacity-75 rounded-full bg-white"
+              className="text-displayGradientSecondary opacity-75 rounded-full bg-white"
             />
           )}
         </div>
@@ -135,7 +135,7 @@ export default function PublicUserProfile({ userData }) {
                   <FontAwesomeIcon
                     icon={faBirthdayCake}
                     size="1x"
-                    className="text-blue-700 text-lg opacity-75 rounded-full"
+                    className="text-displayGradientPrimary text-lg opacity-75 rounded-full"
                   />
                   &nbsp; &nbsp;
                   {userData.dob}
@@ -146,7 +146,7 @@ export default function PublicUserProfile({ userData }) {
               <FontAwesomeIcon
                 icon={faEnvelope}
                 size="1x"
-                className="text-blue-700 text-lg rounded-full"
+                className="text-displayGradientPrimary text-lg rounded-full"
               />
               &nbsp; &nbsp;{userData.email}
             </p>
@@ -158,7 +158,7 @@ export default function PublicUserProfile({ userData }) {
                   <FontAwesomeIcon
                     icon={faPhoneAlt}
                     size="1x"
-                    className="text-blue-700 opacity-75 rounded-full"
+                    className="text-displayGradientPrimary opacity-75 rounded-full"
                   />
                   &nbsp; &nbsp; {userData.mobileNumber}
                 </>
@@ -168,13 +168,13 @@ export default function PublicUserProfile({ userData }) {
         </div>
 
         <div className="flex justify-center p-5 mt-3 text-gray-600">
-          <div className="text-center bg-blue-100 p-2 rounded-lg mr-3">
+          <div className="text-center bg-displayGradientPrimaryLight bg-opacity-20 p-2 rounded-lg mr-3">
             <h2 className="text-lg font-semibold">
               {questionCount}
             </h2>
             <i>Questions Asked</i>
           </div>
-          <div className="text-center bg-blue-100 py-2 px-3 rounded-lg">
+          <div className="text-center bg-displayGradientPrimaryLight py-2 px-3 rounded-lg">
             <h2 className="text-lg font-semibold">
               {answerCount}
             </h2>
