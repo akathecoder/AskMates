@@ -32,9 +32,9 @@ const Registration = () => {
                     firstName: "",
                     middleName: "",
                     lastName: "",
-                    batch: "2021",
-                    degree: "btech",
-                    field: "cse",
+                    batch: "2023",
+                    degree: "B. Tech.",
+                    field: "Computer Science Engineering",
                     rollNo: "",
                   }}
                   onSubmit={async (values) => {
@@ -42,7 +42,7 @@ const Registration = () => {
                       `Please verify your account from the link sent to email `,
                       "green"
                     );
-                    console.log("values", values);
+                    // console.log("values", values);
                     await axios
                       .post(
                         process.env.serverUrl + "users",
