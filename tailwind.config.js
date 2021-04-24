@@ -18,6 +18,13 @@ module.exports = {
         questionShadow:
           "-52px -6px 115px -42px rgba(155,12,161,0.27)",
       },
+      colors: {
+        displayGradient:
+          "linear-gradient(103deg, rgba(155,12,161,1) 0%, rgba(96,72,184,1) 62%, rgba(96,72,184,1) 100%)",
+        displayGradientPrimary: "rgba(155,12,161,1)",
+        displayGradientSecondary: "rgba(96,72,184,1)",
+        displayGradientDanger: "rgba(96,72,184,1)",
+      },
     },
     fontFamily: {
       display: [
@@ -27,6 +34,12 @@ module.exports = {
         "sans-serif",
       ],
     },
+    gradientColorStops: (theme) => ({
+      ...theme("colors"),
+      primary: "rgba(155,12,161,0.7)",
+      secondary: "rgba(96,72,184,0.7)",
+      danger: "rgba(96,72,184,0.7)",
+    }),
   },
   variants: {
     extend: {

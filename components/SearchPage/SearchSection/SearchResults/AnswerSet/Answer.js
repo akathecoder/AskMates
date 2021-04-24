@@ -44,7 +44,7 @@ const Answer = ({ data }) => {
               <FontAwesomeIcon
                 icon={faCaretUp}
                 size="2x"
-                className="text-blue-500 hover:text-gray-600"
+                className="text-displayGradientPrimary hover:text-displayGradientDanger"
               />
             </div>
             <p className="text-center">
@@ -60,7 +60,7 @@ const Answer = ({ data }) => {
               <FontAwesomeIcon
                 icon={faCaretDown}
                 size="2x"
-                className="text-blue-500 hover:text-gray-600"
+                className="text-displayGradientPrimary hover:text-displayGradientDanger"
               />
             </div>
           </div>

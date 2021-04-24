@@ -107,9 +107,9 @@ const Question = ({ question }) => {
                     <FontAwesomeIcon
                       icon={faEdit}
                       size="1x"
-                      className="text-blue-500 group-hover:text-gray-600"
+                      className="text-displayGradientDanger group-hover:text-displayGradientPrimary"
                     />
-                    <span className="text-blue-500 group-hover:text-gray-600 font-bold">
+                    <span className="text-displayGradientDanger group-hover:text-displayGradientPrimary font-bold">
                       &nbsp;Answer
                     </span>
                   </div>
@@ -124,9 +124,9 @@ const Question = ({ question }) => {
                     <FontAwesomeIcon
                       icon={faShare}
                       size="1x"
-                      className="text-blue-500 group-hover:text-gray-600"
+                      className="text-displayGradientDanger group-hover:text-displayGradientPrimary"
                     />
-                    <span className="text-blue-500 group-hover:text-gray-600 font-bold">
+                    <span className="text-displayGradientDanger group-hover:text-displayGradientPrimary font-bold">
                       &nbsp;Share
                     </span>
                   </div>
