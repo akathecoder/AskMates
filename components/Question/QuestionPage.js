@@ -47,7 +47,7 @@ function QuestionPage({ slug, questionData, answersData }) {
           </h1>
           <div className="flex justify-center">
             <Link href="/login">
-              <button className="text-2xl bg-blue-400 text-white px-8 py-2 my-4">
+              <button className="text-2xl transform hover:scale-110 bg-gradient-to-br from-primary via-secondary to-danger rounded-sm text-white px-8 py-2 my-4">
                 Login
               </button>
             </Link>
@@ -55,8 +55,10 @@ function QuestionPage({ slug, questionData, answersData }) {
         </div>
         <div
           className={
-            "mt-6 px-2 pointer-events-none" +
-            (isLogin ? "" : " filter blur-md ")
+            "mt-6 px-2 " +
+            (isLogin
+              ? ""
+              : " filter blur-md pointer-events-none ")
           }
         >
           <h1 className="text-xl mb-4 px-1 font-medium ">
@@ -71,7 +73,7 @@ function QuestionPage({ slug, questionData, answersData }) {
                   answer
                 )
               }
-              className="border hover:bg-blue-500 bg-blue-600 font-medium text-white hover:shadow-lg py-2 px-4 rounded-sm my-4"
+              className="border bg-gradient-to-br from-primary via-secondary to-danger font-medium text-white hover:shadow-2xl py-2 px-4 rounded-sm my-4 transform hover:scale-110"
             >
               Submit
             </button>

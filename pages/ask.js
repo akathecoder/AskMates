@@ -84,7 +84,7 @@ function ask() {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="py-3 px-4 bg-blue-400 text-white border border-blue-400 hover:bg-blue-500 hover:shadow-2xl rounded my-6"
+              className="py-3 px-4 transform hover:scale-110 bg-gradient-to-r from-primary via-secondary to-danger text-white font-semibold hover:shadow-2xl rounded my-6"
             >
               Submit your Question
             </button>
