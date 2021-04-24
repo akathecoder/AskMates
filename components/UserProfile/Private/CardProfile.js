@@ -16,7 +16,7 @@ export default function CardProfile() {
       e.target.newPassword.value !==
       e.target.confirmNewPassword.value
     ) {
-      showPopup("Confirm Password not Match !..", "red");
+      showPopup("Confirm Password not Match", "red");
     }
     // if the current password entered is not correct and confirm password matches..
     else {
@@ -32,7 +32,7 @@ export default function CardProfile() {
         }
         if (val === "PasswordChanged") {
           showPopup(
-            "Password Successfully Updated !..",
+            "Password Successfully Updated",
             "green"
           );
         }
