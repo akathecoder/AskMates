@@ -8,9 +8,11 @@ import {
   faPhoneAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-
-const imageLink1 = "/assets/profilePic.jpeg";
-const imageLink = false;
+import {
+  getCoverImageLink,
+  getProfilePicLink,
+} from "../../../utils/getImage";
+import { useEffect, useState } from "react";
 
 export default function PublicUserProfile({ userData }) {
   userData = JSON.parse(userData);
@@ -19,6 +21,18 @@ export default function PublicUserProfile({ userData }) {
       .toGMTString()
       .substring(5, 17);
   }
+
+  const profileImage = getProfilePicLink(userData.email);
+
+  const [coverImage, setCoverImage] = useState(
+    "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+  );
+
+  useEffect(() => {
+    getCoverImageLink(userData.email).then((e) => {
+      setCoverImage(e);
+    });
+  }, []);
 
   const questionData = async () => {
     await axios
@@ -55,13 +69,13 @@ export default function PublicUserProfile({ userData }) {
   return (
     <section className="pb-20">
       <div className="w-full h-3/5">
-        <img src="https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80" />
+        <img src={coverImage} />
       </div>
       <div className="relative flex flex-col mx-auto shadow-lg lg:w-6/12 md:w-3/5 p-7 bg-white -mt-32 rounded-lg">
         <div className="flex text-2xl justify-center -mt-36">
-          {imageLink1 ? (
+          {profileImage ? (
             <img
-              src="/assets/profilePic.jpeg"
+              src={profileImage}
               alt="Picture of the author"
               className="object-cover rounded-full w-64 h-64"
             />
