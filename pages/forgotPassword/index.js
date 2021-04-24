@@ -42,8 +42,8 @@ const email = () => {
                               .authenticateForgotPassword,
                         }
                       )
-                      .catch((error) => {
-                        if (error.response.status === 200) {
+                      .then((res) => {
+                        if (res.status === 200) {
                           showPopup(
                             "Passwod updated sucessfully",
                             "green"
@@ -54,9 +54,10 @@ const email = () => {
                           console.log(
                             "Password updated sucessfully"
                           );
-                        } else {
-                          console.log(error.response);
                         }
+                      })
+                      .catch((error) => {
+                        console.log(error.response);
                       });
                   }}
                 >
