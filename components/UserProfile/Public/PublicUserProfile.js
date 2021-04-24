@@ -14,6 +14,11 @@ const imageLink = false;
 
 export default function PublicUserProfile({ userData }) {
   userData = JSON.parse(userData);
+  if (userData.dob != null) {
+    userData.dob = new Date(userData.dob)
+      .toGMTString()
+      .substring(5, 17);
+  }
 
   const questionData = async () => {
     await axios
@@ -89,13 +94,19 @@ export default function PublicUserProfile({ userData }) {
         <div className="mx-auto pl-7">
           <div className="flex flex-col">
             <p className="mt-3 pl-0.5 font-sans font-medium text-gray-500">
-              <FontAwesomeIcon
-                icon={faBirthdayCake}
-                size="1x"
-                className="text-blue-700 text-lg opacity-75 rounded-full"
-              />
-              &nbsp; &nbsp;
-              {userData.dob.slice(0, 10)}
+              {userData.dob === null ? (
+                ""
+              ) : (
+                <>
+                  <FontAwesomeIcon
+                    icon={faBirthdayCake}
+                    size="1x"
+                    className="text-blue-700 text-lg opacity-75 rounded-full"
+                  />
+                  &nbsp; &nbsp;
+                  {userData.dob}
+                </>
+              )}
             </p>
             <p className="mt-2 font-sans font-medium text-gray-600">
               <FontAwesomeIcon
@@ -106,15 +117,18 @@ export default function PublicUserProfile({ userData }) {
               &nbsp; &nbsp;{userData.email}
             </p>
             <p className="mt-2 font-sans font-medium text-gray-600">
-              <FontAwesomeIcon
-                icon={faPhoneAlt}
-                size="1x"
-                className="text-blue-700 opacity-75 rounded-full"
-              />
-              &nbsp; &nbsp;
-              {userData.mobileNumber === ""
-                ? `Not Available`
-                : userData.mobileNumber}
+              {userData.mobileNumber === null ? (
+                ""
+              ) : (
+                <>
+                  <FontAwesomeIcon
+                    icon={faPhoneAlt}
+                    size="1x"
+                    className="text-blue-700 opacity-75 rounded-full"
+                  />
+                  &nbsp; &nbsp; {userData.mobileNumber}
+                </>
+              )}
             </p>
           </div>
         </div>
