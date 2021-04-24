@@ -19,7 +19,7 @@ const Question = ({ data }) => {
 
   return (
     <>
-      <div className="px-6 py-6 bg-gray-50 shadow-md">
+      <div className="px-6 py-6 bg-white shadow-2xl">
         <div className="flex justify-between ">
           {/* user details */}
           <div className="mb-4">

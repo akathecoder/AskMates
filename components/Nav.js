@@ -30,7 +30,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full px-2 py-3 navbar-expand-lg bg-blue-500 z-10 sticky top-0 ">
+      <nav className="w-full px-2 py-3 navbar-expand-lg bg-displayGradient z-10 sticky top-0 ">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link href="/">
