@@ -34,7 +34,7 @@ export default function Home({ answerData }) {
         <section className="md:mx-32 lg:mx-48 pb-20 mt-16">
           <div className="flex flex-row">
             <LeftSidePane />
-            <div className="ml-96">
+            <div className="ml-96 w-full">
               <AnswerSet answerData={answerData} />
             </div>
           </div>

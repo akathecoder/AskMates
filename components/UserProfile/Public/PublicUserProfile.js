@@ -12,168 +12,178 @@ import {
   getCoverImageLink,
   getProfilePicLink,
 } from "../../../utils/getImage";
+import date from "date-and-time";
 import { useEffect, useState } from "react";
 
 export default function PublicUserProfile({ userData }) {
   userData = JSON.parse(userData);
   if (userData.dob != null) {
-    userData.dob = new Date(userData.dob)
-      .toGMTString()
-      .substring(5, 17);
+    userData.dob = date.format(
+      new Date(userData.dob),
+      "DD MMMM YYYY"
+    );
   }
 
   const profileImage = getProfilePicLink(userData.email);
 
+  const [questionCount, setQuestionCount] = useState(0);
+  const [answerCount, setAnswerCount] = useState(0);
+
   const [coverImage, setCoverImage] = useState(
     "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
   );
-
   useEffect(() => {
     getCoverImageLink(userData.email).then((e) => {
       setCoverImage(e);
     });
   }, []);
 
-  const questionData = async () => {
-    await axios
-      .get(
-        "http://localhost:4001/questions/username/rg12301"
-      )
-      .catch((error) => {
-        console.log(error);
-        return;
-      });
-  };
-
-  const answerData = async () => {
-    await axios
-      .get("http://localhost:4001/answers/byusername", {
+  const getQuestionData = async () => {
+    return await axios
+      .get(`http://localhost:4001/questions/username`, {
         params: {
-          username: "rg12301",
+          username: userData.username,
         },
+        withCredentials: true,
+      })
+      .then((questionData) => {
+        return questionData.data;
       })
       .catch((error) => {
+        if (error.response.status === 404) {
+          return 0;
+        }
         console.log(error);
         return;
       });
   };
-  let questionCount = 0;
-  let answerCount = 0;
-  console.log(questionData, answerData);
-  // const answerCount = answerData.data.length;
 
-  // questionData === undefined
-  //   ? (questionCount = 0)
-  //   : (questionCount = questionData.data.length);
+  const getAnswerData = async () => {
+    return await axios
+      .get("http://localhost:4001/answers/byusername", {
+        params: {
+          username: userData.username,
+        },
+        withCredentials: true,
+      })
+      .then((answerData) => {
+        return answerData.data;
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          return 0;
+        }
+        console.log(error);
+        return;
+      });
+  };
+  useEffect(() => {
+    getQuestionData().then((questionData) => {
+      setQuestionCount(questionData.length);
+    });
+    getAnswerData().then((answerData) => {
+      setAnswerCount(answerData.length);
+    });
+  }, []);
 
   return (
-    <section className="pb-20 h-screen">
+    <section className="pb-20">
       <div className="w-full h-3/5">
-        <img src={coverImage} className="bg-cover w-full" />
+        <img src={coverImage} />
       </div>
-      <div className="bg-white w-full h-full relative">
-        <div className="relative flex flex-col mx-auto shadow-lg lg:w-6/12 md:w-3/5 p-7 bg-white -mt-32 rounded-lg">
-          <div className="flex text-2xl justify-center -mt-36">
-            {profileImage ? (
-              <img
-                src={profileImage}
-                alt="Picture of the author"
-                className="object-cover rounded-full w-64 h-64"
-              />
-            ) : (
+      <div className="relative flex flex-col mx-auto shadow-lg lg:w-6/12 md:w-3/5 p-7 bg-white -mt-32 rounded-lg">
+        <div className="flex text-2xl justify-center -mt-36">
+          {profileImage ? (
+            <img
+              src={profileImage}
+              alt="Picture of the author"
+              className="object-cover rounded-full w-64 h-64"
+            />
+          ) : (
+            <FontAwesomeIcon
+              icon={faUserCircle}
+              size="10x"
+              className="text-blue-900 opacity-75 rounded-full bg-white"
+            />
+          )}
+        </div>
+        <div className="text-center px-3 p-5 text-lg tracking-wide">
+          <h3 className="text-gray-700 text-3xl font-bold font-sans tracking-wider">
+            {`${userData.firstName} ${
+              userData.middleName
+                ? userData.middleName + ` `
+                : ""
+            }${userData.lastName}`}
+          </h3>
+          <p className="mt-3 font-sans font-medium text-gray-600">
+            {userData.field}
+          </p>
+          <p className="mt-1 font-sans font-medium text-gray-600">
+            {userData.degree + " - " + userData.batch}
+          </p>
+          <p className="mt-1 font-sans font-medium text-gray-600">
+            RollNo : {userData.rollNo}
+          </p>
+        </div>
+        <div className="mx-auto pl-7 tracking-wide">
+          <div className="flex flex-col">
+            <p className="mt-3 pl-0.5 font-sans font-medium text-gray-600">
+              {userData.dob === null ? (
+                ""
+              ) : (
+                <>
+                  <FontAwesomeIcon
+                    icon={faBirthdayCake}
+                    size="1x"
+                    className="text-blue-700 text-lg opacity-75 rounded-full"
+                  />
+                  &nbsp; &nbsp;
+                  {userData.dob}
+                </>
+              )}
+            </p>
+            <p className="mt-2 font-sans font-medium text-gray-600">
               <FontAwesomeIcon
-                icon={faUserCircle}
-                size="10x"
-                className="text-blue-900 opacity-75 rounded-full bg-white"
+                icon={faEnvelope}
+                size="1x"
+                className="text-blue-700 text-lg rounded-full"
               />
-            )}
-          </div>
-          <div className="text-center px-3 p-5">
-            <h3 className="text-gray-700 text-3xl font-bold font-sans tracking-wider">
-              {`${userData.firstName} ${
-                userData.middleName
-                  ? userData.middleName + ` `
-                  : ""
-              }${userData.lastName}`}
-            </h3>
-            <p className="mt-3 font-sans font-medium text-gray-600">
-              {userData.field}
+              &nbsp; &nbsp;{userData.email}
             </p>
-            <p className="mt-1 font-sans font-medium text-gray-600">
-              {userData.degree + " - " + userData.batch}
-            </p>
-            <p className="mt-1 font-sans text-gray-500">
-              RollNo : {userData.rollNo}
+            <p className="mt-2 font-sans font-medium text-gray-600">
+              {userData.mobileNumber === null ? (
+                ""
+              ) : (
+                <>
+                  <FontAwesomeIcon
+                    icon={faPhoneAlt}
+                    size="1x"
+                    className="text-blue-700 opacity-75 rounded-full"
+                  />
+                  &nbsp; &nbsp; {userData.mobileNumber}
+                </>
+              )}
             </p>
           </div>
-          <div className="mx-auto pl-7">
-            <div className="flex flex-col">
-              <p className="mt-3 pl-0.5 font-sans font-medium text-gray-500">
-                {userData.dob === null ? (
-                  ""
-                ) : (
-                  <>
-                    <FontAwesomeIcon
-                      icon={faBirthdayCake}
-                      size="1x"
-                      className="text-blue-700 text-lg opacity-75 rounded-full"
-                    />
-                    &nbsp; &nbsp;
-                    {userData.dob}
-                  </>
-                )}
-              </p>
-              <p className="mt-2 font-sans font-medium text-gray-600">
-                <FontAwesomeIcon
-                  icon={faEnvelope}
-                  size="1x"
-                  className="text-blue-700 text-lg rounded-full"
-                />
-                &nbsp; &nbsp;{userData.email}
-              </p>
-              <p className="mt-2 font-sans font-medium text-gray-600">
-                {userData.mobileNumber === null ? (
-                  ""
-                ) : (
-                  <>
-                    <FontAwesomeIcon
-                      icon={faPhoneAlt}
-                      size="1x"
-                      className="text-blue-700 opacity-75 rounded-full"
-                    />
-                    &nbsp; &nbsp; {userData.mobileNumber}
-                  </>
-                )}
-              </p>
-            </div>
-          </div>
+        </div>
 
-          <div className="flex justify-center p-5 mt-3 text-gray-600">
-            <div className="text-center bg-blue-100 p-2 rounded-lg mr-3">
-              <h2 className="text-lg font-semibold">
-                {questionCount}
-              </h2>
-              <i>Questions Asked</i>
-            </div>
-            <div className="text-center bg-blue-100 py-2 px-3 rounded-lg">
-              <h2 className="text-lg font-semibold">
-                {answerCount}
-              </h2>
-              <i>Answers Given</i>
-            </div>
+        <div className="flex justify-center p-5 mt-3 text-gray-600">
+          <div className="text-center bg-blue-100 p-2 rounded-lg mr-3">
+            <h2 className="text-lg font-semibold">
+              {questionCount}
+            </h2>
+            <i>Questions Asked</i>
           </div>
-          <hr className="my-3 lg:mx-32 md:mx-12 border-b-1 border-gray-200" />
-          <div className="flex justify-center py-5 md:px-20 lg:px-40 text-center text-gray-600">
-            <p>{userData.bio}</p>
-            {/* <p>
-            Lorem Ipsum is simply dummy text of the printing
-            and typesetting industry. Lorem Ipsum has been
-            the industry's standard dummy text ever since
-            the 1500s, when an unknown printer took a galley
-            of type and scrambled it to make a type specimen
-            book.
-          </p> */}
+          <div className="text-center bg-blue-100 py-2 px-3 rounded-lg">
+            <h2 className="text-lg font-semibold">
+              {answerCount}
+            </h2>
+            <i>Answers Given</i>
           </div>
+        </div>
+        <hr className="my-3 lg:mx-32 md:mx-12 border-b-1 border-gray-200" />
+        <div className="flex justify-center py-5 md:px-20 lg:px-40 text-center text-gray-600 tracking-wider">
+          <p>{userData.bio}</p>
         </div>
       </div>
     </section>
