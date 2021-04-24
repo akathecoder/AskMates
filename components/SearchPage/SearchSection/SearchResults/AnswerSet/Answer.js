@@ -80,8 +80,11 @@ const Answer = ({ data }) => {
               )}
             </p>
           </div>
-
-          <p>{parse(data.answerBody)}</p>
+          <Link href={`/q/${data.slug}`}>
+            <p className="cursor-pointer">
+              {parse(data.answerBody)}
+            </p>
+          </Link>
 
           {/* user details */}
           <div className="mt-6 flex flex-row-reverse">
