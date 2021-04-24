@@ -18,8 +18,8 @@ const Question = ({ question }) => {
   const [share, setShare] = useState(true);
   return (
     // Question Card
-    <div className="my-6 px-10 py-6 bg-white shadow-lg rounded-lg">
-      <div className="grid grid-cols-10 gap-x-5 items-start">
+    <div className="my-6 px-10 py-6 bg-white shadow-2xl rounded-lg">
+      <div className="grid grid-cols-10 gap-x-5 items-center">
         {/* user details */}
         <div className="col-span-1 mt-7">
           <Link href={"/u/" + question.username}>
