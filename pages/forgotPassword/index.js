@@ -29,36 +29,37 @@ const email = () => {
                       );
                       e.target.newPassword.value = "";
                       e.target.confirmPassword.value = "";
+                    } else {
+                      axios
+                        .patch(
+                          `${process.env.serverUrl}updateForgottenPassword`,
+                          {
+                            email: Router.query.email,
+                            newPassword:
+                              e.target.newPassword.value,
+                            authenticateForgotPassword:
+                              Router.query
+                                .authenticateForgotPassword,
+                          }
+                        )
+                        .then((res) => {
+                          if (res.status === 200) {
+                            showPopup(
+                              "Passwod updated sucessfully",
+                              "green"
+                            );
+                            setTimeout(() => {
+                              Router.push(`/login`);
+                            }, 2000);
+                            console.log(
+                              "Password updated sucessfully"
+                            );
+                          }
+                        })
+                        .catch((error) => {
+                          console.log(error.response);
+                        });
                     }
-                    axios
-                      .patch(
-                        `${process.env.serverUrl}updateForgottenPassword`,
-                        {
-                          email: Router.query.email,
-                          newPassword:
-                            e.target.newPassword.value,
-                          authenticateForgotPassword:
-                            Router.query
-                              .authenticateForgotPassword,
-                        }
-                      )
-                      .then((res) => {
-                        if (res.status === 200) {
-                          showPopup(
-                            "Passwod updated sucessfully",
-                            "green"
-                          );
-                          setTimeout(() => {
-                            Router.push(`/login`);
-                          }, 2000);
-                          console.log(
-                            "Password updated sucessfully"
-                          );
-                        }
-                      })
-                      .catch((error) => {
-                        console.log(error.response);
-                      });
                   }}
                 >
                   <div className="relative w-full mb-5">
