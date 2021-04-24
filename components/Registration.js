@@ -7,6 +7,7 @@ import {
   validateUsername,
 } from "../utils/validate";
 import { useRouter } from "next/router";
+import { showPopup } from "./Notification";
 
 const Registration = () => {
   const router = useRouter();
@@ -36,6 +37,10 @@ const Registration = () => {
                     rollNo: "",
                   }}
                   onSubmit={async (values) => {
+                    showPopup(
+                      `Please verify your account from the link sent to email `,
+                      "green"
+                    );
                     console.log("values", values);
                     await axios
                       .post(
