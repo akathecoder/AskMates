@@ -1,11 +1,19 @@
 import Navbar from "../components/Nav";
 import MyEditor from "../components/InputBox/MyEditor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import Router from "next/router";
 
 function ask() {
   const [bodyData, setBodyData] = useState("");
 
   // console.log(bodyData);
+
+  useEffect(() => {
+    if (!Cookies.get("username")) {
+      Router.push("/login");
+    }
+  });
 
   return (
     <>
@@ -59,7 +67,10 @@ function ask() {
               <p className="text-sm text-gray-600">
                 Add up to 5 tags to describe what your
                 question is about.
-                <b> Separate your tags with space</b>
+                <b> Separate your tags with space. </b>
+                <br />
+                Only Small characters, Numerals and hyphens
+                allowed.
               </p>
               <input
                 type="text"

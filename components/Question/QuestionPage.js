@@ -22,7 +22,7 @@ function QuestionPage({ slug, questionData, answersData }) {
 
   return (
     <div className="mx-96 pr-64 font-display">
-      <div className="mt-10">
+      <div className="mt-10 mb-14">
         <Question data={JSON.stringify(questionData)} />
       </div>
       <div className="mb-6 mt-12">
