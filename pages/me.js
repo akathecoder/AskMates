@@ -31,12 +31,12 @@ export async function getServerSideProps(ctx) {
         : undefined,
     })
     .catch((error) => {
-      console.log(error);
       if (error.response.status === 401) {
         return "notLoggedIn";
+      } else {
+        console.log(error.response);
+        return null;
       }
-      console.log(error.response);
-      return null;
     });
   if (userData === "notLoggedIn" || userData === null) {
     return {

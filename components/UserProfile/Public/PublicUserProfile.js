@@ -12,59 +12,79 @@ import {
   getCoverImageLink,
   getProfilePicLink,
 } from "../../../utils/getImage";
+import date from "date-and-time";
 import { useEffect, useState } from "react";
 
 export default function PublicUserProfile({ userData }) {
   userData = JSON.parse(userData);
   if (userData.dob != null) {
-    userData.dob = new Date(userData.dob)
-      .toGMTString()
-      .substring(5, 17);
+    userData.dob = date.format(
+      new Date(userData.dob),
+      "DD MMMM YYYY"
+    );
   }
 
   const profileImage = getProfilePicLink(userData.email);
 
+  const [questionCount, setQuestionCount] = useState(0);
+  const [answerCount, setAnswerCount] = useState(0);
+
   const [coverImage, setCoverImage] = useState(
     "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
   );
-
   useEffect(() => {
     getCoverImageLink(userData.email).then((e) => {
       setCoverImage(e);
     });
   }, []);
 
-  const questionData = async () => {
-    await axios
-      .get(
-        "http://localhost:4001/questions/username/rg12301"
-      )
-      .catch((error) => {
-        console.log(error);
-        return;
-      });
-  };
-
-  const answerData = async () => {
-    await axios
-      .get("http://localhost:4001/answers/byusername", {
+  const getQuestionData = async () => {
+    return await axios
+      .get(`http://localhost:4001/questions/username`, {
         params: {
-          username: "rg12301",
+          username: userData.username,
         },
+        withCredentials: true,
+      })
+      .then((questionData) => {
+        return questionData.data;
       })
       .catch((error) => {
+        if (error.response.status === 404) {
+          return 0;
+        }
         console.log(error);
         return;
       });
   };
-  let questionCount = 0;
-  let answerCount = 0;
-  console.log(questionData, answerData);
-  // const answerCount = answerData.data.length;
 
-  // questionData === undefined
-  //   ? (questionCount = 0)
-  //   : (questionCount = questionData.data.length);
+  const getAnswerData = async () => {
+    return await axios
+      .get("http://localhost:4001/answers/byusername", {
+        params: {
+          username: userData.username,
+        },
+        withCredentials: true,
+      })
+      .then((answerData) => {
+        return answerData.data;
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          return 0;
+        }
+        console.log(error);
+        return;
+      });
+  };
+  useEffect(() => {
+    getQuestionData().then((questionData) => {
+      setQuestionCount(questionData.length);
+    });
+    getAnswerData().then((answerData) => {
+      setAnswerCount(answerData.length);
+    });
+  }, []);
 
   return (
     <section className="pb-20">
@@ -87,7 +107,7 @@ export default function PublicUserProfile({ userData }) {
             />
           )}
         </div>
-        <div className="text-center px-3 p-5">
+        <div className="text-center px-3 p-5 text-lg tracking-wide">
           <h3 className="text-gray-700 text-3xl font-bold font-sans tracking-wider">
             {`${userData.firstName} ${
               userData.middleName
@@ -101,13 +121,13 @@ export default function PublicUserProfile({ userData }) {
           <p className="mt-1 font-sans font-medium text-gray-600">
             {userData.degree + " - " + userData.batch}
           </p>
-          <p className="mt-1 font-sans text-gray-500">
+          <p className="mt-1 font-sans font-medium text-gray-600">
             RollNo : {userData.rollNo}
           </p>
         </div>
-        <div className="mx-auto pl-7">
+        <div className="mx-auto pl-7 tracking-wide">
           <div className="flex flex-col">
-            <p className="mt-3 pl-0.5 font-sans font-medium text-gray-500">
+            <p className="mt-3 pl-0.5 font-sans font-medium text-gray-600">
               {userData.dob === null ? (
                 ""
               ) : (
@@ -162,16 +182,8 @@ export default function PublicUserProfile({ userData }) {
           </div>
         </div>
         <hr className="my-3 lg:mx-32 md:mx-12 border-b-1 border-gray-200" />
-        <div className="flex justify-center py-5 md:px-20 lg:px-40 text-center text-gray-600">
+        <div className="flex justify-center py-5 md:px-20 lg:px-40 text-center text-gray-600 tracking-wider">
           <p>{userData.bio}</p>
-          {/* <p>
-            Lorem Ipsum is simply dummy text of the printing
-            and typesetting industry. Lorem Ipsum has been
-            the industry's standard dummy text ever since
-            the 1500s, when an unknown printer took a galley
-            of type and scrambled it to make a type specimen
-            book.
-          </p> */}
         </div>
       </div>
     </section>

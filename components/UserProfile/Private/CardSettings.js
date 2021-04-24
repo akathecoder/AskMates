@@ -37,10 +37,7 @@ export default function CardSettings({
     console.log(formData);
     // Sending Data to server.
     updateUser(formData);
-    showPopup(
-      "User Profile Successfully Updated..",
-      "green"
-    );
+    showPopup("User Profile Successfully Updated", "green");
   };
 
   // Call the Update User API
