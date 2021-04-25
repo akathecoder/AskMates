@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
 
 function LightDark() {
-  const [light, setLight] = useState(true);
+  const [light, setLight] = useState(null);
 
   useEffect(() => {
-    light
-      ? document
+    if (light === null) {
+      setLight(
+        !document
           .querySelector("html")
-          .classList.remove("dark")
-      : document
-          .querySelector("html")
-          .classList.add("dark");
+          .classList.contains("dark")
+      );
+    } else {
+      light
+        ? document
+            .querySelector("html")
+            .classList.remove("dark")
+        : document
+            .querySelector("html")
+            .classList.add("dark");
+    }
   }, [light]);
 
   return (
