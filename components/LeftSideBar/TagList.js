@@ -21,9 +21,11 @@ const TagList = ({ tagname }) => {
       <FontAwesomeIcon
         icon={faHashtag}
         size="1x"
-        className="text-displayGradientPrimary group-hover:text-white text-base pt-1"
+        className="text-displayGradientPrimary group-hover:text-white dark:group-hover:text-white text-base pt-1"
       />
-      <p>{tagname}</p>
+      <p className="dark:text-dark-gray dark:hover:text-white">
+        {tagname}
+      </p>
     </div>
   );
 };

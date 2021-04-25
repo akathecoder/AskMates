@@ -46,7 +46,7 @@ const Answer = ({ data }) => {
               color="gray"
             />
           </div>
-          <p className="text-center">
+          <p className="text-center dark:text-dark-text ">
             {votes[0] - votes[1]}
           </p>
 
@@ -65,7 +65,7 @@ const Answer = ({ data }) => {
         </div>
 
         {/* Answer Body */}
-        <div className="text-justify mt-1 mb-auto">
+        <div className="text-justify mt-1 mb-auto dark:text-dark-text">
           {parse(data.answerBody)}
         </div>
       </div>
@@ -91,7 +91,7 @@ const Answer = ({ data }) => {
               />
             )}
             <div className="mx-4 my-auto">
-              <p className="text-sm text-gray-900">
+              <p className="text-sm text-gray-900 dark:text-dark-text">
                 {data.firstName +
                   " " +
                   (data.middleName
@@ -100,7 +100,7 @@ const Answer = ({ data }) => {
                   data.lastName}
               </p>
               {/* <p>&nbsp;&nbsp;&nbsp;&nbsp;</p> */}
-              <p className="text-xs text-gray-600">
+              <p className="text-xs text-gray-600 dark:text-dark-gray">
                 {data.field}
               </p>
             </div>
@@ -108,7 +108,7 @@ const Answer = ({ data }) => {
         </Link>
       </div>
       {/* line below answer */}
-      <hr className="mb-6 mt-2 border border-gray-200" />
+      <hr className="mb-6 mt-2 border border-gray-200 dark:border-dark-gray" />
     </>
   );
 };

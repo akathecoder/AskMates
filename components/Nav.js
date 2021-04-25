@@ -18,6 +18,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import LightDark from "./LightDark";
 
 export default function Navbar() {
   const user = Cookies.get("username");
@@ -134,43 +135,43 @@ export default function Navbar() {
                   dropDownOpen ? "inline" : "hidden"
                 } absolute top-12 -right-6 z-50`}
               >
-                <div className="text-sm py-2.5 w-48 mt-1.5 bg-white rounded-lg shadow-md mr-9">
+                <div className="text-sm py-2.5 w-48 mt-1.5 bg-white dark:bg-dark-black rounded-lg shadow-md mr-9">
                   <a
                     href="/me"
-                    className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+                    className="block pl-6 py-2.5 text-gray-800 dark:text-dark-text hover:bg-displayGradientPrimary hover:text-white hover:font-semibold group"
                   >
                     <FontAwesomeIcon
                       icon={faUser}
                       size="1x"
-                      className="text-gray-600 group-hover:text-gray-50"
+                      className="text-gray-600 dark:text-dark-gray group-hover:text-white"
                     />
                     &nbsp; My Profile
                   </a>
                   <a
                     href="/myQuestions"
-                    className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+                    className="block pl-6 py-2.5 text-gray-800 dark:text-dark-text hover:bg-displayGradientPrimary hover:text-white hover:font-semibold group"
                   >
                     <FontAwesomeIcon
                       icon={faQuestion}
                       size="1x"
-                      className="text-gray-600 group-hover:text-gray-50"
+                      className="text-gray-600 dark:text-dark-gray group-hover:text-white"
                     />
                     &nbsp; My Question
                   </a>
                   <a
                     href="/myAnswers"
-                    className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+                    className="block pl-6 py-2.5 text-gray-800 dark:text-dark-text hover:bg-displayGradientPrimary hover:text-white hover:font-semibold group"
                   >
                     <FontAwesomeIcon
                       icon={faPencilAlt}
                       size="1x"
-                      className="text-gray-600 group-hover:text-gray-50"
+                      className="text-gray-600 dark:text-dark-gray group-hover:text-white"
                     />
                     &nbsp; My Answers
                   </a>
                   <a
                     href="#"
-                    className="block pl-6 py-2.5 text-gray-800 hover:bg-blue-500 hover:text-white hover:font-semibold group"
+                    className="block pl-6 py-2.5 text-gray-800 dark:text-dark-text hover:bg-displayGradientPrimary hover:text-white hover:font-semibold group"
                     onClick={() => {
                       Cookies.remove("username");
                       Cookies.remove("auth");
@@ -180,7 +181,7 @@ export default function Navbar() {
                     <FontAwesomeIcon
                       icon={faSignOutAlt}
                       size="1x"
-                      className="text-gray-600 group-hover:text-gray-50"
+                      className="text-gray-600 dark:text-dark-gray group-hover:text-white"
                     />
                     &nbsp; Sign Out
                   </a>
@@ -194,6 +195,9 @@ export default function Navbar() {
                     : "hidden"
                 }
               ></div>
+              <div className="nav-item my-auto hidden lg:flex relative">
+                <LightDark />
+              </div>
             </div>
           </div>
         </div>

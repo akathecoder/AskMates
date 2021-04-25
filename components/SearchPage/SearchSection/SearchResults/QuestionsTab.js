@@ -10,7 +10,7 @@ const QuestionsTab = ({
     <div className="flex flex-col justify-center items-center text-lg font-bold">
       {questionsFound ? (
         <>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-dark-text">
             Showing Questions for&nbsp;
             <span className="text-white bg-displayGradientPrimary text-xl">
               &nbsp;
@@ -18,7 +18,7 @@ const QuestionsTab = ({
               &nbsp;
             </span>
           </p>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-dark-text">
             Found&nbsp;
             <span className="text-white bg-displayGradientPrimary text-xl">
               &nbsp;
@@ -48,7 +48,9 @@ const QuestionsTab = ({
           </p>
         </>
       ) : (
-        <p>Start searching...</p>
+        <p className="dark:text-dark-text">
+          Start searching...
+        </p>
       )}
     </div>
   );

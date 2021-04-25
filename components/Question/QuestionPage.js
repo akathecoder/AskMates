@@ -42,7 +42,7 @@ function QuestionPage({ slug, questionData, answersData }) {
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 z-10"
           hidden={isLogin ? true : false}
         >
-          <h1 className="text-2xl font-semibold">
+          <h1 className="text-2xl font-semibold dark:text-dark-text">
             You need to login in order to Answer
           </h1>
           <div className="flex justify-center">
@@ -61,7 +61,7 @@ function QuestionPage({ slug, questionData, answersData }) {
               : " filter blur-md pointer-events-none ")
           }
         >
-          <h1 className="text-xl mb-4 px-1 font-medium ">
+          <h1 className="text-xl mb-4 px-1 font-medium dark:text-dark-text">
             Your Answer
           </h1>
           <MyEditor minHeight="12rem" setData={setAnswer} />
@@ -73,7 +73,7 @@ function QuestionPage({ slug, questionData, answersData }) {
                   answer
                 )
               }
-              className="border bg-gradient-to-br from-primary via-secondary to-danger font-medium text-white hover:shadow-2xl py-2 px-4 rounded-sm my-4 transform hover:scale-110"
+              className=" bg-gradient-to-br from-primary via-secondary to-danger font-medium text-white hover:shadow-2xl py-2 px-4 rounded-sm my-4 transform hover:scale-110"
             >
               Submit
             </button>

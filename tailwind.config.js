@@ -3,7 +3,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
       backgroundImage: (theme) => ({
@@ -24,6 +24,16 @@ module.exports = {
         displayGradientPrimary: "rgba(155,12,161,1)",
         displayGradientSecondary: "rgba(96,72,184,1)",
         displayGradientDanger: "rgba(96,72,184,1)",
+        displayGradientPrimaryLight: "rgba(155,12,161,0.3)",
+        dark: {
+          background: "#2D2F31",
+          text: "#D8D7D4",
+          gray: "#C2BFB9",
+          black: "#28292A",
+        },
+      },
+      animation: {
+        "spin-slow": "spin 5s linear infinite",
       },
     },
     fontFamily: {
