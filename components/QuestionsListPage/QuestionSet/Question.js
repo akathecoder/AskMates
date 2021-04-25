@@ -18,7 +18,7 @@ const Question = ({ question }) => {
   const [share, setShare] = useState(true);
   return (
     // Question Card
-    <div className="my-6 px-10 py-6 bg-white shadow-2xl rounded-lg">
+    <div className="my-6 px-10 py-6 bg-white dark:bg-dark-black shadow-2xl rounded-lg">
       <div className="grid grid-cols-10 gap-x-5 items-start">
         {/* user details */}
         <div className="col-span-1 mt-7">
@@ -41,12 +41,12 @@ const Question = ({ question }) => {
                 />
               )}
               <div className="my-auto text-center">
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-gray-700 dark:text-dark-text">
                   {question.firstName +
                     " " +
                     question.lastName}
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-500 dark:text-dark-gray">
                   {question.field}
                 </p>
               </div>
@@ -61,15 +61,15 @@ const Question = ({ question }) => {
               <FontAwesomeIcon
                 icon={faEye}
                 size="1x"
-                className="text-gray-500"
+                className="text-gray-500 dark:text-dark-gray"
               />
-              <span className="text-gray-500 text-sm">
+              <span className="text-gray-500 dark:text-dark-gray text-sm">
                 &nbsp;{question.views}
               </span>
             </div>
 
             {/* Date */}
-            <p className="text-sm text-gray-500 font-semibold">
+            <p className="text-sm text-gray-500 dark:text-dark-gray font-semibold">
               {date.format(
                 date.parse(
                   new String(question.doc).substring(0, 10),
@@ -85,12 +85,12 @@ const Question = ({ question }) => {
             <Link href={`/q/${question.slug}`}>
               <div className="cursor-pointer">
                 {/* Question title */}
-                <h3 className="text-lg font-bold text-black mb-2 mx-2 text-justify">
+                <h3 className="text-lg font-bold text-black dark:text-white mb-2 mx-2 text-justify">
                   {question.title}
                 </h3>
 
                 {/* Question body */}
-                <p className="font-normal text-gray-700 mt-2 mb-2 mx-2 text-justify">
+                <p className="font-normal text-gray-700 dark:text-dark-text mt-2 mb-2 mx-2 text-justify">
                   {parse(question.content)}
                 </p>
               </div>

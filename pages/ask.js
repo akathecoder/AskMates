@@ -24,13 +24,15 @@ function ask() {
         autoComplete="false"
       >
         <div className="px-44">
-          <h1 className="text-3xl font-medium py-6 px-4">
+          <h1 className="text-3xl font-medium py-6 px-4 dark:text-white">
             Ask a public question
           </h1>
-          <div className="bg-white shadow-2xl rounded-lg py-4 px-8">
+          <div className="dark:bg-dark-black shadow-2xl rounded-lg py-4 px-8">
             <div className="my-4">
-              <h1 className="text-xl font-medium">Title</h1>
-              <p className="text-sm text-gray-600">
+              <h1 className="text-xl font-medium dark:text-dark-text">
+                Title
+              </h1>
+              <p className="text-sm text-gray-600 dark:text-dark-gray">
                 Be specific and imagine you’re asking a
                 question to another person
               </p>
@@ -40,12 +42,14 @@ function ask() {
                 id=""
                 autoFocus
                 required={true}
-                className="w-full border border-gray-300 px-4 py-2 my-2 outline-none"
+                className="w-full border border-gray-300 dark:border-dark-background px-4 py-2 my-2 outline-none dark:bg-dark-black dark:text-dark-text"
               />
             </div>
             <div className="my-4">
-              <h1 className="text-xl font-medium">Body</h1>
-              <p className="text-sm text-gray-600">
+              <h1 className="text-xl font-medium dark:text-dark-text">
+                Body
+              </h1>
+              <p className="text-sm text-gray-600 dark:text-dark-gray">
                 Include all the information someone would
                 need to answer your question
               </p>
@@ -63,8 +67,10 @@ function ask() {
               />
             </div>
             <div className="my-4">
-              <h1 className="text-xl font-medium">Tags</h1>
-              <p className="text-sm text-gray-600">
+              <h1 className="text-xl font-medium dark:text-dark-text">
+                Tags
+              </h1>
+              <p className="text-sm text-gray-600 dark:text-dark-gray">
                 Add up to 5 tags to describe what your
                 question is about.
                 <b> Separate your tags with space. </b>
@@ -76,7 +82,7 @@ function ask() {
                 type="text"
                 name="tags"
                 id=""
-                className="w-full border border-gray-300 px-4 py-2 my-2 outline-none"
+                className="w-full border border-gray-300 dark:border-dark-background px-4 py-2 my-2 outline-none dark:bg-dark-black dark:text-dark-text"
                 pattern="^[a-z]+([\s-][a-z]+){0,5}$"
               />
             </div>

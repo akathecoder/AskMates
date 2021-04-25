@@ -64,9 +64,9 @@ export default function CardSettings({
         method="post"
         onSubmit={handleSubmit}
       >
-        <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100">
+        <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 dark:bg-dark-black">
           <div className="flex-auto md:p-7 lg:px-10 lg:py-7 ">
-            <h6 className="text-gray-500 text-base mt-2 mb-2 font-bold uppercase">
+            <h6 className="text-gray-500 dark:text-dark-text text-base mt-2 mb-2 font-bold uppercase">
               Personal Information
             </h6>
             {/* firstName, middleName, lastName */}
@@ -79,7 +79,7 @@ export default function CardSettings({
                     onChange={handleChange}
                     className={`${
                       enabled ? "bg-gray-200" : "bg-white"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3 dark:text-dark-text  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="First Name"
                     required
                     pattern="^[aA-zZ]+$"
@@ -97,7 +97,7 @@ export default function CardSettings({
                     onChange={handleChange}
                     className={`${
                       enabled ? "bg-gray-200" : "bg-white"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="Middle Name"
                     pattern="^[aA-zZ]+$"
                     title="Cannot contain numeric, symbols, spaces"
@@ -114,7 +114,7 @@ export default function CardSettings({
                     onChange={handleChange}
                     className={`${
                       enabled ? "bg-gray-200" : "bg-white"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="Last Name"
                     required
                     pattern="^[aA-zZ]+$"
@@ -136,7 +136,7 @@ export default function CardSettings({
                     disabled
                     className={`${
                       enabled ? "bg-gray-200" : "bg-gray-50"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="Username"
                     defaultValue={userData.username}
                   />
@@ -150,7 +150,7 @@ export default function CardSettings({
                     disabled
                     className={`${
                       enabled ? "bg-gray-200" : "bg-gray-50"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="E-Mail ID"
                     defaultValue={userData.email}
                   />
@@ -169,7 +169,7 @@ export default function CardSettings({
                     onChange={handleChange}
                     className={`${
                       enabled ? "bg-gray-200" : "bg-white"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="D.O.B."
                     disabled={enabled}
                     defaultValue={
@@ -186,7 +186,7 @@ export default function CardSettings({
                     onChange={handleChange}
                     className={`${
                       enabled ? "bg-gray-200" : "bg-white"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="Mobile Number"
                     pattern="^[0-9]+$"
                     minLength="10"
@@ -201,21 +201,27 @@ export default function CardSettings({
 
             <hr className="mt-6 mb-3 border-b-1 border-gray-300" />
 
-            <h6 className="text-gray-500 text-base mt-4 mb-2 font-bold uppercase">
+            <h6 className="text-gray-500 dark:text-dark-text text-base mt-4 mb-2 font-bold uppercase">
               College Information
             </h6>
 
             {/* Batch, Degree, Field, RollNo */}
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 px-6 py-1.5">
-                <div className="relative w-full mb-3">
+                <div className="relative flex flex-row w-full mb-3 items-center">
+                  <label
+                    className="uppercase text-gray-500 text-xs font-bold mb-2"
+                    htmlFor="number"
+                  >
+                    Roll No.
+                  </label>
                   <input
                     type="number"
                     name="rollNo"
                     onChange={handleChange}
                     className={`${
                       enabled ? "bg-gray-200" : "bg-white"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     placeholder="Roll No."
                     required
                     pattern="[0-9]"
@@ -239,7 +245,7 @@ export default function CardSettings({
                     onChange={handleChange}
                     className={`${
                       enabled ? "bg-gray-200" : "bg-white"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     disabled={enabled}
                     defaultValue={userData.degree}
                   >
@@ -286,7 +292,7 @@ export default function CardSettings({
                     onChange={handleChange}
                     className={`${
                       enabled ? "bg-gray-200" : "bg-white"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     disabled={enabled}
                     defaultValue={userData.field}
                   >
@@ -356,7 +362,7 @@ export default function CardSettings({
                     onChange={handleChange}
                     className={`${
                       enabled ? "bg-gray-200" : "bg-white"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     disabled={enabled}
                     defaultValue={userData.batch}
                   >
@@ -381,7 +387,7 @@ export default function CardSettings({
 
             <hr className="mt-6 mb-3 border-b-1 border-gray-300" />
 
-            <h6 className="text-gray-500 text-base mt-4 mb-2 font-bold uppercase">
+            <h6 className="text-gray-500 dark:text-dark-text text-base mt-4 mb-2 font-bold uppercase">
               About Me
             </h6>
             {/* Biography */}
@@ -394,7 +400,7 @@ export default function CardSettings({
                     onChange={handleChange}
                     className={`${
                       enabled ? "bg-gray-200" : "bg-white"
-                    } border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
+                    } border-0 px-3 py-3  dark:text-dark-text placeholder-gray-400  dark:bg-dark-background text-blueGray-600 rounded text-sm tracking-wider font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150`}
                     rows="5"
                     placeholder="Something about Me......."
                     disabled={enabled}
@@ -407,9 +413,9 @@ export default function CardSettings({
             <button
               className={`${
                 enabled
-                  ? "bg-gray-200 text-gray-400 border-gray-500 cursor-default"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-50 hover:font-bold transititon duration-200 ease-in-out transform hover:scale-105 border-gray-700"
-              } relative flex w-2/5 flex-col mt-5 mb-3  rounded-lg items-center m-auto focus:outline-none border-2 font-semibold  tracking-wider`}
+                  ? "bg-gray-200 dark:bg-dark-black text-gray-400 dark:text-dark-text border-gray-500 cursor-default"
+                  : "bg-gray-200 dark:bg-dark-black text-gray-700 dark:text-dark-gray hover:bg-gray-700 hover:text-gray-50 hover:font-bold transititon duration-200 ease-in-out transform hover:scale-105 border-gray-700"
+              } relative flex w-2/5 flex-col mt-5 mb-3  rounded-lg items-center m-auto focus:outline-none border dark:border-dark-gray  font-semibold  tracking-wider`}
               type="submit"
               disabled={enabled}
             >

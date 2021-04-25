@@ -12,7 +12,7 @@ const UserProfilePage = ({ userData }) => {
         <div className="px-10">
           {/* Edit Profile */}
           <button
-            className="relative flex lg:w-2/12 md:w-2/5 flex-col rounded-lg items-center ml-auto focus:outline-none bg-gray-200 text-gray-700 border-gray-700 border-2 hover:bg-gray-700 hover:text-gray-50 hover:font-bold transititon duration-200 ease-in-out transform hover:scale-105"
+            className="relative flex lg:w-2/12 md:w-2/5 flex-col rounded-lg items-center ml-auto focus:outline-none bg-gray-200 dark:bg-dark-black text-gray-700 dark:text-dark-text border-gray-700 dark:border-dark-gray border hover:bg-gray-700 hover:text-gray-50 hover:font-bold transititon duration-200 ease-in-out transform hover:scale-105"
             onClick={() => setEnabled(false)}
           >
             <div className="p-3 font-semibold uppercase text-lg break-words">

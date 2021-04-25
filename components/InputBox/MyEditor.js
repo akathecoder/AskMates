@@ -42,9 +42,9 @@ export default function MyEditor({
       {/* {parse(html)} */}
       <Editor
         editorState={editorState}
-        toolbarClassName="toolbarClassName"
+        toolbarClassName="toolbarClassName dark:bg-dark-black dark:text-dark-text dark:border-dark-background"
         wrapperClassName="wrapperClassName"
-        editorClassName="editorClassName bg-white border border-gray-300 leading-snug text-lg px-4"
+        editorClassName="editorClassName bg-white border border-gray-300 dark:border-dark-background leading-snug text-lg px-4 dark:bg-dark-black dark:text-dark-text"
         editorStyle={{
           minHeight: minHeight,
         }}

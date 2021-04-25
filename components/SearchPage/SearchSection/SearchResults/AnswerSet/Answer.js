@@ -24,7 +24,7 @@ const Answer = ({ data }) => {
   ]);
 
   return (
-    <div className="my-6 pl-5 pr-10 py-6 bg-white shadow-lg rounded-lg font-normal w-full">
+    <div className="my-6 pl-5 pr-10 py-6 bg-white dark:bg-dark-black shadow-lg rounded-lg font-normal w-full">
       <div className="grid grid-cols-10 gap-x-5 place-content-center justify-items-center">
         <div className="col-span-1 mt-1 flex flex-col justify-center items-center space-y-3">
           {data.correct.toLowerCase() == "c" && (
@@ -47,7 +47,7 @@ const Answer = ({ data }) => {
                 className="text-displayGradientPrimary hover:text-displayGradientDanger"
               />
             </div>
-            <p className="text-center">
+            <p className="text-center dark:text-dark-gray">
               {votes[0] - votes[1]}
             </p>
 
@@ -70,7 +70,7 @@ const Answer = ({ data }) => {
         <div className="text-left mt-1 col-start-2 col-end-11 flex flex-col justify-between content-between w-full">
           <div className="flex flex-row-reverse items-center mb-6 pr-2">
             {/* Date */}
-            <p className="text-sm text-gray-500 font-semibold">
+            <p className="text-sm text-gray-500 dark:text-dark-gray font-semibold">
               {date.format(
                 date.parse(
                   new String(data.doc).substring(0, 10),
@@ -81,7 +81,7 @@ const Answer = ({ data }) => {
             </p>
           </div>
           <Link href={`/q/${data.slug}`}>
-            <p className="cursor-pointer">
+            <p className="cursor-pointer dark:text-dark-text">
               {parse(data.answerBody)}
             </p>
           </Link>
@@ -107,11 +107,11 @@ const Answer = ({ data }) => {
                   />
                 )}
                 <div className="mx-4 my-auto">
-                  <p className="text-sm text-gray-900">
+                  <p className="text-sm text-gray-900 dark:text-dark-text">
                     {data.firstName + " " + data.lastName}
                   </p>
                   {/* <p>&nbsp;&nbsp;&nbsp;&nbsp;</p> */}
-                  <p className="text-xs text-gray-600">
+                  <p className="text-xs text-gray-600 dark:text-dark-gray">
                     Computer Science & Engineering
                   </p>
                 </div>

@@ -99,8 +99,8 @@ export default function CardProfile() {
           </div>
         </div>
         {/* Update Password */}
-        <div className="relative flex flex-col min-w-0 break-words w-full mb-6 mt-4 shadow-lg rounded-lg bg-gray-100 md:p-7">
-          <h6 className="text-gray-600 text-base mt-2 mb-2 font-bold uppercase">
+        <div className="relative flex flex-col min-w-0 break-words w-full mb-6 mt-4 shadow-lg rounded-lg bg-gray-100 dark:bg-dark-black md:p-7">
+          <h6 className="text-gray-600 dark:text-dark-text text-base mt-2 mb-2 font-bold uppercase">
             Change Password
           </h6>
           <div className="flex flex-wrap py-2 mx-3">
@@ -109,7 +109,7 @@ export default function CardProfile() {
                 type="password"
                 name="currentPassword"
                 autoComplete="new-password"
-                className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                className="border-0 px-3 py-3 placeholder-gray-400 dark:placeholder-dark-gray text-blueGray-600 dark:text-dark-text bg-white dark:bg-dark-background rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Current Password"
                 required
               />
@@ -124,7 +124,7 @@ export default function CardProfile() {
                 type="password"
                 name="newPassword"
                 autoComplete="new-password"
-                className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                className="border-0 px-3 py-3 placeholder-gray-400 dark:placeholder-dark-gray text-blueGray-600 dark:text-dark-text bg-white dark:bg-dark-background rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="New Password"
                 required
                 pattern="^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$"
@@ -139,7 +139,7 @@ export default function CardProfile() {
                 type="password"
                 name="confirmNewPassword"
                 autoComplete="new-password"
-                className="border-0 px-3 py-3 placeholder-gray-400 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                className="border-0 px-3 py-3 placeholder-gray-400 dark:placeholder-dark-gray text-blueGray-600 dark:text-dark-text bg-white dark:bg-dark-background rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Confirm New Password"
                 required
               />
@@ -148,7 +148,7 @@ export default function CardProfile() {
         </div>
         {/* Change / Update Password */}
         <button
-          className="relative flex w-4/5 flex-col mt-8 rounded-lg items-center m-auto focus:outline-none bg-gray-200 text-gray-700 border-gray-700 border-2 hover:bg-gray-700 hover:text-gray-50 hover:font-bold transititon duration-200 ease-in-out transform hover:scale-105"
+          className="relative flex w-4/5 flex-col mt-8 rounded-lg items-center m-auto focus:outline-none bg-gray-200 dark:bg-dark-black text-gray-700 dark:text-dark-text border-gray-700 dark:border-dark-background border-2 hover:bg-gray-700 hover:text-gray-50 hover:font-bold transititon duration-200 ease-in-out transform hover:scale-105"
           type="submit"
         >
           <div className="p-4 font-semibold uppercase text-base break-words">

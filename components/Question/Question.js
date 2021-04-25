@@ -19,7 +19,7 @@ const Question = ({ data }) => {
 
   return (
     <>
-      <div className="px-6 py-6 bg-white shadow-2xl">
+      <div className="px-6 py-6 bg-white dark:bg-dark-black shadow-2xl">
         <div className="flex justify-between ">
           {/* user details */}
           <div className="mb-4">
@@ -43,7 +43,7 @@ const Question = ({ data }) => {
                 )}
 
                 <div className="mx-4 my-auto">
-                  <p className="text-lg text-gray-900">
+                  <p className="text-lg text-gray-900 dark:text-dark-text">
                     {data.firstName +
                       " " +
                       (data.middleName
@@ -51,7 +51,7 @@ const Question = ({ data }) => {
                         : "") +
                       data.lastName}
                   </p>
-                  <p className="text-xs text-gray-600">
+                  <p className="text-xs text-gray-600 dark:text-dark-gray">
                     {data.field}
                   </p>
                 </div>
@@ -67,15 +67,15 @@ const Question = ({ data }) => {
                 <FontAwesomeIcon
                   icon={faEye}
                   size="1x"
-                  className="text-gray-500"
+                  className="text-gray-500 dark:text-dark-gray"
                 />
-                <span className="text-gray-500 text-sm">
+                <span className="text-gray-500 dark:text-dark-gray text-sm">
                   &nbsp;{data.views}
                 </span>
               </div>
 
               {/* Date */}
-              <p className="text-sm text-gray-500 font-semibold">
+              <p className="text-sm text-gray-500 dark:text-dark-gray font-semibold">
                 {date.format(
                   date.parse(
                     new String(data.doc).substring(0, 10),
@@ -89,19 +89,19 @@ const Question = ({ data }) => {
         </div>
 
         {/* Question title */}
-        <h1 className="text-2xl font-bold text-black  mb-2 mx-2 text-justify">
+        <h1 className="text-2xl font-bold text-black dark:text-white mb-2 mx-2 text-justify">
           {data.title}
         </h1>
 
         {/* Question body */}
-        <h1 className="text-xl font-normal text-black mt-2 mb-2 mx-2 text-justify">
+        <h1 className="text-xl font-normal text-black dark:text-dark-text mt-2 mb-2 mx-2 text-justify">
           {parse(data.content)}
         </h1>
 
         {/* Tags */}
         <div className="flex gap-4">
           {tags.map((tag) => {
-            return <Tags tag={tag} />;
+            return <Tags tag={tag} key={tag} />;
           })}
         </div>
 
