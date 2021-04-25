@@ -24,8 +24,8 @@ function LightDark() {
   return (
     <div
       className={
-        "cursor-pointer flex rounded-full px-2 mx-4 py-0.5 shadow-2xl " +
-        (light ? "bg-white" : "bg-gray-700")
+        "cursor-pointer flex rounded-full px-3 mx-4 py-1 shadow-2xl " +
+        (light ? "bg-white" : "bg-dark-background")
       }
       onClick={() => {
         setLight(!light);
