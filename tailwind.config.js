@@ -7,6 +7,14 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: (theme) => ({
+        developers_light:
+          "url('/assets/developers_light.svg')",
+        developers_dark:
+          "url('/assets/developers_dark.svg')",
+        hero_light: "url('/assets/hero_light.svg')",
+        hero_dark: "url('/assets/hero_dark.svg')",
+        hero_light1: "url('/assets/hero_light1.svg')",
+        hero_dark1: "url('/assets/hero_dark1.svg')",
         login: "url('/formbg.png')",
         question404: "url('/assets/caveMan.gif')",
         homeHero: "url('/assets/undraw_Questions.svg')",
@@ -54,6 +62,7 @@ module.exports = {
   variants: {
     extend: {
       fontWeight: ["hover"],
+      backgroundImage: ["dark"],
     },
   },
   plugins: [],
