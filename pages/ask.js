@@ -7,8 +7,6 @@ import Router from "next/router";
 function ask() {
   const [bodyData, setBodyData] = useState("");
 
-  // console.log(bodyData);
-
   useEffect(() => {
     if (!Cookies.get("username")) {
       Router.push("/login");

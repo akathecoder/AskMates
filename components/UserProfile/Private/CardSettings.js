@@ -34,7 +34,6 @@ export default function CardSettings({
   const handleSubmit = (e) => {
     e.preventDefault();
     setEnabled(true);
-    console.log(formData);
     // Sending Data to server.
     updateUser(formData);
     showPopup("User Profile Successfully Updated", "green");
@@ -44,7 +43,7 @@ export default function CardSettings({
   const updateUser = async (updatedData) => {
     await axios
       .patch(
-        `http://localhost:4001/users/data/${userData.username}`,
+        `${process.env.serverUrl}users/data/${userData.username}`,
         {
           ...updatedData,
         },

@@ -50,7 +50,7 @@ export default function CardProfile() {
   ) => {
     const result = await axios
       .patch(
-        `http://localhost:4001/updatePassword`,
+        `${process.env.serverUrl}updatePassword`,
         {
           password: currentPassword,
           newPassword: newPassword,

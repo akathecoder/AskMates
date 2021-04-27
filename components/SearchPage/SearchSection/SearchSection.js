@@ -93,7 +93,7 @@ const SearchSection = ({ defaultSearchTerm }) => {
       dispatchSearchResult({ type: "DATA_FETCH_INIT" });
     } else {
       searchData(
-        `http://localhost:4001/questions/question/${searchTerm}`
+        `${process.env.serverUrl}questions/question/${searchTerm}`
       ).then((searchedQuestionData) => {
         if (_.isEmpty(searchedQuestionData)) {
           dispatchSearchResult({
@@ -107,7 +107,7 @@ const SearchSection = ({ defaultSearchTerm }) => {
         }
       });
       searchData(
-        `http://localhost:4001/answers/search/${searchTerm}`
+        `${process.env.serverUrl}answers/search/${searchTerm}`
       ).then((searchedAnswerData) => {
         if (_.isEmpty(searchedAnswerData)) {
           dispatchSearchResult({

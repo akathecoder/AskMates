@@ -3,43 +3,32 @@ import QuestionsListPage from "../../components/QuestionsListPage/QuestionsListP
 import axios from "axios";
 
 export default function Home({ questionData }) {
-	return (
-		<div className="">
-			<Navbar />
-			<QuestionsListPage questionData={questionData} />
-		</div>
-	);
+  return (
+    <div className="">
+      <Navbar />
+      <QuestionsListPage questionData={questionData} />
+    </div>
+  );
 }
 
 export async function getStaticProps() {
-	const questionData = await axios
-		.get("http://localhost:4001/questions")
-		.catch(error => {
-			console.log(error);
-			return;
-		});
-	if (questionData === null) {
-		return {
-			props: {
-				questionData: null,
-			}, // will be passed to the page component as props
-		};
-	}
-	// const answerData = questionData.map(question=>{
-	// 	const answer = await axios.get(
-	// 		"http://localhost:4001/answers/byquestionid/",
-	// 		{
-	// 			params: {
-	// 				questionId: question.questionId,
-	// 			},
-	// 		}
-	// 	);
-	// 	return answer
-	// })
-	return {
-		props: {
-			questionData: JSON.stringify(questionData.data),
-		},
-		revalidate: 1,
-	};
+  const questionData = await axios
+    .get(`${process.env.serverUrl}questions`)
+    .catch((error) => {
+      console.log(error);
+      return;
+    });
+  if (questionData === null) {
+    return {
+      props: {
+        questionData: null,
+      }, // will be passed to the page component as props
+    };
+  }
+  return {
+    props: {
+      questionData: JSON.stringify(questionData.data),
+    },
+    revalidate: 1,
+  };
 }

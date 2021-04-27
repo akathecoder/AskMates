@@ -40,7 +40,7 @@ export default function PublicUserProfile({ userData }) {
 
   const getQuestionData = async () => {
     return await axios
-      .get(`http://localhost:4001/questions/username`, {
+      .get(`${process.env.serverUrl}questions/username`, {
         params: {
           username: userData.username,
         },
@@ -60,7 +60,7 @@ export default function PublicUserProfile({ userData }) {
 
   const getAnswerData = async () => {
     return await axios
-      .get("http://localhost:4001/answers/byusername", {
+      .get(`${process.env.serverUrl}answers/byusername`, {
         params: {
           username: userData.username,
         },

@@ -1,8 +1,6 @@
 import axios from "axios";
 
 export async function voteUp(answerId, votes, setVotes) {
-  console.log(answerId);
-
   axios
     .patch(
       process.env.serverUrl + "answers/upvote/" + answerId,

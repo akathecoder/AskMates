@@ -9,7 +9,6 @@ import Router from "next/router";
 import Link from "next/link";
 
 function QuestionPage({ slug, questionData, answersData }) {
-  // console.log(answersData);
   questionData = JSON.parse(questionData);
   answersData = JSON.parse(answersData);
 

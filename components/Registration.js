@@ -42,7 +42,6 @@ const Registration = () => {
                       `Please verify your account from the link sent to email `,
                       "green"
                     );
-                    // console.log("values", values);
                     await axios
                       .post(
                         process.env.serverUrl + "users",

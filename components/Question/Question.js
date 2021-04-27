@@ -13,7 +13,6 @@ const Question = ({ data }) => {
   data = JSON.parse(data);
 
   const tags = data.tags.split(" ");
-  // console.log(tags);
 
   const imageLink = "/assets/profilePic.jpeg";
 

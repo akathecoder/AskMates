@@ -19,8 +19,6 @@ const Answer = ({ data }) => {
     data.downVotes,
   ]);
 
-  // console.log(data);
-
   return (
     <>
       <div className="px-4 flex ">

@@ -27,10 +27,8 @@ export default function Home({ userData }) {
 }
 
 export async function getServerSideProps(ctx) {
-  // console.log(params);
-
   const userData = await axios
-    .get(`http://localhost:4001/user`, {
+    .get(`${process.env.serverUrl}user`, {
       withCredentials: true,
       params: {
         username: ctx.params.username,

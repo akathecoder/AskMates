@@ -9,10 +9,6 @@ export default function Home({
   questionData,
   answersData,
 }) {
-  // const { slug } = useRouter().query;
-
-  // console.log(questionData);
-
   return (
     <>
       <Navbar />
@@ -31,10 +27,8 @@ export default function Home({
 }
 
 export async function getServerSideProps(context) {
-  // console.log(context.params.slug); //gives slug
-
   const questionData = await axios
-    .get("http://localhost:4001/question", {
+    .get(`${process.env.serverUrl}question`, {
       params: {
         slug: context.params.slug,
       },
@@ -42,8 +36,6 @@ export async function getServerSideProps(context) {
     .catch((err) => {
       return null;
     });
-
-  // console.log(questionData);
 
   if (questionData === null) {
     return {
@@ -54,13 +46,10 @@ export async function getServerSideProps(context) {
       }, // will be passed to the page component as props
     };
   }
-
-  // console.log("sss = ");
-  // console.log(questionData.data.slug);
   increaseViews(questionData.data.slug);
 
   const answerData = await axios
-    .get("http://localhost:4001/answers/byquestionid/", {
+    .get(`${process.env.serverUrl}answers/byquestionid/`, {
       params: {
         questionId: questionData.data.questionId,
       },

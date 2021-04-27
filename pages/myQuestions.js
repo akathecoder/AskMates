@@ -39,7 +39,7 @@ export default function Home({ questionData }) {
 
 export async function getServerSideProps(ctx) {
   const questionData = await axios
-    .get("http://localhost:4001/questions/username", {
+    .get(`${process.env.serverUrl}questions/username`, {
       withCredentials: true,
       headers: ctx.req.headers.cookie
         ? { cookie: ctx.req.headers.cookie }
@@ -56,7 +56,6 @@ export async function getServerSideProps(ctx) {
         return null;
       }
     });
-  console.log(questionData);
   if (questionData === "zeroAnswers") {
     return {
       props: {

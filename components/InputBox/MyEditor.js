@@ -31,8 +31,6 @@ export default function MyEditor({
 
   let html = stateToHTML(contentState);
 
-  // console.log(typeof html);
-
   if (setData) {
     setData(html);
   }

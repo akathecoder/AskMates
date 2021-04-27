@@ -4,7 +4,7 @@ export async function validateUsername(username) {
   // await new Promise((r) => setTimeout(r, 1000));
 
   return await axios
-    .get("http://localhost:4001/username", {
+    .get(`${process.env.serverUrl}username`, {
       params: {
         username: username,
       },
@@ -34,7 +34,7 @@ export async function validateUsername(username) {
 
 export async function validateEmail(email) {
   return await axios
-    .get("http://localhost:4001/email", {
+    .get(`${process.env.serverUrl}email`, {
       params: {
         email: email,
       },
