@@ -1,6 +1,8 @@
+require("dotenv").config();
+
 module.exports = {
   env: {
-    serverUrl: "http://localhost:4001/",
+    serverUrl: process.env.SERVER_URL,
   },
   images: {
     domains: ["images.unsplash.com"],
