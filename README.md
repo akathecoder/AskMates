@@ -8,7 +8,7 @@
   yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the application render live.
+Open [askmates.tk](https://askmates.tk/) with your browser to see the application render live.
 
 - To build the production build
 
