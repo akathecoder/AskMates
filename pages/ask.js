@@ -2,10 +2,15 @@ import Navbar from "../components/Nav";
 import MyEditor from "../components/InputBox/MyEditor";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
+import axios from "axios";
 
 function ask() {
+  const router = useRouter();
+
+  const [title, setTitle] = useState("");
   const [bodyData, setBodyData] = useState("");
+  const [tags, setTags] = useState("");
 
   useEffect(() => {
     if (!Cookies.get("username")) {
@@ -13,12 +18,35 @@ function ask() {
     }
   });
 
+  function sendQuestion(e) {
+    e.preventDefault();
+
+    axios
+      .post(
+        process.env.serverUrl + "question",
+        {
+          title: title,
+          content: bodyData,
+          tags: tags,
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        router.push("/q");
+      })
+      .catch((err) => {
+        console.error(err);
+        router.push("/q");
+      });
+  }
+
   return (
     <>
       <Navbar />
       <form
-        method="post"
-        action={process.env.serverUrl + "question"}
+        // method="post"
+        // action={process.env.serverUrl + "question"}
+        onSubmit={sendQuestion}
         autoComplete="false"
       >
         <div className="px-44">
@@ -41,6 +69,9 @@ function ask() {
                 autoFocus
                 required={true}
                 className="w-full border border-gray-300 dark:border-dark-background px-4 py-2 my-2 outline-none dark:bg-dark-black dark:text-dark-text"
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
               />
             </div>
             <div className="my-4">
@@ -82,6 +113,9 @@ function ask() {
                 id=""
                 className="w-full border border-gray-300 dark:border-dark-background px-4 py-2 my-2 outline-none dark:bg-dark-black dark:text-dark-text"
                 pattern="^[a-z]+([\s-][a-z]+){0,5}$"
+                onChange={(e) => {
+                  setTags(e.target.value);
+                }}
               />
             </div>
           </div>
