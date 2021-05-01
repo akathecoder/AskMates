@@ -29,7 +29,14 @@ function ask() {
           content: bodyData,
           tags: tags,
         },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type":
+              "application/x-www-form-urlencoded",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
       )
       .then((res) => {
         router.push("/q");
