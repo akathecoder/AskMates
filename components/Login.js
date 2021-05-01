@@ -1,4 +1,41 @@
+import axios from "axios";
+import Cookies from "js-cookie";
+
+import { useRouter } from "next/router";
+import { useState } from "react";
+
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  function login(e) {
+    const router = useRouter();
+
+    e.preventDefault();
+
+    axios
+      .post(
+        process.env.serverUrl + "authenticate",
+        {
+          username: username,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((result) => {
+        Cookies.set("username", result.data.username);
+        Cookies.set("auth", result.data.auth);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally((r) => {
+        router.push("/q/");
+      });
+  }
+
   return (
     <div className="relative top-44">
       <div className="container mx-auto px-4">
@@ -9,13 +46,7 @@ const Login = () => {
                 <div className="text-center mb-3 font-bold text-xl">
                   <h3>Sign in with credentials</h3>
                 </div>
-                <form
-                  className="mt-8"
-                  method="post"
-                  action={
-                    process.env.serverUrl + "authenticate"
-                  }
-                >
+                <form className="mt-8" onSubmit={login}>
                   <div className="relative w-full mb-5">
                     <label
                       className="block text-xs font-bold mb-2"
@@ -31,6 +62,9 @@ const Login = () => {
                         className="flex-grow rounded focus:outline-none focus:ring-0 px-3 py-3 placeholder-gray-400 text-gray-600"
                         style={{
                           transition: "all .15s ease",
+                        }}
+                        onChange={(e) => {
+                          setUsername(e.target.value);
                         }}
                       />
                     </div>
@@ -50,6 +84,9 @@ const Login = () => {
                       placeholder="Password"
                       style={{
                         transition: "all .15s ease",
+                      }}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
                       }}
                     />
                   </div>
